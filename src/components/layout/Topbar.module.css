@@ -1,0 +1,345 @@
+/* =========================================================
+   GESTÃO.DEV — Topbar Styles
+   Phase 1 · src/components/layout/Topbar.module.css
+========================================================= */
+
+/* ── Topbar container ──────────────────────────────────── */
+.topbar {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px 0 32px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Bottom separator line */
+.topbar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--b-subtle) 30%,
+    var(--b-subtle) 70%,
+    transparent 100%
+  );
+}
+
+/* ── Search box ────────────────────────────────────────── */
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  max-width: 480px;
+  height: 40px;
+  background: var(--bg-glass);
+  border: 1px solid var(--b-subtle);
+  border-radius: var(--r-full);
+  padding: 0 14px;
+  cursor: pointer;
+  transition: border-color var(--t-fast), background var(--t-fast);
+}
+
+.searchBox:hover {
+  border-color: var(--b-edge);
+  background: var(--bg-glass-hover);
+}
+
+.searchBox svg {
+  flex-shrink: 0;
+  color: var(--t-muted);
+}
+
+.searchInput {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: var(--f-sans);
+  font-size: 0.875rem;
+  color: var(--t-muted);
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.searchInput::placeholder {
+  color: var(--t-dim);
+}
+
+.searchKbd {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--b-subtle);
+  border-radius: 6px;
+  padding: 3px 8px;
+  flex-shrink: 0;
+}
+
+.searchKbd span {
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  color: var(--t-dim);
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.searchKbd svg {
+  color: var(--t-dim);
+}
+
+/* ── Topbar actions (right side) ───────────────────────── */
+.topbarActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+/* ── Theme toggle button ───────────────────────────────── */
+.themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-glass);
+  border: 1px solid var(--b-subtle);
+  color: var(--t-muted);
+  cursor: pointer;
+  transition: background var(--t-fast), color var(--t-fast), transform var(--t-swift);
+  flex-shrink: 0;
+}
+
+.themeToggle:hover {
+  background: var(--bg-glass-hover);
+  color: var(--t-main);
+  transform: scale(1.05);
+}
+
+.themeToggle:focus-visible {
+  outline: 2px solid var(--c-primary-light);
+  outline-offset: 2px;
+}
+
+.themeToggle:active {
+  transform: scale(0.93);
+}
+
+/* Icon visibility based on theme */
+.moonIcon {
+  display: block;
+}
+
+.sunIcon {
+  display: none;
+}
+
+[data-theme="light"] .moonIcon {
+  display: none;
+}
+
+[data-theme="light"] .sunIcon {
+  display: block;
+}
+
+/* ── Notification button ───────────────────────────────── */
+.notifBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-glass);
+  border: 1px solid var(--b-subtle);
+  color: var(--t-muted);
+  cursor: pointer;
+  transition: background var(--t-fast), color var(--t-fast), transform var(--t-swift);
+  flex-shrink: 0;
+}
+
+.notifBtn:hover {
+  background: var(--bg-glass-hover);
+  color: var(--t-main);
+  transform: scale(1.05);
+}
+
+.notifBtn:focus-visible {
+  outline: 2px solid var(--c-primary-light);
+  outline-offset: 2px;
+}
+
+.notifBtn:active {
+  transform: scale(0.93);
+}
+
+.notifCount {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--c-error);
+  border: 2px solid var(--c-bg-deep);
+  font-family: var(--f-mono);
+  font-size: 0.5rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0;
+}
+
+/* ── Sync indicator ────────────────────────────────────── */
+.syncIndicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--f-mono);
+  font-size: 0.5625rem;
+  color: var(--t-dim);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.syncDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-success);
+  box-shadow: 0 0 5px var(--c-success);
+  flex-shrink: 0;
+}
+
+/* ── New project CTA ───────────────────────────────────── */
+.gemCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: var(--grad-primary);
+  border-radius: var(--r-full);
+  cursor: pointer;
+  border: none;
+  transition: box-shadow var(--t-swift), transform var(--t-swift);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.gemCta:hover {
+  box-shadow: 0 0 35px -5px rgba(75, 33, 142, 0.80);
+  transform: translateY(-1px);
+}
+
+.gemCta:active {
+  transform: scale(0.95);
+}
+
+/* ── Mobile hamburger (hidden on desktop) ──────────────── */
+.mobileHamburger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-glass);
+  border: 1px solid var(--b-subtle);
+  align-items: center;
+  justify-content: center;
+  color: var(--t-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--t-fast), color var(--t-fast);
+}
+
+.mobileHamburger:hover {
+  background: var(--bg-glass-hover);
+  color: var(--t-main);
+}
+
+/* ── Mobile search button (hidden on desktop) ──────────── */
+.mobileSearchBtn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-glass);
+  border: 1px solid var(--b-subtle);
+  align-items: center;
+  justify-content: center;
+  color: var(--t-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--t-fast), color var(--t-fast);
+}
+
+.mobileSearchBtn:hover {
+  background: var(--bg-glass-hover);
+  color: var(--t-main);
+}
+
+/* ── Responsive: mobile ────────────────────────────────── */
+@media (max-width: 1116px) {
+  .topbar {
+    height: 56px;
+    padding: 0 10px;
+    gap: 8px;
+  }
+
+  .searchBox {
+    display: none;
+  }
+
+  .syncIndicator {
+    display: none;
+  }
+
+  .themeToggle {
+    display: none;
+  }
+
+  .mobileHamburger {
+    display: flex;
+  }
+
+  .mobileSearchBtn {
+    display: flex;
+  }
+}
+
+/* ── Responsive: large desktop ─────────────────────────── */
+@media (min-width: 1600px) {
+  .topbar {
+    height: 80px;
+    padding: 0 20px 0 40px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .topbar {
+    height: 84px;
+  }
+}
+
+/* ── Responsive: small mobile ──────────────────────────── */
+@media (max-width: 480px) {
+  .topbarActions .gemCta {
+    display: none;
+  }
+}

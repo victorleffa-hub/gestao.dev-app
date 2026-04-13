@@ -2435,6 +2435,25 @@
     }
 
     /* =========================================================
+       MOBILE POR ALTURA (≤ 520px)
+       Abaixo de 520px de viewport, a sidebar não cabe mesmo
+       em modo mínimo. Ativa o layout mobile (tab bar inferior)
+       independente da largura — mesmo em telas largas em
+       orientação paisagem muito curta (ex.: browser <520px tall).
+    ========================================================= */
+    @media (max-height: 520px) {
+      .sidebar           { display: none; }
+      .mobile-tab-bar    { display: flex; }
+      .mobile-hamburger  { display: flex; }
+      .mobile-search-btn { display: flex; }
+      .app-shell         { padding: 8px; gap: 0; }
+      .workspace         { padding-bottom: 72px; }
+      .view-scroll       { padding-bottom: 84px; }
+      .topbar            { height: 52px; padding: 0 8px; }
+      .theme-toggle      { display: none; }
+    }
+
+    /* =========================================================
        LARGE SCREEN SCALING (1800px+ / 2200px+)
     ========================================================= */
     @media (min-width: 1800px) {
@@ -2581,7 +2600,42 @@
       display: flex; flex-direction: column;
       padding: 28px 24px;
       overflow-y: auto;
+      /* Scrollbar — igual ao view-scroll */
+      scrollbar-width: thin;
+      scrollbar-color: rgba(75,33,142,0.3) transparent;
     }
+    .mobile-drawer::-webkit-scrollbar { width: 4px; }
+    .mobile-drawer::-webkit-scrollbar-track { background: transparent; }
+    .mobile-drawer::-webkit-scrollbar-thumb { background: rgba(75,33,142,0.3); border-radius: 4px; }
+
+    /* Fade inferior — indica rolagem disponível (sticky no fundo do drawer) */
+    .mobile-drawer::after {
+      content: '';
+      position: sticky; bottom: 0;
+      display: block;
+      height: 64px; margin-top: -64px;
+      background: linear-gradient(to bottom, transparent, var(--c-bg-surface) 90%);
+      pointer-events: none;
+      flex-shrink: 0;
+    }
+
+    /* Itens do drawer: entram escalonados ao abrir (igual ao reveal da home) */
+    .mobile-drawer > * {
+      opacity: 0;
+      transform: translateY(10px);
+      filter: blur(3px);
+      transition: opacity 0.45s ease, transform 0.45s ease, filter 0.45s ease;
+    }
+    .mobile-drawer-overlay.open .mobile-drawer > *:nth-child(1)  { opacity:1; transform:none; filter:none; transition-delay:0.06s; }
+    .mobile-drawer-overlay.open .mobile-drawer > *:nth-child(2)  { opacity:1; transform:none; filter:none; transition-delay:0.10s; }
+    .mobile-drawer-overlay.open .mobile-drawer > *:nth-child(3)  { opacity:1; transform:none; filter:none; transition-delay:0.14s; }
+    .mobile-drawer-overlay.open .mobile-drawer > *:nth-child(4)  { opacity:1; transform:none; filter:none; transition-delay:0.17s; }
+    .mobile-drawer-overlay.open .mobile-drawer > *:nth-child(5)  { opacity:1; transform:none; filter:none; transition-delay:0.20s; }
+    .mobile-drawer-overlay.open .mobile-drawer > *:nth-child(6)  { opacity:1; transform:none; filter:none; transition-delay:0.23s; }
+    .mobile-drawer-overlay.open .mobile-drawer > *:nth-child(7)  { opacity:1; transform:none; filter:none; transition-delay:0.25s; }
+    .mobile-drawer-overlay.open .mobile-drawer > *:nth-child(8)  { opacity:1; transform:none; filter:none; transition-delay:0.27s; }
+    .mobile-drawer-overlay.open .mobile-drawer > *:nth-child(n+9) { opacity:1; transform:none; filter:none; transition-delay:0.29s; }
+
     .mobile-drawer-overlay.open .mobile-drawer { transform: translateX(0); }
     .drawer-header { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
     .drawer-avatar {
@@ -3458,10 +3512,6 @@
       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
       <span>Projetos</span>
     </div>
-    <div class="mobile-tab" data-target="view-board">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-      <span>Board</span>
-    </div>
     <div class="mobile-tab" data-target="view-sprints">
       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
       <span>Sprints</span>
@@ -3517,10 +3567,6 @@
 
         <div class="nav-divider"></div>
 
-        <div class="nav-item" data-target="view-board" title="Board Kanban" aria-label="Ir para Board Kanban" role="button" tabindex="0">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
-          <span class="nav-label">Board</span>
-        </div>
         <div class="nav-item" data-target="view-sprints" title="Sprints" aria-label="Ir para Sprints" role="button" tabindex="0">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           <span class="nav-label">Sprints</span>

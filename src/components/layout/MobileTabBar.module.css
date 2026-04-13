@@ -1,0 +1,100 @@
+/* =========================================================
+   GESTÃO.DEV — Mobile Tab Bar Styles
+   Phase 1 · src/components/layout/MobileTabBar.module.css
+========================================================= */
+
+/* ── Tab bar container ─────────────────────────────────── */
+.mobileTabBar {
+  display: none; /* shown via media query in AppShell */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  z-index: 40;
+  background: rgba(4, 10, 18, 0.90);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid var(--b-subtle);
+  padding: 0 4px;
+  align-items: stretch;
+  justify-content: space-around;
+}
+
+/* ── Single tab ────────────────────────────────────────── */
+.mobileTab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex: 1;
+  padding: 8px 4px;
+  color: var(--t-dim);
+  cursor: pointer;
+  transition: color var(--t-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobileTab svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.mobileTab span {
+  font-family: var(--f-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Active state */
+.mobileTab.active {
+  color: var(--c-primary-light);
+}
+
+/* Active indicator — top purple line */
+.mobileTab.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 2px;
+  border-radius: 0 0 3px 3px;
+  background: var(--grad-primary);
+  box-shadow: 0 0 8px var(--c-primary-light);
+}
+
+/* Hover */
+.mobileTab:hover {
+  color: var(--t-muted);
+}
+
+/* Press */
+.mobileTab:active {
+  transform: scale(0.93);
+}
+
+/* Focus */
+.mobileTab:focus-visible {
+  outline: 2px solid var(--c-primary-light);
+  outline-offset: -2px;
+  border-radius: var(--r-sm);
+}
+
+/* ── Responsive: small mobile ──────────────────────────── */
+@media (max-width: 480px) {
+  .mobileTab span {
+    font-size: 0.4375rem;
+  }
+
+  .mobileTab svg {
+    width: 20px;
+    height: 20px;
+  }
+}

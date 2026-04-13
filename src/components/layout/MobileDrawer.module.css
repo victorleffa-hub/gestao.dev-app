@@ -1,0 +1,250 @@
+/* =========================================================
+   GESTÃO.DEV — Mobile Drawer Styles
+   Phase 1 · src/components/layout/MobileDrawer.module.css
+========================================================= */
+
+/* ── Overlay backdrop ──────────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── Drawer panel ──────────────────────────────────────── */
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  max-width: 85vw;
+  z-index: 51;
+  background: var(--c-bg-raised);
+  border-right: 1px solid var(--b-subtle);
+  border-radius: 0 var(--r-xl) var(--r-xl) 0;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 16px 24px;
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(75, 33, 142, 0.3) transparent;
+}
+
+.drawer::-webkit-scrollbar {
+  width: 4px;
+}
+
+.drawer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.drawer::-webkit-scrollbar-thumb {
+  background: rgba(75, 33, 142, 0.3);
+  border-radius: 4px;
+}
+
+/* Fade-in gradient at bottom */
+.drawer::after {
+  content: '';
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: linear-gradient(to top, var(--c-bg-raised), transparent);
+  pointer-events: none;
+  flex-shrink: 0;
+  margin-top: -48px;
+}
+
+/* Open state — slide in */
+.overlay.open .drawer {
+  transform: translateX(0);
+}
+
+/* ── Stagger animation for children ────────────────────── */
+.drawer > * {
+  opacity: 0;
+  transform: translateY(8px);
+  filter: blur(4px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    filter 0.3s ease;
+}
+
+.overlay.open .drawer > *:nth-child(1)  { opacity: 1; transform: none; filter: none; transition-delay: 0.06s; }
+.overlay.open .drawer > *:nth-child(2)  { opacity: 1; transform: none; filter: none; transition-delay: 0.10s; }
+.overlay.open .drawer > *:nth-child(3)  { opacity: 1; transform: none; filter: none; transition-delay: 0.14s; }
+.overlay.open .drawer > *:nth-child(4)  { opacity: 1; transform: none; filter: none; transition-delay: 0.17s; }
+.overlay.open .drawer > *:nth-child(5)  { opacity: 1; transform: none; filter: none; transition-delay: 0.20s; }
+.overlay.open .drawer > *:nth-child(6)  { opacity: 1; transform: none; filter: none; transition-delay: 0.23s; }
+.overlay.open .drawer > *:nth-child(7)  { opacity: 1; transform: none; filter: none; transition-delay: 0.25s; }
+.overlay.open .drawer > *:nth-child(8)  { opacity: 1; transform: none; filter: none; transition-delay: 0.27s; }
+.overlay.open .drawer > *:nth-child(n+9) { opacity: 1; transform: none; filter: none; transition-delay: 0.29s; }
+
+/* ── Header (avatar + user info) ───────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-md);
+  flex-shrink: 0;
+  background: url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80')
+    center / cover;
+  border: 2px solid rgba(255, 255, 255, 0.08);
+}
+
+.userName {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--t-main);
+}
+
+.userRole {
+  font-family: var(--f-mono);
+  font-size: 0.5625rem;
+  color: var(--t-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── Section label ─────────────────────────────────────── */
+.sectionLabel {
+  font-family: var(--f-mono);
+  font-size: 0.5rem;
+  color: var(--t-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 4px 8px;
+  margin-top: 4px;
+}
+
+/* ── Drawer item ───────────────────────────────────────── */
+.item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 8px;
+  border-radius: var(--r-sm);
+  color: var(--t-muted);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  font-size: 0.875rem;
+  font-weight: 500;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--t-main);
+}
+
+.item:active {
+  transform: scale(0.97);
+}
+
+.item:focus-visible {
+  outline: 2px solid var(--c-primary-light);
+  outline-offset: 2px;
+}
+
+.item svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--t-dim);
+}
+
+/* Danger item (logout) */
+.item.danger {
+  color: var(--c-error);
+  opacity: 0.7;
+}
+
+.item.danger svg {
+  color: var(--c-error);
+}
+
+.item.danger:hover {
+  opacity: 1;
+  background: rgba(239, 68, 68, 0.08);
+}
+
+/* Disabled item */
+.item.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* ── Divider ───────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--b-subtle);
+  margin: 12px 0;
+}
+
+/* Auto-margin divider (pushes content to bottom) */
+.divider.pushTop {
+  margin-top: auto;
+}
+
+/* ── Sync status indicator (inside item) ───────────────── */
+.syncDot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-success);
+  box-shadow: 0 0 4px var(--c-success);
+  margin-left: 4px;
+  flex-shrink: 0;
+}
+
+/* ── Theme toggle row ──────────────────────────────────── */
+.themeRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 8px;
+  border-radius: var(--r-sm);
+  color: var(--t-muted);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  font-size: 0.875rem;
+  font-weight: 500;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.themeRow:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--t-main);
+}
+
+.themeRow svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--t-dim);
+}

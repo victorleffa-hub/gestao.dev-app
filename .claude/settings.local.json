@@ -14,7 +14,16 @@
       "Bash(sed -n '7,2053p' \"C:\\\\Users\\\\victo\\\\OneDrive\\\\Documents\\\\Ceisc Tech\\\\gestao.dev-app\\\\app-mockup-claude.html\")",
       "Read(//tmp/**)",
       "Bash(Get-Item \"C:\\\\Users\\\\victo\\\\OneDrive\\\\Documents\\\\Ceisc Tech\\\\gestao.dev-app\\\\app-mockup-claude.html\")",
-      "Bash(Select-Object FullName, LastWriteTime, Length)"
+      "Bash(Select-Object FullName, LastWriteTime, Length)",
+      "Bash(dir \"C:\\\\Users\\\\victo\\\\OneDrive\\\\Documents\\\\Ceisc Tech\\\\gestao.dev-app\")",
+      "Bash(npm install:*)",
+      "Read(//usr/local/bin/**)",
+      "Read(//usr/bin/**)",
+      "Bash(command -v npm)",
+      "Read(//c/Users/victo/AppData/Roaming/**)",
+      "Read(//c/Users/victo/AppData/Local/Programs/**)",
+      "Bash(/c/Users/victo/.bun/bin/bun.exe install:*)",
+      "Bash(/c/Users/victo/.bun/bin/bun.exe run:*)"
     ]
   }
 }

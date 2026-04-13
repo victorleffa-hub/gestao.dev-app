@@ -1,0 +1,167 @@
+/* =========================================================
+   GESTÃO.DEV — AppShell Styles
+   Phase 1 · src/components/layout/AppShell.module.css
+========================================================= */
+
+/* ── Fluid background ──────────────────────────────────── */
+.fluidBg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.fluidOrb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+}
+
+.fluidOrb1 {
+  width: 600px;
+  height: 600px;
+  top: -100px;
+  left: -100px;
+  background: radial-gradient(circle, rgba(75, 33, 142, 0.5) 0%, transparent 70%);
+  animation: orbFloat1 18s ease-in-out infinite;
+}
+
+.fluidOrb2 {
+  width: 500px;
+  height: 500px;
+  bottom: -80px;
+  right: -80px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, transparent 70%);
+  animation: orbFloat2 22s ease-in-out infinite 2s;
+}
+
+.fluidOrb3 {
+  width: 400px;
+  height: 400px;
+  top: 40%;
+  left: 40%;
+  background: radial-gradient(circle, rgba(123, 77, 196, 0.20) 0%, transparent 70%);
+  animation: orbFloat3 26s ease-in-out infinite 4s;
+}
+
+@keyframes orbFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(60px, 40px) scale(1.05); }
+  66% { transform: translate(-30px, 70px) scale(0.95); }
+}
+
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-50px, -40px) scale(1.08); }
+  66% { transform: translate(30px, -60px) scale(0.96); }
+}
+
+@keyframes orbFloat3 {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.15); }
+}
+
+/* ── App shell layout ──────────────────────────────────── */
+.appShell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  height: 100%;
+  max-width: 2400px;
+  margin: 0 auto;
+}
+
+/* ── Workspace (right of sidebar) ──────────────────────── */
+.workspace {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* ── View scroll area ──────────────────────────────────── */
+.viewScroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 8px 32px 60px 32px;
+  min-height: 0;
+
+  /* Scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(75, 33, 142, 0.3) transparent;
+}
+
+.viewScroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.viewScroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.viewScroll::-webkit-scrollbar-thumb {
+  background: rgba(75, 33, 142, 0.3);
+  border-radius: 4px;
+}
+
+/* ── Responsive: mobile (≤ 1116px or short) ────────────── */
+@media (max-width: 1116px) {
+  .appShell {
+    padding: 8px;
+    gap: 0;
+  }
+
+  .workspace {
+    padding-bottom: 72px;
+  }
+
+  .viewScroll {
+    padding: 8px 12px 84px 12px;
+  }
+}
+
+/* ── Responsive: large desktop ─────────────────────────── */
+@media (min-width: 1600px) {
+  .appShell {
+    gap: 32px;
+    padding: 28px 36px;
+  }
+
+  .viewScroll {
+    padding: 12px 40px 60px 40px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .appShell {
+    gap: 36px;
+    padding: 32px 48px;
+  }
+
+  .viewScroll {
+    padding: 16px 52px 60px 52px;
+  }
+}
+
+/* ── Responsive: small mobile ──────────────────────────── */
+@media (max-width: 480px) {
+  .appShell {
+    padding: 4px;
+  }
+
+  .viewScroll {
+    padding: 4px 8px 84px 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .viewScroll {
+    padding: 4px 10px 84px 10px;
+  }
+}

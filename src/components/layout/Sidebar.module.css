@@ -1,0 +1,332 @@
+/* =========================================================
+   GESTÃO.DEV — Sidebar Styles
+   Phase 1 · src/components/layout/Sidebar.module.css
+========================================================= */
+
+/* ── Container ─────────────────────────────────────────── */
+.sidebar {
+  --sw: 100px;
+  width: var(--sw);
+  height: 100%;
+  flex-shrink: 0;
+  background: var(--bg-glass);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid var(--b-subtle);
+  border-top: 1px solid var(--b-edge);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--r-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 0 20px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.03);
+}
+
+/* ── Brand mark ────────────────────────────────────────── */
+.brandMark {
+  margin-bottom: 40px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.brandMark svg {
+  display: block;
+  transition: transform var(--t-swift);
+}
+
+.brandMark:hover svg {
+  transform: scale(1.1);
+}
+
+@keyframes gemSymbolPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.brandMark :global(.gem-chevron) {
+  animation: gemSymbolPulse 1.8s ease-in-out infinite;
+}
+
+.brandMark :global(.gem-cursor) {
+  animation: gemSymbolPulse 1.8s ease-in-out infinite 0.12s;
+}
+
+/* ── Nav list ──────────────────────────────────────────── */
+.navList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+/* ── Nav item ──────────────────────────────────────────── */
+.navItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 52px;
+  min-height: 52px;
+  padding: 6px 0;
+  border-radius: var(--r-md);
+  color: var(--t-muted);
+  cursor: pointer;
+  transition: background var(--t-fast), color var(--t-fast);
+  user-select: none;
+  outline: none;
+}
+
+.navItem svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: transform var(--t-swift);
+}
+
+.navItem:hover {
+  color: var(--t-main);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.navItem:hover svg {
+  transform: scale(1.08);
+}
+
+/* Active state */
+.navItem.active {
+  color: var(--t-main);
+  background: rgba(75, 33, 142, 0.15);
+}
+
+/* Active right-edge glow indicator */
+.navItem.active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 24px;
+  border-radius: 3px 0 0 3px;
+  background: var(--grad-primary);
+  /* right = -( (sidebar-width - nav-item-width) / 2 + 1px )
+     Default for --sw:100px and nav-item:52px → -25px */
+  right: calc((var(--sw, 100px) - 52px) / -2 - 1px);
+  box-shadow: 0 0 12px var(--c-primary-light);
+}
+
+/* Nav label */
+.navLabel {
+  font-family: var(--f-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity var(--t-swift), max-height var(--t-swift);
+  text-align: center;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.navItem:hover .navLabel,
+.navItem.active .navLabel {
+  opacity: 1;
+  max-height: 14px;
+}
+
+/* Focus ring */
+.navItem:focus-visible {
+  outline: 2px solid var(--c-primary-light);
+  outline-offset: 2px;
+}
+
+/* Press animation */
+.navItem:active {
+  transform: scale(0.93);
+}
+
+/* ── Nav divider ───────────────────────────────────────── */
+.navDivider {
+  width: 32px;
+  height: 1px;
+  background: var(--b-subtle);
+  margin: 6px 0;
+  flex-shrink: 0;
+}
+
+/* ── Notification badge ────────────────────────────────── */
+.notifBadge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c-error);
+  border: 2px solid var(--c-bg-deep);
+  box-shadow: 0 0 6px var(--c-error);
+}
+
+/* ── Sidebar bottom ────────────────────────────────────── */
+.sidebarBottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+  width: 100%;
+}
+
+/* ── Avatar button ─────────────────────────────────────── */
+.avatarBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md);
+  background: url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80')
+    center / cover;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform var(--t-swift), border-color var(--t-fast);
+  outline: none;
+}
+
+.avatarBtn:hover {
+  transform: scale(1.1);
+  border-color: var(--c-primary-light);
+}
+
+.avatarBtn:focus-visible {
+  outline: 2px solid var(--c-primary-light);
+  outline-offset: 2px;
+}
+
+/* ── Responsive: slim (1117–1400px) ────────────────────── */
+@media (min-width: 1117px) and (max-width: 1400px) {
+  .sidebar {
+    --sw: 72px;
+    padding: 18px 0 12px;
+  }
+
+  .brandMark {
+    margin-bottom: 28px;
+  }
+
+  .brandMark svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .navItem {
+    width: 40px;
+    min-height: 44px;
+    padding: 4px 0;
+  }
+
+  .navItem svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Active indicator: nav-item 40px, sidebar 72px → -17px */
+  .navItem.active::after {
+    right: calc((var(--sw, 72px) - 40px) / -2 - 1px);
+  }
+
+  .sidebarBottom {
+    gap: 8px;
+  }
+
+  .navDivider {
+    width: 24px;
+    margin: 4px 0;
+  }
+
+  .avatarBtn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Responsive: compact height (≤ 700px) */
+@media (max-height: 700px) and (min-width: 1117px) {
+  .sidebar {
+    padding: 12px 0 10px;
+  }
+
+  .brandMark {
+    margin-bottom: 20px;
+  }
+
+  .navItem {
+    min-height: 40px;
+    padding: 3px 0;
+  }
+
+  .navList {
+    gap: 1px;
+  }
+
+  .sidebarBottom {
+    gap: 6px;
+  }
+
+  .navDivider {
+    display: none;
+  }
+
+  .avatarBtn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+}
+
+/* Responsive: very compact (≤ 520px height) */
+@media (max-height: 520px) and (min-width: 1117px) {
+  .brandMark {
+    display: none;
+  }
+
+  .navItem {
+    min-height: 36px;
+  }
+
+  .sidebarBottom {
+    gap: 4px;
+  }
+
+  .avatarBtn {
+    display: none;
+  }
+}
+
+/* Responsive: large desktop (≥ 1600px) */
+@media (min-width: 1600px) {
+  .sidebar {
+    --sw: 110px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .sidebar {
+    --sw: 120px;
+  }
+}
+
+/* Nav flash animation */
+@keyframes navRipple {
+  0% { background: rgba(75, 33, 142, 0.30); transform: scale(1.05); }
+  100% { background: transparent; transform: scale(1); }
+}
+
+.navItem.navFlash {
+  animation: navRipple 0.4s ease-out forwards;
+}
