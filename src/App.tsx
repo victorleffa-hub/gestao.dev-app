@@ -6,10 +6,17 @@
 import React from 'react';
 import { AppProvider, useApp } from './context/AppContext';
 import { AppShell } from './components/layout/AppShell';
+import { Dashboard } from './views/Dashboard/Dashboard';
+import { Projects } from './views/Projects/Projects';
+import { Ideas } from './views/Ideas/Ideas';
+import { Sprints } from './views/Sprints/Sprints';
+import { Admin } from './views/Admin/Admin';
+import { Billing } from './views/Billing/Billing';
+import { Org } from './views/Org/Org';
+import { Account } from './views/Account/Account';
 import type { ViewId } from './types';
 
-// ── Placeholder view components ──────────────────────────
-// Phase 2 will replace these with real view implementations.
+// ── Placeholder view components (Phase 2b+ will replace) ─
 
 function PlaceholderView({ label }: { label: string }) {
   return (
@@ -94,15 +101,15 @@ function PlaceholderView({ label }: { label: string }) {
 }
 
 const VIEW_COMPONENTS: Record<ViewId, React.FC> = {
-  'view-dash':     () => <PlaceholderView label="Dashboard" />,
-  'view-projects': () => <PlaceholderView label="Projetos" />,
-  'view-ideas':    () => <PlaceholderView label="Ideias" />,
+  'view-dash':     Dashboard,
+  'view-projects': Projects,
+  'view-ideas':    Ideas,
   'view-board':    () => <PlaceholderView label="Board Kanban" />,
-  'view-sprints':  () => <PlaceholderView label="Sprints" />,
-  'view-admin':    () => <PlaceholderView label="Admin" />,
-  'view-billing':  () => <PlaceholderView label="Billing" />,
-  'view-org':      () => <PlaceholderView label="Organização" />,
-  'view-account':  () => <PlaceholderView label="Minha Conta" />,
+  'view-sprints':  Sprints,
+  'view-admin':    Admin,
+  'view-billing':  Billing,
+  'view-org':      Org,
+  'view-account':  Account,
 };
 
 // ── Inner app (needs context) ────────────────────────────

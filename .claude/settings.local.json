@@ -23,7 +23,9 @@
       "Read(//c/Users/victo/AppData/Roaming/**)",
       "Read(//c/Users/victo/AppData/Local/Programs/**)",
       "Bash(/c/Users/victo/.bun/bin/bun.exe install:*)",
-      "Bash(/c/Users/victo/.bun/bin/bun.exe run:*)"
+      "Bash(/c/Users/victo/.bun/bin/bun.exe run:*)",
+      "Bash(npx tsc:*)",
+      "Bash(node_modules/.bin/tsc --noEmit)"
     ]
   }
 }

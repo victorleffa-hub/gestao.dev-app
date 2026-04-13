@@ -1,0 +1,53 @@
+/* Dashboard — component-specific overrides only.
+   Global card, stat-card, bento-core, metrics-row styles live in index.css */
+
+.gemVizWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.projectBars {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 20px;
+}
+
+.projectBarRow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.projectBarLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sprintTrackerWrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.healthSection {
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.miniListCard {
+  margin-bottom: 0;
+}
+
+.miniList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}

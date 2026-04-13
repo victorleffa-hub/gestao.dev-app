@@ -1692,6 +1692,7 @@
     .sprint-stat-label { font-family: var(--f-mono); font-size: 0.5625rem; color: var(--t-dim); text-transform: uppercase; letter-spacing: 0.10em; }
     .burndown-area { height: 160px; margin: 16px 0; position: relative; border-radius: var(--r-md); overflow: hidden; background: rgba(0,0,0,0.15); }
     .burndown-area svg { width: 100%; height: 100%; }
+    .burndown-area canvas { width: 100% !important; height: 100% !important; display: block; }
     .sprint-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .sprint-mini-card {
       padding: 20px; border-radius: var(--r-lg); cursor: pointer;
@@ -1905,6 +1906,73 @@
     .project-detail-stat { display: flex; flex-direction: column; gap: 2px; }
     .project-detail-stat-val { font-size: 1.5rem; font-weight: 700; line-height: 1; }
     .project-detail-stat-label { font-family: var(--f-mono); font-size: 0.5625rem; color: var(--t-dim); text-transform: uppercase; letter-spacing: 0.10em; }
+
+    /* ── Breadcrumbs ─────────────────────────────────── */
+    .breadcrumb {
+      display: flex; align-items: center; gap: 6px;
+      font-family: var(--f-mono); font-size: 0.5625rem;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--t-dim); margin-bottom: 14px;
+    }
+    .breadcrumb-sep { color: var(--t-faint); user-select: none; }
+    .breadcrumb-item { cursor: pointer; transition: color var(--t-fast); }
+    .breadcrumb-item:not(.active):hover { color: var(--c-primary-light); }
+    .breadcrumb-item.active { color: var(--t-muted); cursor: default; pointer-events: none; }
+
+    /* ── Board sprint filter ─────────────────────────── */
+    .board-filter-bar {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 20px; padding: 10px 16px;
+      background: rgba(0,0,0,0.2); border: 1px solid var(--b-subtle);
+      border-radius: var(--r-md);
+    }
+    .board-filter-label {
+      display: flex; align-items: center; gap: 6px;
+      font-family: var(--f-mono); font-size: 0.5625rem;
+      text-transform: uppercase; letter-spacing: 0.08em; color: var(--t-dim);
+      flex-shrink: 0;
+    }
+    .sprint-select {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--b-subtle);
+      border-radius: var(--r-sm); padding: 5px 28px 5px 10px;
+      font-family: var(--f-mono); font-size: 0.6875rem; color: var(--t-main);
+      cursor: pointer; outline: none;
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' fill='none' stroke='rgba(255,255,255,0.4)' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 8px center;
+      transition: border-color 0.2s;
+    }
+    .sprint-select:hover { border-color: var(--b-edge); }
+    .sprint-select:focus { border-color: rgba(123,77,196,0.4); }
+    .sprint-select option { background: var(--c-bg-surface); color: var(--t-main); }
+    .board-filter-count {
+      font-family: var(--f-mono); font-size: 0.5625rem; color: var(--t-dim);
+      margin-left: auto;
+    }
+
+    /* ── Burndown mini-chart ─────────────────────────── */
+    .burndown-mini {
+      margin: 14px 0 10px;
+      height: 72px; border-radius: var(--r-sm); overflow: hidden;
+      background: rgba(0,0,0,0.18); position: relative;
+    }
+    .burndown-mini svg { width: 100%; height: 100%; display: block; }
+    .burndown-mini canvas { width: 100% !important; height: 100% !important; display: block; }
+    .burndown-status {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-family: var(--f-mono); font-size: 0.5rem;
+      font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+      margin-top: 6px;
+    }
+    .burndown-status::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: currentColor;
+    }
+    .burndown-status.on-track  { color: var(--c-success); }
+    .burndown-status.ahead     { color: var(--c-info); }
+    .burndown-status.late      { color: var(--c-error); }
+    .burndown-status.done      { color: var(--c-success); }
+    .burndown-status.planning  { color: var(--t-dim); }
 
     /* Internal tabs */
     .project-tabs {
@@ -3054,6 +3122,8 @@
     [data-theme="light"] .refresh-toggle { background: rgba(75,33,142,0.08); border-color: rgba(75,33,142,0.20); }
     [data-theme="light"] .refresh-toggle[aria-pressed="true"] { background: rgba(75,33,142,0.25); border-color: rgba(75,33,142,0.45); }
   </style>
+  <!-- Chart.js — burndown charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
@@ -4650,35 +4720,19 @@
               <div class="bar-bg" style="height:8px;"><div class="bar-fill" style="width:62%; background:#6366f1;"></div></div>
             </div>
 
-            <!-- Burndown chart — placeholder SVG, production uses Recharts LineChart -->
-            <!-- Data source: GET /dashboard/sprints/:id/burndown -->
+            <!-- Burndown chart — driven by Chart.js, data via data-* attrs (backend-ready) -->
+            <!-- Data source: GET /api/v1/sprints/:id/burndown -->
             <div class="burndown-area">
-              <svg viewBox="0 0 400 160" preserveAspectRatio="none" data-chart="burndown" data-sprint="sprint-5" data-total-points="44" data-days="14">
-                <defs>
-                  <linearGradient id="burnG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#6366f1" stop-opacity="0.18"/><stop offset="100%" stop-color="#6366f1" stop-opacity="0"/></linearGradient>
-                </defs>
-                <!-- Y-axis grid (points scale: 44, 33, 22, 11) -->
-                <line data-grid="y-75" x1="0" y1="30" x2="400" y2="30" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
-                <line data-grid="y-50" x1="0" y1="65" x2="400" y2="65" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
-                <line data-grid="y-25" x1="0" y1="100" x2="400" y2="100" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
-                <!-- Y-axis labels -->
-                <text data-axis="y" x="4" y="28" fill="var(--t-faint)" font-size="6" font-family="var(--f-mono)">33</text>
-                <text data-axis="y" x="4" y="63" fill="var(--t-faint)" font-size="6" font-family="var(--f-mono)">22</text>
-                <text data-axis="y" x="4" y="98" fill="var(--t-faint)" font-size="6" font-family="var(--f-mono)">11</text>
-                <!-- Ideal burndown line (linear from total to 0) -->
-                <line data-line="ideal" x1="20" y1="12" x2="385" y2="135" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
-                <!-- Actual burndown (remaining points per day) -->
-                <!-- data-points: day0=44, day2=42, day4=36, day6=33, day8=27, day10=19, day11=20 (spike) -->
-                <path data-line="actual" data-points="44,42,36,33,27,19,20" d="M20 12 L75 16 L135 35 L195 44 L255 68 L320 92 L345 88" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Area fill under actual line -->
-                <path data-area="actual" d="M20 12 L75 16 L135 35 L195 44 L255 68 L320 92 L345 88 L345 160 L20 160 Z" fill="url(#burnG)"/>
-                <!-- Today marker (day 11 of 14) -->
-                <line data-marker="today" data-day="11" x1="345" y1="0" x2="345" y2="160" stroke="rgba(245,158,11,0.30)" stroke-width="1" stroke-dasharray="3 3"/>
-                <text data-marker-label="today" x="348" y="12" fill="var(--c-warning)" font-size="7" font-family="var(--f-mono)">hoje</text>
-                <!-- X-axis labels (sprint date range) -->
-                <text data-label="start" x="20" y="155" fill="var(--t-dim)" font-size="7" font-family="var(--f-mono)">24 Mar</text>
-                <text data-label="end" x="362" y="155" fill="var(--t-dim)" font-size="7" font-family="var(--f-mono)">06 Abr</text>
-              </svg>
+              <canvas class="burndown-canvas"
+                data-sprint-id="sprint-5"
+                data-color="#6366f1"
+                data-total-pts="44"
+                data-days="14"
+                data-current-day="12"
+                data-start-label="24 Mar"
+                data-end-label="06 Abr"
+                data-real="[44,42,39,36,33,31,28,26,24,21,19,17,null,null,null]">
+              </canvas>
             </div>
 
             <div class="sprint-actions">
@@ -4876,9 +4930,13 @@
 
           <div class="page-header reveal">
             <div class="page-header-left" style="width:100%;">
-              <div style="display:flex; align-items:center; gap:6px; margin-bottom:8px;">
-                <span class="u-mono-sm u-dim" style="cursor:pointer;" id="projDetailBack">&larr; Projetos</span>
-              </div>
+              <nav class="breadcrumb" id="projDetailBreadcrumb">
+                <span class="breadcrumb-item" id="projDetailBack">Projetos</span>
+                <span class="breadcrumb-sep">/</span>
+                <span class="breadcrumb-item active" id="breadcrumb-proj-name">Banco de Questoes Backend</span>
+                <span class="breadcrumb-sep" id="breadcrumb-tab-sep">/</span>
+                <span class="breadcrumb-item active" id="breadcrumb-tab-name">Board</span>
+              </nav>
               <div class="project-detail-header">
                 <div class="project-detail-initials" id="projDetailInitials" style="background:rgba(75,33,142,0.12); color:var(--c-primary-light);" data-field="initials">BQ</div>
                 <div style="flex:1; min-width:0;">
@@ -4915,25 +4973,43 @@
 
           <!-- TAB: Board -->
           <div class="project-tab-pane active" id="proj-board">
+
+            <!-- Sprint filter -->
+            <div class="board-filter-bar">
+              <label class="board-filter-label">
+                <svg width="11" height="11" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                Sprint
+              </label>
+              <select class="sprint-select" id="boardSprintFilter">
+                <option value="all">Todas as sprints</option>
+                <option value="sprint-5" selected>Sprint 5 &mdash; Ativa</option>
+                <option value="sprint-4">Sprint 4 &mdash; Conclu&iacute;da</option>
+                <option value="sprint-3">Sprint 3 &mdash; Conclu&iacute;da</option>
+              </select>
+              <span class="board-filter-count" id="boardTaskCount">9 tarefas nesta sprint</span>
+            </div>
+
             <div class="kanban-board" data-widget="project-kanban" data-endpoint="/api/v1/projects/:id/tasks?board=true">
+              <!-- Backlog — sprint-4 items (histórico) -->
               <div class="kanban-col" data-col-status="backlog">
                 <div class="kanban-col-header"><span class="kanban-col-title">Backlog</span><span class="kanban-col-count">2</span></div>
                 <div class="kanban-col-body">
-                  <div class="kanban-card" data-task-id="251" data-priority="medium" data-points="5">
+                  <div class="kanban-card" data-task-id="251" data-priority="medium" data-points="5" data-sprint-id="sprint-4">
                     <div class="kanban-card-title" data-field="title">Documentar endpoints REST</div>
                     <div class="kanban-card-meta"><span class="priority-dot p-medium"></span><span class="kanban-card-pts">5 pts</span><span class="kanban-card-tag">docs</span></div>
                   </div>
-                  <div class="kanban-card" data-task-id="252" data-priority="low" data-points="3">
+                  <div class="kanban-card" data-task-id="252" data-priority="low" data-points="3" data-sprint-id="sprint-4">
                     <div class="kanban-card-title" data-field="title">Testes unitarios services</div>
                     <div class="kanban-card-meta"><span class="priority-dot p-low"></span><span class="kanban-card-pts">3 pts</span><span class="kanban-card-tag">test</span></div>
                   </div>
                   <div class="kanban-add">+ Nova tarefa</div>
                 </div>
               </div>
+              <!-- A Fazer — sprint-5 -->
               <div class="kanban-col" data-col-status="todo">
                 <div class="kanban-col-header"><span class="kanban-col-title" style="color:var(--c-info);">A Fazer</span><span class="kanban-col-count">2</span></div>
                 <div class="kanban-col-body">
-                  <div class="kanban-card" style="--sprint-color:#6366f1;" data-task-id="253" data-priority="high" data-points="3">
+                  <div class="kanban-card" style="--sprint-color:#6366f1;" data-task-id="253" data-priority="high" data-points="3" data-sprint-id="sprint-5">
                     <div class="kanban-card-title" data-field="title">Validar schema do banco</div>
                     <div class="kanban-card-meta"><span class="priority-dot p-high"></span><span class="kanban-card-pts">3 pts</span><span class="kanban-card-tag">db</span></div>
                     <div class="kanban-card-footer">
@@ -4941,17 +5017,18 @@
                       <img class="kanban-card-assignee" src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=facearea&facepad=2&w=64&h=64&q=80" alt="">
                     </div>
                   </div>
-                  <div class="kanban-card" style="--sprint-color:#6366f1;" data-task-id="254" data-priority="medium" data-points="2">
+                  <div class="kanban-card" style="--sprint-color:#6366f1;" data-task-id="254" data-priority="medium" data-points="2" data-sprint-id="sprint-5">
                     <div class="kanban-card-title" data-field="title">Setup rate limiting API</div>
                     <div class="kanban-card-meta"><span class="priority-dot p-medium"></span><span class="kanban-card-pts">2 pts</span><span class="kanban-card-tag">security</span></div>
                   </div>
                   <div class="kanban-add">+ Nova tarefa</div>
                 </div>
               </div>
+              <!-- In Progress — sprint-5 -->
               <div class="kanban-col" data-col-status="in_progress">
                 <div class="kanban-col-header"><span class="kanban-col-title" style="color:var(--c-warning);">In Progress</span><span class="kanban-col-count">2</span></div>
                 <div class="kanban-col-body">
-                  <div class="kanban-card" style="--sprint-color:#6366f1;" data-task-id="247" data-priority="critical" data-points="5">
+                  <div class="kanban-card" style="--sprint-color:#6366f1;" data-task-id="247" data-priority="critical" data-points="5" data-sprint-id="sprint-5">
                     <div class="kanban-card-title" data-field="title">Fix auth redirect loop</div>
                     <div class="kanban-card-meta"><span class="priority-dot p-critical"></span><span class="kanban-card-pts">5 pts</span><span class="kanban-card-tag">bug</span></div>
                     <div class="kanban-card-footer">
@@ -4959,7 +5036,7 @@
                       <img class="kanban-card-assignee" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=facearea&facepad=2&w=64&h=64&q=80" alt="">
                     </div>
                   </div>
-                  <div class="kanban-card" style="--sprint-color:#6366f1;" data-task-id="248" data-priority="high" data-points="8">
+                  <div class="kanban-card" style="--sprint-color:#6366f1;" data-task-id="248" data-priority="high" data-points="8" data-sprint-id="sprint-5">
                     <div class="kanban-card-title" data-field="title">Migrar Drizzle ORM v2</div>
                     <div class="kanban-card-meta"><span class="priority-dot p-high"></span><span class="kanban-card-pts">8 pts</span><span class="kanban-card-tag">refactor</span></div>
                     <div class="kanban-card-footer">
@@ -4969,10 +5046,11 @@
                   </div>
                 </div>
               </div>
+              <!-- Review — sprint-5 -->
               <div class="kanban-col" data-col-status="review">
                 <div class="kanban-col-header"><span class="kanban-col-title" style="color:var(--c-info);">Review</span><span class="kanban-col-count">1</span></div>
                 <div class="kanban-col-body">
-                  <div class="kanban-card" style="--sprint-color:#6366f1;" data-task-id="249" data-priority="high" data-points="5">
+                  <div class="kanban-card" style="--sprint-color:#6366f1;" data-task-id="249" data-priority="high" data-points="5" data-sprint-id="sprint-5">
                     <div class="kanban-card-title" data-field="title">Integrar Stripe checkout</div>
                     <div class="kanban-card-meta"><span class="priority-dot p-high"></span><span class="kanban-card-pts">5 pts</span><span class="kanban-card-tag">billing</span></div>
                     <div class="kanban-card-footer">
@@ -4982,16 +5060,25 @@
                   </div>
                 </div>
               </div>
+              <!-- Done — sprint-5 (ativas) + sprint-4 (históricas) -->
               <div class="kanban-col" data-col-status="done">
-                <div class="kanban-col-header"><span class="kanban-col-title" style="color:var(--c-success);">Done</span><span class="kanban-col-count">2</span></div>
+                <div class="kanban-col-header"><span class="kanban-col-title" style="color:var(--c-success);">Done</span><span class="kanban-col-count">4</span></div>
                 <div class="kanban-col-body">
-                  <div class="kanban-card" style="--sprint-color:#6366f1; opacity:0.6;" data-task-id="243" data-priority="critical">
+                  <div class="kanban-card" style="--sprint-color:#6366f1; opacity:0.6;" data-task-id="243" data-priority="critical" data-sprint-id="sprint-5">
                     <div class="kanban-card-title" style="text-decoration:line-through;" data-field="title">Schema multi-tenancy</div>
                     <div class="kanban-card-meta"><span class="priority-dot p-critical"></span><span class="kanban-card-pts">13 pts</span></div>
                   </div>
-                  <div class="kanban-card" style="--sprint-color:#6366f1; opacity:0.6;" data-task-id="244" data-priority="low">
+                  <div class="kanban-card" style="--sprint-color:#6366f1; opacity:0.6;" data-task-id="244" data-priority="low" data-sprint-id="sprint-5">
                     <div class="kanban-card-title" style="text-decoration:line-through;" data-field="title">Seed planos billing</div>
                     <div class="kanban-card-meta"><span class="priority-dot p-low"></span><span class="kanban-card-pts">2 pts</span></div>
+                  </div>
+                  <div class="kanban-card" style="--sprint-color:#22c55e; opacity:0.5;" data-task-id="231" data-priority="high" data-sprint-id="sprint-4">
+                    <div class="kanban-card-title" style="text-decoration:line-through;" data-field="title">Middleware de autorizacao por org</div>
+                    <div class="kanban-card-meta"><span class="priority-dot p-high"></span><span class="kanban-card-pts">8 pts</span></div>
+                  </div>
+                  <div class="kanban-card" style="--sprint-color:#22c55e; opacity:0.5;" data-task-id="232" data-priority="medium" data-sprint-id="sprint-4">
+                    <div class="kanban-card-title" style="text-decoration:line-through;" data-field="title">Endpoint de convites por e-mail</div>
+                    <div class="kanban-card-meta"><span class="priority-dot p-medium"></span><span class="kanban-card-pts">5 pts</span></div>
                   </div>
                 </div>
               </div>
@@ -5002,11 +5089,11 @@
           <div class="project-tab-pane" id="proj-sprints" data-widget="project-sprints" data-endpoint="/api/v1/projects/:id/sprints">
             <div class="sprint-grid" style="grid-template-columns: 1fr;">
 
-              <!-- Sprint 5 — Ativa (indigo) -->
+              <!-- Sprint 5 — Ativa · ATRASADA (real > ideal no dia atual) -->
               <div class="card sprint-mini-card" style="--sprint-color:var(--s-active); padding:24px;" data-sprint-id="sprint-5" data-status="active" data-progress="62">
-                <div class="u-flex-between" style="margin-bottom:12px;">
+                <div class="u-flex-between" style="margin-bottom:10px;">
                   <div class="u-flex u-gap-10">
-                    <span style="width:12px; height:12px; border-radius:50%; background:var(--s-active); box-shadow:0 0 8px var(--s-active);"></span>
+                    <span style="width:12px; height:12px; border-radius:50%; background:var(--s-active); box-shadow:0 0 8px var(--s-active); flex-shrink:0;"></span>
                     <span class="sprint-mini-name" style="font-size:1rem;">Sprint 5</span>
                     <span class="status-pill s-active">Ativa</span>
                   </div>
@@ -5019,51 +5106,92 @@
                   </div>
                 </div>
                 <div class="sprint-goal">"Implementar billing completo com Stripe, plan cards e feature gating no frontend."</div>
-                <div class="u-flex u-gap-16" style="margin:12px 0;">
-                  <span class="u-mono-sm"><strong>44</strong> pontos</span>
+                <div class="u-flex u-gap-16" style="margin:10px 0 4px;">
+                  <span class="u-mono-sm"><strong>44</strong> pts</span>
                   <span class="u-mono-sm"><strong>13</strong> tarefas</span>
                   <span class="u-mono-sm" style="color:var(--s-completed);"><strong>8</strong> concluidas</span>
+                  <span class="u-mono-sm u-dim">Dia 12 / 14</span>
                 </div>
-                <div class="bar-bg" style="height:8px;"><div class="bar-fill" style="width:62%; background:var(--s-active);" data-field="progress"></div></div>
-                <div class="row-bar-pct" style="margin-top:4px;">62%</div>
+                <!-- Burndown chart: Real está acima da linha Ideal → ATRASADA -->
+                <div class="burndown-mini">
+                  <canvas class="burndown-canvas burndown-canvas--mini"
+                    data-sprint-id="sprint-5"
+                    data-color="#6366f1"
+                    data-total-pts="44"
+                    data-days="14"
+                    data-current-day="12"
+                    data-real="[44,42,39,36,33,31,28,26,24,21,19,17,null,null,null]">
+                  </canvas>
+                </div>
+                <div class="u-flex-between" style="align-items:center;">
+                  <span class="burndown-status late">Atrasada &mdash; 11 pts acima do ideal</span>
+                  <span class="row-bar-pct">62%</span>
+                </div>
               </div>
 
-              <!-- Sprint 4 — Concluida (verde) -->
+              <!-- Sprint 4 — Concluida · NO PRAZO -->
               <div class="card sprint-mini-card" style="--sprint-color:var(--s-completed); padding:24px;" data-sprint-id="sprint-4" data-status="completed" data-progress="100">
-                <div class="u-flex-between" style="margin-bottom:12px;">
+                <div class="u-flex-between" style="margin-bottom:10px;">
                   <div class="u-flex u-gap-10">
-                    <span style="width:12px; height:12px; border-radius:50%; background:var(--s-completed);"></span>
+                    <span style="width:12px; height:12px; border-radius:50%; background:var(--s-completed); flex-shrink:0;"></span>
                     <span class="sprint-mini-name" style="font-size:1rem;">Sprint 4</span>
-                    <span class="status-pill s-completed">Concluida</span>
+                    <span class="status-pill s-completed">Conclu&iacute;da</span>
                   </div>
                   <span class="u-mono-sm u-dim">10 Mar — 23 Mar 2026</span>
                 </div>
                 <div class="sprint-goal">"Multi-tenancy core: organizations, members, invitations, middleware."</div>
-                <div class="u-flex u-gap-16" style="margin:12px 0;">
-                  <span class="u-mono-sm"><strong>38</strong> pontos</span>
+                <div class="u-flex u-gap-16" style="margin:10px 0 4px;">
+                  <span class="u-mono-sm"><strong>38</strong> pts</span>
                   <span class="u-mono-sm"><strong>11</strong> tarefas</span>
                   <span class="u-mono-sm" style="color:var(--s-completed);"><strong>11</strong> concluidas</span>
                 </div>
-                <div class="bar-bg" style="height:8px;"><div class="bar-fill" style="width:100%; background:var(--s-completed);" data-field="progress"></div></div>
-                <div class="row-bar-pct" style="margin-top:4px;">100%</div>
+                <!-- Burndown chart: Real abaixo da Ideal → ADIANTADA / NO PRAZO -->
+                <div class="burndown-mini">
+                  <canvas class="burndown-canvas burndown-canvas--mini"
+                    data-sprint-id="sprint-4"
+                    data-color="#22c55e"
+                    data-total-pts="38"
+                    data-days="14"
+                    data-current-day="14"
+                    data-real="[38,35,32,29,26,23,20,17,14,11,8,5,3,1,0]">
+                  </canvas>
+                </div>
+                <div class="u-flex-between" style="align-items:center;">
+                  <span class="burndown-status done">Conclu&iacute;da no prazo</span>
+                  <span class="row-bar-pct">100%</span>
+                </div>
               </div>
 
-              <!-- Sprint 6 — Planejada (cinza) -->
+              <!-- Sprint 6 — Planejada (ainda sem dados reais) -->
               <div class="card sprint-mini-card" style="--sprint-color:var(--s-planning); border-style:dashed; padding:24px;" data-sprint-id="sprint-6" data-status="planning" data-progress="0">
-                <div class="u-flex-between" style="margin-bottom:12px;">
+                <div class="u-flex-between" style="margin-bottom:10px;">
                   <div class="u-flex u-gap-10">
-                    <span style="width:12px; height:12px; border-radius:50%; background:var(--s-planning); opacity:0.5;"></span>
+                    <span style="width:12px; height:12px; border-radius:50%; background:var(--s-planning); opacity:0.5; flex-shrink:0;"></span>
                     <span class="sprint-mini-name" style="font-size:1rem; color:var(--t-muted);">Sprint 6</span>
                     <span class="status-pill s-planning">Planejada</span>
                   </div>
                   <span class="u-mono-sm u-dim">07 Abr — 20 Abr 2026</span>
                 </div>
-                <div class="sprint-goal" style="color:var(--t-dim);">"Polish, deploy em producao e testes E2E."</div>
-                <div class="u-flex u-gap-16" style="margin:12px 0;">
-                  <span class="u-mono-sm u-dim"><strong>0</strong> pontos</span>
+                <div class="sprint-goal" style="color:var(--t-dim);">"Polish, deploy em produ&ccedil;&atilde;o e testes E2E."</div>
+                <div class="u-flex u-gap-16" style="margin:10px 0 4px;">
+                  <span class="u-mono-sm u-dim"><strong>0</strong> pts planejados</span>
                   <span class="u-mono-sm u-dim"><strong>0</strong> tarefas</span>
                 </div>
-                <div class="bar-bg" style="height:8px;"><div class="bar-fill" style="width:0%;" data-field="progress"></div></div>
+                <!-- Burndown: sprint planejada, sem dados reais ainda -->
+                <div class="burndown-mini" style="background:rgba(0,0,0,0.10);">
+                  <canvas class="burndown-canvas burndown-canvas--mini burndown-canvas--planning"
+                    data-sprint-id="sprint-6"
+                    data-color="#94a3b8"
+                    data-total-pts="0"
+                    data-days="14"
+                    data-current-day="0"
+                    data-real="">
+                  </canvas>
+                </div>
+                <div class="u-flex-between" style="align-items:center;">
+                  <span class="burndown-status planning">Planejada &mdash; aguardando in&iacute;cio</span>
+                  <span class="row-bar-pct" style="color:var(--t-dim);">0%</span>
+                </div>
               </div>
 
             </div>
@@ -5430,6 +5558,11 @@
 
           <div class="page-header reveal">
             <div class="page-header-left">
+              <nav class="breadcrumb">
+                <span class="breadcrumb-item" id="ideaDetailBack">Ideias</span>
+                <span class="breadcrumb-sep">/</span>
+                <span class="breadcrumb-item active">Transformar gestao.dev em Multi-tenant</span>
+              </nav>
               <div class="u-flex u-gap-8" style="margin-bottom:8px;">
                 <span class="idea-cat" style="color:var(--c-primary-light);">Produto SaaS</span>
                 <span class="idea-pill">Aprovada</span>
@@ -5943,6 +6076,19 @@
           label.textContent = health.label;
         }
 
+        // Sync breadcrumb project name and reset tab to Board
+        var bcProjName = document.getElementById('breadcrumb-proj-name');
+        if (bcProjName) bcProjName.textContent = name;
+        var bcTabName = document.getElementById('breadcrumb-tab-name');
+        if (bcTabName) bcTabName.textContent = 'Board';
+        // Reset tabs to Board
+        document.querySelectorAll('.project-tab').forEach(function(t) { t.classList.remove('active'); });
+        document.querySelectorAll('.project-tab-pane').forEach(function(p) { p.classList.remove('active'); });
+        var firstTab = document.querySelector('[data-proj-tab="proj-board"]');
+        var firstPane = document.getElementById('proj-board');
+        if (firstTab) firstTab.classList.add('active');
+        if (firstPane) firstPane.classList.add('active');
+
         switchView('view-project-detail');
       }
 
@@ -5965,13 +6111,20 @@
         }
       });
 
-      // Back button
+      // Back button (breadcrumb "Projetos" item)
       var backBtn = document.getElementById('projDetailBack');
       if (backBtn) {
         backBtn.addEventListener('click', function() { switchView('view-projects'); });
       }
 
-      // Internal tabs
+      // Idea detail back button
+      var ideaBackBtn = document.getElementById('ideaDetailBack');
+      if (ideaBackBtn) {
+        ideaBackBtn.addEventListener('click', function() { switchView('view-ideas'); });
+      }
+
+      // Internal tabs — with breadcrumb sync
+      var TAB_LABELS = { 'proj-board': 'Board', 'proj-sprints': 'Sprints', 'proj-bugs': 'Bugs' };
       document.querySelectorAll('.project-tab').forEach(function(tab) {
         tab.addEventListener('click', function() {
           var target = this.getAttribute('data-proj-tab');
@@ -5980,8 +6133,56 @@
           this.classList.add('active');
           var pane = document.getElementById(target);
           if (pane) pane.classList.add('active');
+          // Sync breadcrumb tab label
+          var bcTab = document.getElementById('breadcrumb-tab-name');
+          if (bcTab) bcTab.textContent = TAB_LABELS[target] || target;
+          // Resize any Chart.js canvases that just became visible
+          if (pane && typeof Chart !== 'undefined') {
+            requestAnimationFrame(function() {
+              pane.querySelectorAll('.burndown-canvas').forEach(function(cv) {
+                var ch = Chart.getChart(cv);
+                if (ch) ch.resize();
+              });
+            });
+          }
         });
       });
+
+      // Sprint filter for project board
+      (function() {
+        var filter = document.getElementById('boardSprintFilter');
+        var countEl = document.getElementById('boardTaskCount');
+        if (!filter) return;
+
+        function applySprintFilter() {
+          var val = filter.value;
+          var board = document.getElementById('proj-board');
+          if (!board) return;
+          var cards = board.querySelectorAll('.kanban-card');
+          var visible = 0;
+          cards.forEach(function(card) {
+            var sprint = card.getAttribute('data-sprint-id') || 'sprint-5';
+            var show = val === 'all' || sprint === val;
+            card.style.display = show ? '' : 'none';
+            if (show) visible++;
+          });
+          // Update column counts after filter
+          board.querySelectorAll('.kanban-col').forEach(function(col) {
+            var visCards = col.querySelectorAll('.kanban-card:not([style*="display: none"])').length;
+            var countBadge = col.querySelector('.kanban-col-count');
+            if (countBadge) countBadge.textContent = visCards;
+          });
+          if (countEl) {
+            countEl.textContent = val === 'all'
+              ? visible + ' tarefas no total'
+              : visible + ' tarefa' + (visible !== 1 ? 's' : '') + ' nesta sprint';
+          }
+        }
+
+        filter.addEventListener('change', applySprintFilter);
+        // Init on load
+        applySprintFilter();
+      })();
     })();
 
     /* ---- New Project modal ---- */
@@ -6726,6 +6927,189 @@
         doRefresh(true);
       });
     }
+  })();
+
+  /* ── Burndown Charts (Chart.js) ─────────────────────────────────────────
+     All .burndown-canvas elements are backend-ready:
+     data-total-pts, data-days, data-current-day, data-color, data-real (JSON array)
+     Ideal line: linear from totalPts → 0 over 'days' steps.
+     Real line:  array of daily remaining points (null = no data yet).
+     Today marker: vertical dashed line drawn via custom inline plugin.
+  ─────────────────────────────────────────────────────────────────────── */
+  (function () {
+    if (typeof Chart === 'undefined') return;
+
+    /* Helper ----------------------------------------------------------- */
+    function hexToRgba(hex, alpha) {
+      var m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      if (!m) return 'rgba(99,102,241,' + alpha + ')';
+      return 'rgba(' + parseInt(m[1], 16) + ',' + parseInt(m[2], 16) + ',' + parseInt(m[3], 16) + ',' + alpha + ')';
+    }
+
+    /* Custom plugin: vertical "hoje" line for full-size charts ---------- */
+    Chart.register({
+      id: 'todayLine',
+      afterDatasetsDraw: function (chart) {
+        var cv = chart.canvas;
+        if (cv.classList.contains('burndown-canvas--mini')) return;
+        var cd = parseInt(cv.dataset.currentDay);
+        var days = parseInt(cv.dataset.days);
+        if (!cd || isNaN(cd) || !days) return;
+        var xs = chart.scales.x;
+        var ys = chart.scales.y;
+        if (!xs || !ys) return;
+        var x = xs.getPixelForValue(cd);
+        var ctx = chart.ctx;
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(x, ys.top);
+        ctx.lineTo(x, ys.bottom);
+        ctx.strokeStyle = 'rgba(245,158,11,0.40)';
+        ctx.setLineDash([3, 3]);
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = 'rgba(245,158,11,0.80)';
+        ctx.font = '8px monospace';
+        ctx.fillText('hoje', x + 4, ys.top + 12);
+        ctx.restore();
+      }
+    });
+
+    /* Init a single canvas --------------------------------------------- */
+    function initCanvas(cv) {
+      if (cv._chartInstance) return; // already initialized
+      var totalPts    = parseInt(cv.dataset.totalPts) || 0;
+      var days        = parseInt(cv.dataset.days) || 14;
+      var currentDay  = parseInt(cv.dataset.currentDay) || days;
+      var color       = cv.dataset.color || '#6366f1';
+      var isMini      = cv.classList.contains('burndown-canvas--mini');
+      var isPlanning  = cv.classList.contains('burndown-canvas--planning') || totalPts === 0;
+      var realData    = null;
+      try { if (cv.dataset.real) realData = JSON.parse(cv.dataset.real); } catch (e) {}
+
+      /* Labels: one per day (0 → days) */
+      var labels = [];
+      for (var d = 0; d <= days; d++) labels.push(d);
+
+      /* Ideal dataset: for planning sprint use a ghost reference from 10 → 0 */
+      var refPts = isPlanning ? 10 : totalPts;
+      var idealArr = [];
+      for (var d = 0; d <= days; d++) {
+        idealArr.push(+(refPts * (1 - d / days)).toFixed(1));
+      }
+
+      var fillColor = hexToRgba(color, 0.10);
+      var datasets = [{
+        label: 'Ideal',
+        data: idealArr,
+        borderColor: 'rgba(255,255,255,0.20)',
+        borderWidth: 1.5,
+        borderDash: [5, 3],
+        pointRadius: 0,
+        fill: false,
+        tension: 0,
+        order: 2,
+        spanGaps: false,
+      }];
+
+      /* Real dataset (skip if planning / no data) */
+      if (!isPlanning && realData && realData.length > 0) {
+        datasets.push({
+          label: 'Real',
+          data: realData,
+          borderColor: color,
+          borderWidth: isMini ? 1.5 : 2,
+          pointRadius: 0,
+          pointHoverRadius: isMini ? 0 : 4,
+          pointHoverBackgroundColor: color,
+          fill: 'origin',
+          backgroundColor: fillColor,
+          tension: 0.25,
+          spanGaps: false,
+          order: 1,
+        });
+      }
+
+      var chart = new Chart(cv, {
+        type: 'line',
+        data: { labels: labels, datasets: datasets },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: isMini ? 500 : 750, easing: 'easeInOutQuart' },
+          layout: { padding: isMini ? 0 : { top: 6, right: 8, bottom: 4, left: 4 } },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              enabled: !isMini,
+              mode: 'index',
+              intersect: false,
+              backgroundColor: 'rgba(8,3,18,0.92)',
+              borderColor: 'rgba(255,255,255,0.08)',
+              borderWidth: 1,
+              titleColor: 'rgba(255,255,255,0.55)',
+              bodyColor: 'rgba(255,255,255,0.45)',
+              padding: 8,
+              callbacks: {
+                title: function (items) { return 'Dia ' + items[0].label; },
+                label: function (ctx) {
+                  if (ctx.raw === null || ctx.raw === undefined) return null;
+                  return ctx.dataset.label + ': ' + ctx.raw + ' pts';
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              display: !isMini,
+              type: 'linear',
+              min: 0,
+              max: days,
+              grid: { color: 'rgba(255,255,255,0.05)', tickLength: 0 },
+              border: { display: false },
+              ticks: {
+                stepSize: 2,
+                color: 'rgba(255,255,255,0.30)',
+                font: { family: 'monospace', size: 8 },
+                callback: function (v) { return Number.isInteger(v) ? 'D' + v : ''; },
+                maxRotation: 0,
+              }
+            },
+            y: {
+              display: !isMini,
+              min: 0,
+              suggestedMax: refPts > 0 ? refPts : 10,
+              grid: { color: 'rgba(255,255,255,0.05)', tickLength: 0 },
+              border: { display: false },
+              ticks: {
+                maxTicksLimit: 4,
+                color: 'rgba(255,255,255,0.30)',
+                font: { family: 'monospace', size: 8 },
+                callback: function (v) { return v + ' pts'; }
+              }
+            }
+          }
+        }
+      });
+
+      cv._chartInstance = chart;
+    }
+
+    /* Use IntersectionObserver so hidden tab pane canvases init on reveal */
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          initCanvas(entry.target);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.01 });
+
+    document.querySelectorAll('.burndown-canvas').forEach(function (cv) {
+      io.observe(cv);
+    });
+
   })();
   </script>
 

@@ -39,7 +39,13 @@ export interface Project {
   progress: number; // 0-100
   tasksTotal: number;
   tasksDone: number;
+  bugs: number;
+  sprintsCount: number;
+  stack: string;
+  initials: string;
+  initialsColor: { bg: string; color: string };
   avatars: string[];
+  avatarOverflow?: string;
 }
 
 // ── Kanban / Board ───────────────────────────────────────
