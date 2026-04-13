@@ -25,7 +25,11 @@
       "Bash(/c/Users/victo/.bun/bin/bun.exe install:*)",
       "Bash(/c/Users/victo/.bun/bin/bun.exe run:*)",
       "Bash(npx tsc:*)",
-      "Bash(node_modules/.bin/tsc --noEmit)"
+      "Bash(node_modules/.bin/tsc --noEmit)",
+      "Bash(Get-Content \"C:\\\\Users\\\\victo\\\\OneDrive\\\\Documents\\\\Ceisc Tech\\\\gestao.dev-app\\\\src\\\\index.css\")",
+      "Bash(Measure-Object -Line)",
+      "Bash(Select-Object Lines)",
+      "Bash(cmd.exe /c \"cd \\\\\"C:\\\\Users\\\\victo\\\\OneDrive\\\\Documents\\\\Ceisc Tech\\\\gestao.dev-app\\\\\" && npx tsc --noEmit 2>&1\")"
     ]
   }
 }
