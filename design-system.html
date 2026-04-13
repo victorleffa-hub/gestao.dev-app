@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gestao.dev — Design System v1.0</title>
+  <style>
+
+/* ══════════════════════════════════════════════════════
+   FONT FACES — Geist & Geist Mono via jsDelivr CDN
+══════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'Geist';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-Light.woff2') format('woff2');
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-Medium.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-SemiBold.woff2') format('woff2');
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-Bold.woff2') format('woff2');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-mono/GeistMono-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-mono/GeistMono-Medium.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-mono/GeistMono-SemiBold.woff2') format('woff2');
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+
+/* ══════════════════════════════════════════════════════
+   DESIGN TOKENS — :root (extraído de global.css)
+══════════════════════════════════════════════════════ */
+
+:root {
+  /* Backgrounds */
+  --c-bg-deep:      #030711;
+  --c-bg-primary:   #050b18;
+  --c-bg-surface:   #0a1628;
+  --c-bg-elevated:  #0f1d32;
+
+  /* Primary */
+  --c-primary:        #4B218E;
+  --c-primary-light:  #7B4DC4;
+  --c-primary-dark:   #371870;
+  --c-primary-glow:   rgba(75, 33, 142, 0.20);
+  --c-primary-subtle: rgba(75, 33, 142, 0.08);
+
+  /* Secondary */
+  --c-secondary:        #607D8B;
+  --c-secondary-light:  #90A4AE;
+  --c-secondary-dark:   #455A64;
+  --c-secondary-glow:   rgba(96, 125, 139, 0.15);
+  --c-secondary-subtle: rgba(96, 125, 139, 0.06);
+
+  /* CTA gem bg */
+  --cta-gem-bg: url("data:image/svg+xml,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='16,2.5 28,9 16,16' fill='%23A060E8' fill-opacity='.60'/%3E%3Cpolygon points='28,9 28,23 16,16' fill='%237030C0' fill-opacity='.60'/%3E%3Cpolygon points='28,23 16,29.5 16,16' fill='%23501888' fill-opacity='.60'/%3E%3Cpolygon points='16,29.5 4,23 16,16' fill='%23280858' fill-opacity='.60'/%3E%3Cpolygon points='4,23 4,9 16,16' fill='%234B218E' fill-opacity='.60'/%3E%3Cpolygon points='4,9 16,2.5 16,16' fill='%236030A8' fill-opacity='.60'/%3E%3C/svg%3E");
+
+  /* Gradients */
+  --gradient-primary:   linear-gradient(135deg, #7B4DC4 0%, #4B218E 60%, #371870 100%);
+  --gradient-secondary: linear-gradient(135deg, #90A4AE 0%, #607D8B 100%);
+  --gradient-brand:     linear-gradient(135deg, #4B218E 0%, #607D8B 100%);
+  --gradient-text:      linear-gradient(135deg, #9B6DD4 0%, #4B218E 50%, #371870 100%);
+  --gradient-glow:      radial-gradient(ellipse at 50% 0%, rgba(75,33,142,0.14) 0%, transparent 70%);
+
+  /* Semantic */
+  --c-success: #22c55e;
+  --c-error:   #ef4444;
+  --c-warning: #f59e0b;
+
+  /* Text */
+  --c-text-primary:   #ffffff;
+  --c-text-secondary: rgba(255, 255, 255, 0.65);
+  --c-text-muted:     rgba(255, 255, 255, 0.40);
+  --c-text-faint:     rgba(255, 255, 255, 0.20);
+
+  /* Borders */
+  --c-border:         rgba(255, 255, 255, 0.06);
+  --c-border-visible: rgba(255, 255, 255, 0.12);
+  --c-border-accent:  rgba(75, 33, 142, 0.35);
+
+  /* Typography */
+  --f-sans: 'Geist', 'Inter', system-ui, -apple-system, sans-serif;
+  --f-mono: 'Geist Mono', 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --nav-h:         64px;
+  --section-py:    96px;
+  --section-py-lg: 128px;
+  --container-w:   1280px;
+  --container-px:  40px;
+
+  /* Radius */
+  --r-xs:   4px;
+  --r-sm:   6px;
+  --r-md:   12px;
+  --r-lg:   16px;
+  --r-xl:   24px;
+  --r-full: 9999px;
+
+  /* Shadows */
+  --shadow-card:         0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.04);
+  --shadow-elevated:     0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.06);
+  --shadow-glow:         0 0 40px rgba(75, 33, 142, 0.18);
+  --shadow-glow-strong:  0 0 60px rgba(75, 33, 142, 0.35);
+  --shadow-button:       0 0 25px -5px rgba(75, 33, 142, 0.50);
+  --shadow-button-hover: 0 0 35px -5px rgba(75, 33, 142, 0.80);
+
+  /* Transitions */
+  --t-fast:   150ms ease;
+  --t-normal: 300ms ease;
+  --t-slow:   500ms ease;
+  --t-spring: 500ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ══════════════════════════════════════════════════════
+   RESET
+══════════════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--f-sans);
+  background: var(--c-bg-primary);
+  color: var(--c-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+img, svg, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+ul { list-style: none; }
+
+::selection { background: rgba(139, 92, 246, 0.3); color: var(--c-primary-light); }
+
+/* ══════════════════════════════════════════════════════
+   COMPONENT STYLES — extraídos de sections.css / navbar.css
+══════════════════════════════════════════════════════ */
+
+/* Section tag */
+.section-tag {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  padding: 4px 14px;
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  background: rgba(75, 33, 142, 0.08);
+  border: 1px solid rgba(75, 33, 142, 0.35);
+  border-radius: var(--r-full);
+  margin: 0 auto 20px;
+}
+
+/* Section title */
+.section-title {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  text-align: center;
+  margin-bottom: 16px;
+  color: #fff;
+  text-shadow: 0 4px 32px rgba(123, 77, 196, 0.32);
+}
+
+/* Section subtitle */
+.section-subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.80);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  max-width: 600px;
+  margin: 0 auto 56px;
+  line-height: 1.8;
+}
+.section-subtitle strong { color: #fff; font-weight: 600; }
+
+/* Nav CTA */
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 20px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: var(--gradient-primary);
+  border-radius: var(--r-full);
+  box-shadow: var(--shadow-button);
+  transition: box-shadow var(--t-normal), transform var(--t-fast);
+}
+.nav-cta:hover { box-shadow: var(--shadow-button-hover); transform: translateY(-1px); }
+
+/* Nav logo */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-mono);
+  font-weight: 600;
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+.nav-logo-dot { color: var(--c-primary-light); }
+
+/* Pain card */
+.pain-card {
+  background: linear-gradient(160deg, rgba(75,33,142,0.08) 0%, var(--c-bg-surface) 55%);
+  border: 1px solid rgba(75,33,142,0.22);
+  border-radius: var(--r-lg);
+  padding: 32px 24px;
+  box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255,255,255,0.07);
+  transition: border-color var(--t-normal), box-shadow var(--t-normal), transform var(--t-spring);
+}
+.pain-card:hover {
+  border-color: rgba(75,33,142,0.45);
+  box-shadow: var(--shadow-card), var(--shadow-glow), inset 0 1px 0 rgba(255,255,255,0.10);
+  transform: translateY(-2px);
+}
+.pain-card-icon {
+  width: 48px; height: 48px;
+  border-radius: var(--r-md);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+}
+.pain-card-title { font-size: 1.0625rem; font-weight: 500; margin-bottom: 8px; }
+.pain-card-text { color: var(--c-text-secondary); font-size: 0.875rem; line-height: 1.65; }
+
+/* MCP card */
+.mcp-card {
+  background: linear-gradient(160deg, rgba(75,33,142,0.09) 0%, var(--c-bg-surface) 55%);
+  border: 1px solid rgba(75,33,142,0.22);
+  border-radius: var(--r-lg);
+  padding: 32px 28px;
+  box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255,255,255,0.07);
+  transition: border-color var(--t-normal), box-shadow var(--t-normal), transform var(--t-spring);
+}
+.mcp-card:hover {
+  border-color: rgba(75,33,142,0.48);
+  box-shadow: var(--shadow-card), var(--shadow-glow), inset 0 1px 0 rgba(255,255,255,0.10);
+  transform: translateY(-2px);
+}
+.mcp-card-icon {
+  width: 44px; height: 44px;
+  border-radius: var(--r-md);
+  background: var(--c-primary-subtle);
+  border: 1px solid var(--c-border-accent);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--c-primary-light);
+  margin-bottom: 20px;
+  transition: transform var(--t-spring);
+}
+.mcp-card:hover .mcp-card-icon { transform: scale(1.1); }
+.mcp-card-title { font-size: 1.0625rem; font-weight: 500; margin-bottom: 8px; }
+.mcp-card-text { color: var(--c-text-secondary); font-size: 0.875rem; line-height: 1.65; }
+
+/* Feature card */
+.feature-card {
+  background: linear-gradient(180deg, rgba(75,33,142,0.08) 0%, var(--c-bg-surface) 55%);
+  border: 1px solid rgba(75,33,142,0.22);
+  border-radius: var(--r-lg);
+  padding: 40px 28px;
+  box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255,255,255,0.07);
+  text-align: center;
+  transition: border-color var(--t-normal), box-shadow var(--t-normal), transform var(--t-spring);
+}
+.feature-card:hover {
+  border-color: rgba(75,33,142,0.45);
+  box-shadow: var(--shadow-card), var(--shadow-glow), inset 0 1px 0 rgba(255,255,255,0.10);
+  transform: translateY(-2px);
+}
+.feature-card-icon {
+  width: 56px; height: 56px;
+  border-radius: var(--r-lg);
+  background: var(--c-primary-subtle);
+  border: 1px solid var(--c-border-accent);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--c-primary-light);
+  margin: 0 auto 20px;
+  transition: transform var(--t-spring);
+}
+.feature-card:hover .feature-card-icon { transform: scale(1.1); }
+.feature-card-title { font-size: 1.0625rem; font-weight: 500; margin-bottom: 8px; }
+.feature-card-text { color: var(--c-text-secondary); font-size: 0.875rem; line-height: 1.65; }
+
+/* Gem CTA */
+.gem-cta {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: var(--gradient-primary);
+  border-radius: var(--r-full);
+  box-shadow: var(--shadow-button);
+  transition: box-shadow var(--t-normal), transform var(--t-fast);
+  cursor: pointer;
+}
+.gem-cta:hover { box-shadow: var(--shadow-button-hover); transform: translateY(-1px); }
+.gem-cta::before {
+  content: '';
+  position: absolute;
+  height: 210%;
+  aspect-ratio: 1;
+  top: -55%;
+  right: -26px;
+  z-index: -1;
+  transform-origin: center center;
+  pointer-events: none;
+  background: var(--cta-gem-bg) no-repeat center / contain;
+}
+.gem-cta.gem-pressing::before {
+  transform: scale(0.78);
+  transition: transform 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes gem-spin {
+  from { transform: scale(0.78) rotate(0deg); }
+  to   { transform: scale(1)    rotate(360deg); }
+}
+.gem-cta.gem-spinning::before {
+  animation: gem-spin 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.gem-cta--sm  { padding: 8px 20px;  font-size: 0.8125rem; }
+.gem-cta--md  { padding: 12px 28px; font-size: 0.9375rem; }
+.gem-cta--lg  { padding: 14px 32px; font-size: 1.0625rem; }
+
+/* Gradient text utility */
+.gradient-text {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ══════════════════════════════════════════════════════
+   DESIGN SYSTEM PAGE LAYOUT
+══════════════════════════════════════════════════════ */
+
+.ds-page { min-height: 100vh; }
+
+.ds-header {
+  background: #050b18;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 40px 60px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.ds-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ds-header-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--f-mono);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+.ds-header-logo svg { flex-shrink: 0; }
+.ds-header-logo-dot { color: #7B4DC4; }
+
+.ds-header-meta {
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+.ds-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
+/* Section */
+.ds-section {
+  padding: 80px 0;
+  border-top: 1px dashed rgba(255,255,255,0.08);
+}
+.ds-section:first-child { border-top: none; }
+
+.ds-section-label {
+  font-family: var(--f-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 10px;
+}
+
+.ds-section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: #fff;
+  margin-bottom: 40px;
+}
+
+/* Token label */
+.ds-token {
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.04em;
+  margin-top: 8px;
+  display: block;
+}
+
+.ds-value {
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.22);
+  margin-top: 2px;
+  display: block;
+}
+
+/* ── Colors ── */
+.ds-color-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.ds-color-group-label {
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.30);
+  margin-bottom: 16px;
+}
+
+.ds-color-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ds-color-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ds-swatch {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  flex-shrink: 0;
+}
+
+.ds-swatch--text {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background: #0a1628;
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* ── Gradients ── */
+.ds-gradient-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ds-gradient-item {}
+
+.ds-gradient-name {
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.ds-gradient-bar {
+  height: 48px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+/* ── Typography ── */
+.ds-type-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ds-type-row {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 24px;
+  align-items: center;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.ds-type-row:last-child { border-bottom: none; }
+
+.ds-type-sample {}
+
+.ds-type-meta {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.ds-type-meta-label {
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  color: rgba(255,255,255,0.28);
+  letter-spacing: 0.04em;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+/* Font weight demos */
+.ds-font-weights {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Spacing ── */
+.ds-spacing-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ds-spacing-item {
+  display: grid;
+  grid-template-columns: 160px 1fr 80px;
+  align-items: center;
+  gap: 20px;
+}
+
+.ds-spacing-bar {
+  height: 10px;
+  background: linear-gradient(90deg, rgba(75,33,142,0.7) 0%, rgba(123,77,196,0.35) 100%);
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.ds-spacing-px {
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.40);
+  text-align: right;
+}
+
+/* ── Radius ── */
+.ds-radius-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.ds-radius-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.ds-radius-box {
+  width: 56px;
+  height: 56px;
+  background: rgba(75,33,142,0.25);
+  border: 1px solid rgba(75,33,142,0.50);
+}
+
+/* ── Shadows ── */
+.ds-shadow-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.ds-shadow-item {
+  background: var(--c-bg-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  padding: 32px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.ds-shadow-swatch {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--r-md);
+  background: var(--c-bg-elevated);
+}
+
+.ds-shadow-label {
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.06em;
+}
+
+/* ── Section pattern demo ── */
+.ds-section-pattern-demo {
+  background: var(--c-bg-surface);
+  border: 1px solid var(--c-border-visible);
+  border-radius: var(--r-xl);
+  padding: 64px 40px;
+  text-align: center;
+}
+
+/* ── Cards grid ── */
+.ds-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ── CTA demos ── */
+.ds-cta-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.ds-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.ds-cta-meta {
+  flex-shrink: 0;
+  min-width: 120px;
+}
+
+/* ── Transitions table ── */
+.ds-transition-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.ds-transition-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 1fr;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  gap: 24px;
+}
+.ds-transition-row:last-child { border-bottom: none; }
+.ds-transition-row:nth-child(odd) { background: rgba(255,255,255,0.01); }
+
+.ds-transition-var {
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+  color: var(--c-primary-light);
+}
+
+.ds-transition-value {
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.40);
+}
+
+.ds-transition-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ds-transition-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-primary-light);
+  flex-shrink: 0;
+}
+
+/* Logo variants section */
+.ds-logo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  align-items: flex-end;
+}
+
+.ds-logo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.ds-logo-bg {
+  background: var(--c-bg-surface);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--r-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.ds-divider-line {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  margin: 16px 0;
+}
+
+/* Code block */
+.ds-code {
+  font-family: var(--f-mono);
+  font-size: 0.8125rem;
+  color: var(--c-primary-light);
+  background: rgba(75,33,142,0.10);
+  border: 1px solid rgba(75,33,142,0.20);
+  border-radius: var(--r-sm);
+  padding: 2px 7px;
+  display: inline;
+}
+
+/* ── GemLoader demos ── */
+.ds-gem-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.ds-gem-card {
+  background: var(--c-bg-surface);
+  padding: 28px 12px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+.ds-gem-card:last-child { border-right: none; }
+
+.ds-gem-name {
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-primary-light);
+  margin-bottom: 4px;
+}
+
+.ds-gem-use {
+  font-family: var(--f-mono);
+  font-size: 0.5rem;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.04em;
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.ds-gem-sizes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.ds-gem-size-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.ds-gem-size-tag {
+  font-family: var(--f-mono);
+  font-size: 0.4375rem;
+  color: rgba(255,255,255,0.20);
+  letter-spacing: 0.06em;
+}
+
+/* GemLoader animations */
+.gem-loader { display: inline-block; flex-shrink: 0; }
+
+@keyframes gem-pulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(123,77,196,0)); }
+  50%       { transform: scale(1.08); filter: drop-shadow(0 0 8px rgba(123,77,196,0.8)); }
+}
+.gem-loader--pulse { transform-origin: 50% 50%; animation: gem-pulse 2.4s ease-in-out infinite; }
+
+@keyframes gem-shimmer-face {
+  0%, 15%, 100% { filter: brightness(1); }
+  7.5%          { filter: brightness(3); }
+}
+.gem-loader--shimmer .gem-f1 { animation: gem-shimmer-face 1.2s linear infinite 0s; }
+.gem-loader--shimmer .gem-f2 { animation: gem-shimmer-face 1.2s linear infinite -1.0s; }
+.gem-loader--shimmer .gem-f3 { animation: gem-shimmer-face 1.2s linear infinite -0.8s; }
+.gem-loader--shimmer .gem-f4 { animation: gem-shimmer-face 1.2s linear infinite -0.6s; }
+.gem-loader--shimmer .gem-f5 { animation: gem-shimmer-face 1.2s linear infinite -0.4s; }
+.gem-loader--shimmer .gem-f6 { animation: gem-shimmer-face 1.2s linear infinite -0.2s; }
+
+@keyframes gem-symbol-pulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 1; }
+}
+.gem-loader--symbol .gem-chevron { animation: gem-symbol-pulse 1.8s ease-in-out infinite; }
+.gem-loader--symbol .gem-cursor  { animation: gem-symbol-pulse 1.8s ease-in-out infinite 0.12s; }
+
+@keyframes gem-draw-chevron { to { stroke-dashoffset: 0; } }
+@keyframes gem-blink {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.gem-loader--cursor .gem-chevron {
+  stroke-dasharray: 28; stroke-dashoffset: 28;
+  animation: gem-draw-chevron 0.45s ease-out 0.1s forwards;
+}
+.gem-loader--cursor .gem-cursor { opacity: 0; animation: gem-blink 0.6s step-end infinite 0.6s; }
+
+@keyframes gem-wave-face {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+.gem-loader--wave .gem-f1 { animation: gem-wave-face 1.8s ease-in-out infinite 0s; }
+.gem-loader--wave .gem-f2 { animation: gem-wave-face 1.8s ease-in-out infinite 0.3s; }
+.gem-loader--wave .gem-f3 { animation: gem-wave-face 1.8s ease-in-out infinite 0.6s; }
+.gem-loader--wave .gem-f4 { animation: gem-wave-face 1.8s ease-in-out infinite 0.9s; }
+.gem-loader--wave .gem-f5 { animation: gem-wave-face 1.8s ease-in-out infinite 1.2s; }
+.gem-loader--wave .gem-f6 { animation: gem-wave-face 1.8s ease-in-out infinite 1.5s; }
+
+  </style>
+</head>
+<body>
+
+<div class="ds-page">
+
+  <!-- ══════════════════════════════════════
+       HEADER FIXO
+  ══════════════════════════════════════ -->
+  <header class="ds-header">
+    <div class="ds-header-inner">
+      <div class="ds-header-logo">
+        <!-- Logo horizontal: gem 32px + wordmark -->
+        <svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="h-hex-clip"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath>
+            <filter id="h-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/>
+            </filter>
+          </defs>
+          <g clip-path="url(#h-hex-clip)">
+            <polygon points="16,2.5 28,9 16,16"   fill="#A060E8"/>
+            <polygon points="28,9 28,23 16,16"    fill="#7030C0"/>
+            <polygon points="28,23 16,29.5 16,16" fill="#501888"/>
+            <polygon points="16,29.5 4,23 16,16"  fill="#280858"/>
+            <polygon points="4,23 4,9 16,16"      fill="#4B218E"/>
+            <polygon points="4,9 16,2.5 16,16"    fill="#6030A8"/>
+            <path d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#h-glow)"/>
+            <rect x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#h-glow)"/>
+          </g>
+          <polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/>
+        </svg>
+        <span>gestao<span class="ds-header-logo-dot">.</span>dev</span>
+      </div>
+      <span class="ds-header-meta">Design System &nbsp;·&nbsp; v1.0</span>
+    </div>
+  </header>
+
+  <div class="ds-body">
+
+    <!-- ══════════════════════════════════════
+         01 · MARCA
+    ══════════════════════════════════════ -->
+    <section class="ds-section">
+      <div class="ds-section-label">01 · Marca</div>
+      <div class="ds-section-title">Logo &amp; Identidade Visual</div>
+
+      <!-- Icon sizes -->
+      <div style="margin-bottom:48px;">
+        <div class="ds-color-group-label">Variante — Icon</div>
+        <div class="ds-logo-grid">
+
+          <div class="ds-logo-item">
+            <div class="ds-logo-bg" style="padding:28px;">
+              <svg viewBox="0 0 32 32" width="128" height="128" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <clipPath id="i128-clip"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath>
+                  <filter id="i128-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/>
+                  </filter>
+                </defs>
+                <g clip-path="url(#i128-clip)">
+                  <polygon points="16,2.5 28,9 16,16"   fill="#A060E8"/>
+                  <polygon points="28,9 28,23 16,16"    fill="#7030C0"/>
+                  <polygon points="28,23 16,29.5 16,16" fill="#501888"/>
+                  <polygon points="16,29.5 4,23 16,16"  fill="#280858"/>
+                  <polygon points="4,23 4,9 16,16"      fill="#4B218E"/>
+                  <polygon points="4,9 16,2.5 16,16"    fill="#6030A8"/>
+                  <path d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#i128-glow)"/>
+                  <rect x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#i128-glow)"/>
+                </g>
+                <polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/>
+              </svg>
+            </div>
+            <span class="ds-token">128px</span>
+          </div>
+
+          <div class="ds-logo-item">
+            <div class="ds-logo-bg">
+              <svg viewBox="0 0 32 32" width="64" height="64" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <clipPath id="i64-clip"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath>
+                  <filter id="i64-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/>
+                  </filter>
+                </defs>
+                <g clip-path="url(#i64-clip)">
+                  <polygon points="16,2.5 28,9 16,16"   fill="#A060E8"/>
+                  <polygon points="28,9 28,23 16,16"    fill="#7030C0"/>
+                  <polygon points="28,23 16,29.5 16,16" fill="#501888"/>
+                  <polygon points="16,29.5 4,23 16,16"  fill="#280858"/>
+                  <polygon points="4,23 4,9 16,16"      fill="#4B218E"/>
+                  <polygon points="4,9 16,2.5 16,16"    fill="#6030A8"/>
+                  <path d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#i64-glow)"/>
+                  <rect x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#i64-glow)"/>
+                </g>
+                <polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/>
+              </svg>
+            </div>
+            <span class="ds-token">64px</span>
+          </div>
+
+          <div class="ds-logo-item">
+            <div class="ds-logo-bg">
+              <svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <clipPath id="i32-clip"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath>
+                  <filter id="i32-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/>
+                  </filter>
+                </defs>
+                <g clip-path="url(#i32-clip)">
+                  <polygon points="16,2.5 28,9 16,16"   fill="#A060E8"/>
+                  <polygon points="28,9 28,23 16,16"    fill="#7030C0"/>
+                  <polygon points="28,23 16,29.5 16,16" fill="#501888"/>
+                  <polygon points="16,29.5 4,23 16,16"  fill="#280858"/>
+                  <polygon points="4,23 4,9 16,16"      fill="#4B218E"/>
+                  <polygon points="4,9 16,2.5 16,16"    fill="#6030A8"/>
+                  <path d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#i32-glow)"/>
+                  <rect x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#i32-glow)"/>
+                </g>
+                <polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/>
+              </svg>
+            </div>
+            <span class="ds-token">32px</span>
+          </div>
+
+          <div class="ds-logo-item">
+            <div class="ds-logo-bg">
+              <svg viewBox="0 0 32 32" width="20" height="20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <clipPath id="i20-clip"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath>
+                  <filter id="i20-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/>
+                  </filter>
+                </defs>
+                <g clip-path="url(#i20-clip)">
+                  <polygon points="16,2.5 28,9 16,16"   fill="#A060E8"/>
+                  <polygon points="28,9 28,23 16,16"    fill="#7030C0"/>
+                  <polygon points="28,23 16,29.5 16,16" fill="#501888"/>
+                  <polygon points="16,29.5 4,23 16,16"  fill="#280858"/>
+                  <polygon points="4,23 4,9 16,16"      fill="#4B218E"/>
+                  <polygon points="4,9 16,2.5 16,16"    fill="#6030A8"/>
+                  <path d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#i20-glow)"/>
+                  <rect x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#i20-glow)"/>
+                </g>
+                <polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/>
+              </svg>
+            </div>
+            <span class="ds-token">20px</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Horizontal & Vertical variants -->
+      <div style="display:flex; gap:48px; flex-wrap:wrap; align-items:flex-start;">
+
+        <div>
+          <div class="ds-color-group-label" style="margin-bottom:16px;">Horizontal — gem 40px + wordmark 22px</div>
+          <div class="ds-logo-bg" style="display:inline-flex; padding:24px 32px;">
+            <div style="display:flex; align-items:center; gap:10px; font-family:var(--f-mono); font-weight:600; font-size:22px; letter-spacing:-0.01em;">
+              <svg viewBox="0 0 32 32" width="40" height="40" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <clipPath id="horiz-clip"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath>
+                  <filter id="horiz-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/>
+                  </filter>
+                </defs>
+                <g clip-path="url(#horiz-clip)">
+                  <polygon points="16,2.5 28,9 16,16"   fill="#A060E8"/>
+                  <polygon points="28,9 28,23 16,16"    fill="#7030C0"/>
+                  <polygon points="28,23 16,29.5 16,16" fill="#501888"/>
+                  <polygon points="16,29.5 4,23 16,16"  fill="#280858"/>
+                  <polygon points="4,23 4,9 16,16"      fill="#4B218E"/>
+                  <polygon points="4,9 16,2.5 16,16"    fill="#6030A8"/>
+                  <path d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#horiz-glow)"/>
+                  <rect x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#horiz-glow)"/>
+                </g>
+                <polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/>
+              </svg>
+              <span>gestao<span style="color:#7B4DC4;">.</span>dev</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="ds-color-group-label" style="margin-bottom:16px;">Vertical — gem 64px + wordmark 15px</div>
+          <div class="ds-logo-bg" style="display:inline-flex; padding:24px 40px;">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:12px; font-family:var(--f-mono); font-weight:600; font-size:15px; letter-spacing:-0.01em;">
+              <svg viewBox="0 0 32 32" width="64" height="64" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <clipPath id="vert-clip"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath>
+                  <filter id="vert-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/>
+                  </filter>
+                </defs>
+                <g clip-path="url(#vert-clip)">
+                  <polygon points="16,2.5 28,9 16,16"   fill="#A060E8"/>
+                  <polygon points="28,9 28,23 16,16"    fill="#7030C0"/>
+                  <polygon points="28,23 16,29.5 16,16" fill="#501888"/>
+                  <polygon points="16,29.5 4,23 16,16"  fill="#280858"/>
+                  <polygon points="4,23 4,9 16,16"      fill="#4B218E"/>
+                  <polygon points="4,9 16,2.5 16,16"    fill="#6030A8"/>
+                  <path d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#vert-glow)"/>
+                  <rect x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#vert-glow)"/>
+                </g>
+                <polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/>
+              </svg>
+              <span>gestao<span style="color:#7B4DC4;">.</span>dev</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         02 · CORES
+    ══════════════════════════════════════ -->
+    <section class="ds-section">
+      <div class="ds-section-label">02 · Cores</div>
+      <div class="ds-section-title">Paleta de Cores</div>
+
+      <div class="ds-color-groups">
+
+        <!-- Backgrounds -->
+        <div>
+          <div class="ds-color-group-label">Backgrounds</div>
+          <div class="ds-color-row">
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:#030711;"></div>
+              <span class="ds-token">--c-bg-deep</span>
+              <span class="ds-value">#030711</span>
+            </div>
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:#050b18;"></div>
+              <span class="ds-token">--c-bg-primary</span>
+              <span class="ds-value">#050b18</span>
+            </div>
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:#0a1628;"></div>
+              <span class="ds-token">--c-bg-surface</span>
+              <span class="ds-value">#0a1628</span>
+            </div>
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:#0f1d32;"></div>
+              <span class="ds-token">--c-bg-elevated</span>
+              <span class="ds-value">#0f1d32</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Primary -->
+        <div>
+          <div class="ds-color-group-label">Primary — Deep Purple</div>
+          <div class="ds-color-row">
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:#4B218E;"></div>
+              <span class="ds-token">--c-primary</span>
+              <span class="ds-value">#4B218E</span>
+            </div>
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:#7B4DC4;"></div>
+              <span class="ds-token">--c-primary-light</span>
+              <span class="ds-value">#7B4DC4</span>
+            </div>
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:#371870;"></div>
+              <span class="ds-token">--c-primary-dark</span>
+              <span class="ds-value">#371870</span>
+            </div>
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:rgba(75,33,142,0.20);"></div>
+              <span class="ds-token">--c-primary-glow</span>
+              <span class="ds-value">rgba(75,33,142,.20)</span>
+            </div>
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:rgba(75,33,142,0.08);"></div>
+              <span class="ds-token">--c-primary-subtle</span>
+              <span class="ds-value">rgba(75,33,142,.08)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Secondary -->
+        <div>
+          <div class="ds-color-group-label">Secondary — Blue Grey</div>
+          <div class="ds-color-row">
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:#607D8B;"></div>
+              <span class="ds-token">--c-secondary</span>
+              <span class="ds-value">#607D8B</span>
+            </div>
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:#90A4AE;"></div>
+              <span class="ds-token">--c-secondary-light</span>
+              <span class="ds-value">#90A4AE</span>
+            </div>
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:#455A64;"></div>
+              <span class="ds-token">--c-secondary-dark</span>
+              <span class="ds-value">#455A64</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div>
+          <div class="ds-color-group-label">Text — Opacidades sobre escuro</div>
+          <div class="ds-color-row">
+            <div class="ds-color-item">
+              <div class="ds-swatch ds-swatch--text" style="color:#ffffff;">Aa</div>
+              <span class="ds-token">--c-text-primary</span>
+              <span class="ds-value">#fff · 100%</span>
+            </div>
+            <div class="ds-color-item">
+              <div class="ds-swatch ds-swatch--text" style="color:rgba(255,255,255,0.65);">Aa</div>
+              <span class="ds-token">--c-text-secondary</span>
+              <span class="ds-value">rgba(255,255,255,.65)</span>
+            </div>
+            <div class="ds-color-item">
+              <div class="ds-swatch ds-swatch--text" style="color:rgba(255,255,255,0.40);">Aa</div>
+              <span class="ds-token">--c-text-muted</span>
+              <span class="ds-value">rgba(255,255,255,.40)</span>
+            </div>
+            <div class="ds-color-item">
+              <div class="ds-swatch ds-swatch--text" style="color:rgba(255,255,255,0.20);">Aa</div>
+              <span class="ds-token">--c-text-faint</span>
+              <span class="ds-value">rgba(255,255,255,.20)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Semantic -->
+        <div>
+          <div class="ds-color-group-label">Semânticas</div>
+          <div class="ds-color-row">
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:#22c55e;"></div>
+              <span class="ds-token">--c-success</span>
+              <span class="ds-value">#22c55e</span>
+            </div>
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:#ef4444;"></div>
+              <span class="ds-token">--c-error</span>
+              <span class="ds-value">#ef4444</span>
+            </div>
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:#f59e0b;"></div>
+              <span class="ds-token">--c-warning</span>
+              <span class="ds-value">#f59e0b</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Borders -->
+        <div>
+          <div class="ds-color-group-label">Bordas</div>
+          <div class="ds-color-row">
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.15)!important;"></div>
+              <span class="ds-token">--c-border</span>
+              <span class="ds-value">rgba(255,255,255,.06)</span>
+            </div>
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:rgba(255,255,255,0.12); border-color:rgba(255,255,255,0.20)!important;"></div>
+              <span class="ds-token">--c-border-visible</span>
+              <span class="ds-value">rgba(255,255,255,.12)</span>
+            </div>
+            <div class="ds-color-item">
+              <div class="ds-swatch" style="background:rgba(75,33,142,0.35);"></div>
+              <span class="ds-token">--c-border-accent</span>
+              <span class="ds-value">rgba(75,33,142,.35)</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         03 · GRADIENTES
+    ══════════════════════════════════════ -->
+    <section class="ds-section">
+      <div class="ds-section-label">03 · Gradientes</div>
+      <div class="ds-section-title">Gradientes</div>
+
+      <div class="ds-gradient-list">
+        <div class="ds-gradient-item">
+          <span class="ds-gradient-name">--gradient-primary &nbsp;·&nbsp; linear-gradient(135deg, #7B4DC4 0%, #4B218E 60%, #371870 100%)</span>
+          <div class="ds-gradient-bar" style="background:linear-gradient(135deg, #7B4DC4 0%, #4B218E 60%, #371870 100%);"></div>
+        </div>
+        <div class="ds-gradient-item">
+          <span class="ds-gradient-name">--gradient-text &nbsp;·&nbsp; linear-gradient(135deg, #9B6DD4 0%, #4B218E 50%, #371870 100%)</span>
+          <div class="ds-gradient-bar" style="background:linear-gradient(135deg, #9B6DD4 0%, #4B218E 50%, #371870 100%);"></div>
+        </div>
+        <div class="ds-gradient-item">
+          <span class="ds-gradient-name">--gradient-brand &nbsp;·&nbsp; linear-gradient(135deg, #4B218E 0%, #607D8B 100%)</span>
+          <div class="ds-gradient-bar" style="background:linear-gradient(135deg, #4B218E 0%, #607D8B 100%);"></div>
+        </div>
+        <div class="ds-gradient-item">
+          <span class="ds-gradient-name">--gradient-secondary &nbsp;·&nbsp; linear-gradient(135deg, #90A4AE 0%, #607D8B 100%)</span>
+          <div class="ds-gradient-bar" style="background:linear-gradient(135deg, #90A4AE 0%, #607D8B 100%);"></div>
+        </div>
+        <div class="ds-gradient-item">
+          <span class="ds-gradient-name">--gradient-glow &nbsp;·&nbsp; radial-gradient(ellipse at 50% 0%, rgba(75,33,142,0.14) 0%, transparent 70%)</span>
+          <div class="ds-gradient-bar" style="background: #0a1628 radial-gradient(ellipse at 50% 0%, rgba(75,33,142,0.50) 0%, transparent 70%); border:1px solid rgba(255,255,255,0.08);"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         04 · TIPOGRAFIA
+    ══════════════════════════════════════ -->
+    <section class="ds-section">
+      <div class="ds-section-label">04 · Tipografia</div>
+      <div class="ds-section-title">Hierarquia Tipográfica</div>
+
+      <!-- Font families -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-bottom:56px;">
+        <div style="background:var(--c-bg-surface); border:1px solid rgba(255,255,255,0.08); border-radius:var(--r-lg); padding:28px;">
+          <div class="ds-color-group-label" style="margin-bottom:20px;">Geist — Sans</div>
+          <div class="ds-font-weights">
+            <div style="font-family:var(--f-sans); font-weight:300; font-size:1.125rem; color:#fff;">Light 300 — The quick brown fox</div>
+            <div style="font-family:var(--f-sans); font-weight:400; font-size:1.125rem; color:#fff;">Regular 400 — The quick brown fox</div>
+            <div style="font-family:var(--f-sans); font-weight:500; font-size:1.125rem; color:#fff;">Medium 500 — The quick brown fox</div>
+            <div style="font-family:var(--f-sans); font-weight:600; font-size:1.125rem; color:#fff;">SemiBold 600 — The quick brown fox</div>
+            <div style="font-family:var(--f-sans); font-weight:700; font-size:1.125rem; color:#fff;">Bold 700 — The quick brown fox</div>
+          </div>
+        </div>
+        <div style="background:var(--c-bg-surface); border:1px solid rgba(255,255,255,0.08); border-radius:var(--r-lg); padding:28px;">
+          <div class="ds-color-group-label" style="margin-bottom:20px;">Geist Mono — Monospace</div>
+          <div class="ds-font-weights">
+            <div style="font-family:var(--f-mono); font-weight:400; font-size:1rem; color:var(--c-primary-light);">Regular 400 — npm run dev</div>
+            <div style="font-family:var(--f-mono); font-weight:500; font-size:1rem; color:var(--c-primary-light);">Medium 500 — npm run build</div>
+            <div style="font-family:var(--f-mono); font-weight:600; font-size:1rem; color:var(--c-primary-light);">SemiBold 600 — gestao.dev</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Type scale -->
+      <div class="ds-type-list">
+
+        <div class="ds-type-row">
+          <div class="ds-type-sample">
+            <h2 class="section-title" style="text-align:left; margin-bottom:0;">O jeito antigo não funciona</h2>
+          </div>
+          <div class="ds-type-meta">
+            <div class="ds-type-meta-label">.section-title
+clamp(1.75rem → 2.75rem)
+weight 500
+letter-spacing -0.035em
+text-shadow glow roxo</div>
+          </div>
+        </div>
+
+        <div class="ds-type-row">
+          <div class="ds-type-sample">
+            <p class="section-subtitle" style="text-align:left; margin:0; max-width:none;">Times de dev perdem horas por semana com ferramentas que não conversam entre si.</p>
+          </div>
+          <div class="ds-type-meta">
+            <div class="ds-type-meta-label">.section-subtitle
+clamp(1rem → 1.125rem)
+weight 400
+color 80% opacity
+line-height 1.8</div>
+          </div>
+        </div>
+
+        <div class="ds-type-row">
+          <div class="ds-type-sample">
+            <div class="section-tag" style="margin:0;">Diagnóstico</div>
+          </div>
+          <div class="ds-type-meta">
+            <div class="ds-type-meta-label">.section-tag
+0.625rem · Geist Mono
+uppercase · weight 500
+letter-spacing 0.12em
+purple border + fill</div>
+          </div>
+        </div>
+
+        <div class="ds-type-row">
+          <div class="ds-type-sample">
+            <p style="font-size:1rem; font-weight:400; line-height:1.6; color:#fff;">Body — Texto padrão para parágrafos e conteúdo descritivo. Legível em qualquer contexto.</p>
+          </div>
+          <div class="ds-type-meta">
+            <div class="ds-type-meta-label">Body
+1rem · weight 400
+line-height 1.6
+color var(--c-text-primary)</div>
+          </div>
+        </div>
+
+        <div class="ds-type-row">
+          <div class="ds-type-sample">
+            <p style="font-size:0.875rem; font-weight:400; line-height:1.6; color:rgba(255,255,255,0.65);">Body small — Texto auxiliar, legendas, metadados e descrições secundárias.</p>
+          </div>
+          <div class="ds-type-meta">
+            <div class="ds-type-meta-label">Body Small
+0.875rem · weight 400
+color var(--c-text-secondary)</div>
+          </div>
+        </div>
+
+        <div class="ds-type-row">
+          <div class="ds-type-sample">
+            <code style="font-family:var(--f-mono); font-size:0.875rem; color:var(--c-primary-light); background:rgba(75,33,142,0.12); padding:6px 12px; border-radius:6px; border:1px solid rgba(75,33,142,0.25);">npx gestao-mcp connect --project=./gestao.dev</code>
+          </div>
+          <div class="ds-type-meta">
+            <div class="ds-type-meta-label">Mono / Code
+Geist Mono · 0.875rem
+color primary-light
+bg primary-subtle</div>
+          </div>
+        </div>
+
+        <div class="ds-type-row">
+          <div class="ds-type-sample">
+            <p style="font-size:1.5rem; font-weight:300; letter-spacing:-0.03em; background:var(--gradient-text); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">87% menos tempo em setup</p>
+          </div>
+          <div class="ds-type-meta">
+            <div class="ds-type-meta-label">Stat / Display
+1.5–2.5rem · weight 300
+letter-spacing -0.03em
+gradient-text</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         05 · ESPAÇAMENTO
+    ══════════════════════════════════════ -->
+    <section class="ds-section">
+      <div class="ds-section-label">05 · Espaçamento &amp; Layout</div>
+      <div class="ds-section-title">Tokens de Espaçamento</div>
+
+      <div class="ds-spacing-list">
+
+        <div class="ds-spacing-item">
+          <span class="ds-token" style="margin:0;">--nav-h</span>
+          <div class="ds-spacing-bar" style="width:64px; height:14px; border-radius:4px;"></div>
+          <span class="ds-spacing-px">64px</span>
+        </div>
+
+        <div class="ds-spacing-item">
+          <span class="ds-token" style="margin:0;">--container-px</span>
+          <div class="ds-spacing-bar" style="width:80px; height:14px; border-radius:4px;"></div>
+          <span class="ds-spacing-px">40px × 2</span>
+        </div>
+
+        <div class="ds-spacing-item">
+          <span class="ds-token" style="margin:0;">--section-py</span>
+          <div class="ds-spacing-bar" style="width:192px; height:14px; border-radius:4px;"></div>
+          <span class="ds-spacing-px">96px</span>
+        </div>
+
+        <div class="ds-spacing-item">
+          <span class="ds-token" style="margin:0;">--section-py-lg</span>
+          <div class="ds-spacing-bar" style="width:256px; height:14px; border-radius:4px;"></div>
+          <span class="ds-spacing-px">128px</span>
+        </div>
+
+        <div class="ds-spacing-item">
+          <span class="ds-token" style="margin:0;">--container-w</span>
+          <div class="ds-spacing-bar" style="width:100%; max-width:640px; height:14px; border-radius:4px;"></div>
+          <span class="ds-spacing-px">1280px</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         06 · RAIOS
+    ══════════════════════════════════════ -->
+    <section class="ds-section">
+      <div class="ds-section-label">06 · Border Radius</div>
+      <div class="ds-section-title">Tokens de Raio</div>
+
+      <div class="ds-radius-row">
+        <div class="ds-radius-item">
+          <div class="ds-radius-box" style="border-radius:4px;"></div>
+          <span class="ds-token">--r-xs</span>
+          <span class="ds-value">4px</span>
+        </div>
+        <div class="ds-radius-item">
+          <div class="ds-radius-box" style="border-radius:6px;"></div>
+          <span class="ds-token">--r-sm</span>
+          <span class="ds-value">6px</span>
+        </div>
+        <div class="ds-radius-item">
+          <div class="ds-radius-box" style="border-radius:12px;"></div>
+          <span class="ds-token">--r-md</span>
+          <span class="ds-value">12px</span>
+        </div>
+        <div class="ds-radius-item">
+          <div class="ds-radius-box" style="border-radius:16px;"></div>
+          <span class="ds-token">--r-lg</span>
+          <span class="ds-value">16px</span>
+        </div>
+        <div class="ds-radius-item">
+          <div class="ds-radius-box" style="border-radius:24px;"></div>
+          <span class="ds-token">--r-xl</span>
+          <span class="ds-value">24px</span>
+        </div>
+        <div class="ds-radius-item">
+          <div class="ds-radius-box" style="border-radius:9999px; width:88px;"></div>
+          <span class="ds-token">--r-full</span>
+          <span class="ds-value">9999px (pill)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         07 · SOMBRAS
+    ══════════════════════════════════════ -->
+    <section class="ds-section">
+      <div class="ds-section-label">07 · Sombras</div>
+      <div class="ds-section-title">Tokens de Shadow</div>
+
+      <div class="ds-shadow-grid">
+
+        <div class="ds-shadow-item">
+          <div class="ds-shadow-swatch" style="box-shadow:0 4px 24px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.04);"></div>
+          <span class="ds-shadow-label">--shadow-card</span>
+          <span class="ds-value" style="text-align:center; font-size:0.5625rem;">0 4px 24px rgba(0,0,0,.4)<br>+ inset top highlight</span>
+        </div>
+
+        <div class="ds-shadow-item">
+          <div class="ds-shadow-swatch" style="box-shadow:0 8px 32px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.06);"></div>
+          <span class="ds-shadow-label">--shadow-elevated</span>
+          <span class="ds-value" style="text-align:center; font-size:0.5625rem;">0 8px 32px rgba(0,0,0,.5)<br>+ inset top highlight</span>
+        </div>
+
+        <div class="ds-shadow-item">
+          <div class="ds-shadow-swatch" style="box-shadow:0 0 40px rgba(75,33,142,0.18);"></div>
+          <span class="ds-shadow-label">--shadow-glow</span>
+          <span class="ds-value" style="text-align:center; font-size:0.5625rem;">0 0 40px rgba(75,33,142,.18)</span>
+        </div>
+
+        <div class="ds-shadow-item">
+          <div class="ds-shadow-swatch" style="box-shadow:0 0 60px rgba(75,33,142,0.35);"></div>
+          <span class="ds-shadow-label">--shadow-glow-strong</span>
+          <span class="ds-value" style="text-align:center; font-size:0.5625rem;">0 0 60px rgba(75,33,142,.35)</span>
+        </div>
+
+        <div class="ds-shadow-item">
+          <div class="ds-shadow-swatch" style="border-radius:9999px; width:80px; height:32px; background:var(--gradient-primary); box-shadow:0 0 25px -5px rgba(75,33,142,0.50);"></div>
+          <span class="ds-shadow-label">--shadow-button</span>
+          <span class="ds-value" style="text-align:center; font-size:0.5625rem;">0 0 25px -5px rgba(75,33,142,.50)</span>
+        </div>
+
+        <div class="ds-shadow-item">
+          <div class="ds-shadow-swatch" style="border-radius:9999px; width:80px; height:32px; background:var(--gradient-primary); box-shadow:0 0 35px -5px rgba(75,33,142,0.80);"></div>
+          <span class="ds-shadow-label">--shadow-button-hover</span>
+          <span class="ds-value" style="text-align:center; font-size:0.5625rem;">0 0 35px -5px rgba(75,33,142,.80)</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         08 · PADRÃO DE SEÇÃO
+    ══════════════════════════════════════ -->
+    <section class="ds-section">
+      <div class="ds-section-label">08 · Componentes</div>
+      <div class="ds-section-title">Padrão de Seção</div>
+
+      <div class="ds-section-pattern-demo">
+        <div class="section-tag">Diagnóstico</div>
+        <h2 class="section-title">O jeito antigo não funciona mais</h2>
+        <p class="section-subtitle">Times de dev perdem <strong>horas por semana</strong> com ferramentas que não conversam entre si.</p>
+        <div style="display:flex; gap:12px; justify-content:center; align-items:center; flex-wrap:wrap;">
+          <span class="nav-cta">Começar grátis</span>
+          <span style="font-size:0.875rem; color:var(--c-text-muted);">Ver documentação →</span>
+        </div>
+      </div>
+
+      <!-- Annotations -->
+      <div style="margin-top:32px; display:flex; flex-direction:column; gap:12px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:3px; height:16px; background:var(--c-primary-light); border-radius:2px; flex-shrink:0;"></div>
+          <code class="ds-code">.section-tag</code>
+          <span style="font-size:0.8125rem; color:rgba(255,255,255,0.45);">flex · fit-content · Geist Mono · uppercase · 0.625rem · purple border</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:3px; height:16px; background:var(--c-primary-light); border-radius:2px; flex-shrink:0;"></div>
+          <code class="ds-code">.section-title</code>
+          <span style="font-size:0.8125rem; color:rgba(255,255,255,0.45);">weight 500 · clamp(1.75rem→2.75rem) · -0.035em · glow text-shadow</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:3px; height:16px; background:var(--c-primary-light); border-radius:2px; flex-shrink:0;"></div>
+          <code class="ds-code">.section-subtitle</code>
+          <span style="font-size:0.8125rem; color:rgba(255,255,255,0.45);">weight 400 · clamp(1rem→1.125rem) · opacity 80% · line-height 1.8</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         09 · CARDS
+    ══════════════════════════════════════ -->
+    <section class="ds-section">
+      <div class="ds-section-label">09 · Componentes</div>
+      <div class="ds-section-title">Cards</div>
+
+      <div class="ds-cards-grid">
+
+        <!-- Pain card -->
+        <div class="pain-card">
+          <div style="margin-bottom:4px;">
+            <div class="ds-color-group-label" style="margin-bottom:16px;">pain-card</div>
+          </div>
+          <div class="pain-card-icon" style="background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.25);">
+            <svg width="24" height="24" fill="none" stroke="#ef4444" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z"/>
+            </svg>
+          </div>
+          <div class="pain-card-title">Contexto perdido</div>
+          <div class="pain-card-text">Cada reunião começa do zero. Ninguém sabe o que foi decidido ontem nem quem está bloqueado.</div>
+        </div>
+
+        <!-- MCP card -->
+        <div class="mcp-card">
+          <div style="margin-bottom:4px;">
+            <div class="ds-color-group-label" style="margin-bottom:16px;">mcp-card</div>
+          </div>
+          <div class="mcp-card-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
+            </svg>
+          </div>
+          <div class="mcp-card-title">Automação inteligente</div>
+          <div class="mcp-card-text">O MCP conecta seu fluxo de trabalho com IA em tempo real, eliminando tarefas repetitivas.</div>
+        </div>
+
+        <!-- Feature card -->
+        <div class="feature-card">
+          <div style="margin-bottom:4px;">
+            <div class="ds-color-group-label" style="margin-bottom:16px;">feature-card</div>
+          </div>
+          <div class="feature-card-icon">
+            <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div class="feature-card-title">Deploy com zero atrito</div>
+          <div class="feature-card-text">Integre, teste e publique sem sair do fluxo. CI/CD que realmente funciona.</div>
+        </div>
+
+      </div>
+
+      <!-- Annotations -->
+      <div style="margin-top:32px; display:flex; gap:24px; flex-wrap:wrap;">
+        <div style="font-size:0.75rem; font-family:var(--f-mono); color:rgba(255,255,255,0.35);">
+          <span style="color:var(--c-primary-light);">pain-card</span> — gradient 160deg · borda purple 0.22 · inset highlight
+        </div>
+        <div style="font-size:0.75rem; font-family:var(--f-mono); color:rgba(255,255,255,0.35);">
+          <span style="color:var(--c-primary-light);">mcp-card</span> — gradient 160deg · ícone purple subtle
+        </div>
+        <div style="font-size:0.75rem; font-family:var(--f-mono); color:rgba(255,255,255,0.35);">
+          <span style="color:var(--c-primary-light);">feature-card</span> — gradient 180deg · text-align center
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         10 · CTAs
+    ══════════════════════════════════════ -->
+    <section class="ds-section">
+      <div class="ds-section-label">10 · Componentes</div>
+      <div class="ds-section-title">CTAs — Gem Button</div>
+
+      <div class="ds-cta-list">
+
+        <div class="ds-cta-row">
+          <div class="ds-cta-meta">
+            <span class="ds-token" style="margin:0;">Small</span>
+            <span class="ds-value">padding 8px 20px<br>font-size 0.8125rem</span>
+          </div>
+          <button class="gem-cta gem-cta--sm" id="cta-sm">Começar grátis</button>
+          <span style="font-size:0.75rem; font-family:var(--f-mono); color:rgba(255,255,255,0.30); margin-left:8px;">.nav-cta / .gem-cta--sm</span>
+        </div>
+
+        <div class="ds-cta-row">
+          <div class="ds-cta-meta">
+            <span class="ds-token" style="margin:0;">Medium</span>
+            <span class="ds-value">padding 12px 28px<br>font-size 0.9375rem</span>
+          </div>
+          <button class="gem-cta gem-cta--md" id="cta-md">Agendar demonstração</button>
+          <span style="font-size:0.75rem; font-family:var(--f-mono); color:rgba(255,255,255,0.30); margin-left:8px;">.gem-cta--md</span>
+        </div>
+
+        <div class="ds-cta-row">
+          <div class="ds-cta-meta">
+            <span class="ds-token" style="margin:0;">Large</span>
+            <span class="ds-value">padding 14px 32px<br>font-size 1.0625rem</span>
+          </div>
+          <button class="gem-cta gem-cta--lg" id="cta-lg">Começar agora — é grátis</button>
+          <span style="font-size:0.75rem; font-family:var(--f-mono); color:rgba(255,255,255,0.30); margin-left:8px;">.gem-cta--lg</span>
+        </div>
+
+      </div>
+
+      <!-- Gem anatomy -->
+      <div style="margin-top:40px; background:var(--c-bg-surface); border:1px solid rgba(255,255,255,0.08); border-radius:var(--r-lg); padding:24px 28px;">
+        <div class="ds-color-group-label" style="margin-bottom:12px;">Anatomia — gem-cta::before</div>
+        <div style="display:flex; flex-direction:column; gap:6px; font-family:var(--f-mono); font-size:0.75rem; color:rgba(255,255,255,0.45);">
+          <span><span style="color:var(--c-primary-light);">height:</span> 210% &nbsp;·&nbsp; <span style="color:var(--c-primary-light);">aspect-ratio:</span> 1 &nbsp;·&nbsp; <span style="color:var(--c-primary-light);">top:</span> -55% &nbsp;·&nbsp; <span style="color:var(--c-primary-light);">right:</span> -26px</span>
+          <span><span style="color:var(--c-primary-light);">transform-origin:</span> center center &nbsp;·&nbsp; <span style="color:var(--c-primary-light);">z-index:</span> -1 &nbsp;·&nbsp; <span style="color:var(--c-primary-light);">overflow:</span> hidden (no botão pai)</span>
+          <span><span style="color:var(--c-primary-light);">.gem-pressing</span> → scale(0.78) &nbsp;·&nbsp; <span style="color:var(--c-primary-light);">.gem-spinning</span> → scale(0.78→1) + rotate(0→360deg)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         11 · GEMLOADER
+    ══════════════════════════════════════ -->
+    <section class="ds-section">
+      <div class="ds-section-label">11 · Componentes</div>
+      <div class="ds-section-title">GemLoader — Insignia Animada</div>
+      <div class="ds-gem-grid" id="ds-gem-grid"></div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         12 · TRANSIÇÕES
+    ══════════════════════════════════════ -->
+    <section class="ds-section">
+      <div class="ds-section-label">12 · Motion</div>
+      <div class="ds-section-title">Tokens de Transição</div>
+
+      <div class="ds-transition-list">
+
+        <div class="ds-transition-row" style="background:var(--c-bg-surface);">
+          <span style="font-family:var(--f-mono); font-size:0.6875rem; color:rgba(255,255,255,0.30); font-weight:600; letter-spacing:0.08em; text-transform:uppercase;">Variável</span>
+          <span style="font-family:var(--f-mono); font-size:0.6875rem; color:rgba(255,255,255,0.30); font-weight:600; letter-spacing:0.08em; text-transform:uppercase;">Valor</span>
+          <span style="font-family:var(--f-mono); font-size:0.6875rem; color:rgba(255,255,255,0.30); font-weight:600; letter-spacing:0.08em; text-transform:uppercase;">Uso</span>
+        </div>
+
+        <div class="ds-transition-row">
+          <span class="ds-transition-var">--t-fast</span>
+          <span class="ds-transition-value">150ms ease</span>
+          <span style="font-size:0.8125rem; color:rgba(255,255,255,0.45);">Hover states, cores imediatas</span>
+        </div>
+
+        <div class="ds-transition-row">
+          <span class="ds-transition-var">--t-normal</span>
+          <span class="ds-transition-value">300ms ease</span>
+          <span style="font-size:0.8125rem; color:rgba(255,255,255,0.45);">Bordas, sombras, backgrounds</span>
+        </div>
+
+        <div class="ds-transition-row">
+          <span class="ds-transition-var">--t-slow</span>
+          <span class="ds-transition-value">500ms ease</span>
+          <span style="font-size:0.8125rem; color:rgba(255,255,255,0.45);">Reveals, animações de entrada</span>
+        </div>
+
+        <div class="ds-transition-row">
+          <span class="ds-transition-var">--t-spring</span>
+          <span class="ds-transition-value">500ms cubic-bezier(0.23, 1, 0.32, 1)</span>
+          <span style="font-size:0.8125rem; color:rgba(255,255,255,0.45);">Ícones, transforms elásticos</span>
+        </div>
+
+      </div>
+
+      <!-- Keyframes de referência -->
+      <div style="margin-top:32px; background:var(--c-bg-surface); border:1px solid rgba(255,255,255,0.08); border-radius:var(--r-lg); padding:24px 28px;">
+        <div class="ds-color-group-label" style="margin-bottom:16px;">Keyframes globais</div>
+        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;">
+          <div>
+            <div style="font-family:var(--f-mono); font-size:0.6875rem; color:var(--c-primary-light); margin-bottom:4px;">reveal</div>
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.40);">opacity 0→1, translateY 20px→0, blur 8px→0</div>
+          </div>
+          <div>
+            <div style="font-family:var(--f-mono); font-size:0.6875rem; color:var(--c-primary-light); margin-bottom:4px;">ambient-drift</div>
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.40);">translate(3%,4%) scale(1.05), opacity 0.6→0.3</div>
+          </div>
+          <div>
+            <div style="font-family:var(--f-mono); font-size:0.6875rem; color:var(--c-primary-light); margin-bottom:4px;">glow-pulse</div>
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.40);">box-shadow 0→rgba(139,92,246,.25)</div>
+          </div>
+          <div>
+            <div style="font-family:var(--f-mono); font-size:0.6875rem; color:var(--c-primary-light); margin-bottom:4px;">gem-spin</div>
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.40);">scale(0.78→1) + rotate(0→360deg)</div>
+          </div>
+          <div>
+            <div style="font-family:var(--f-mono); font-size:0.6875rem; color:var(--c-primary-light); margin-bottom:4px;">cursor-blink</div>
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.40);">opacity 1→0→1 (terminal)</div>
+          </div>
+          <div>
+            <div style="font-family:var(--f-mono); font-size:0.6875rem; color:var(--c-primary-light); margin-bottom:4px;">node-float</div>
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.40);">translateY(0→-4px→0)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div style="border-top:1px dashed rgba(255,255,255,0.08); padding:48px 0; display:flex; align-items:center; justify-content:space-between;">
+      <div style="display:flex; align-items:center; gap:8px; font-family:var(--f-mono); font-size:0.8125rem; font-weight:600;">
+        <svg viewBox="0 0 32 32" width="20" height="20" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="f-clip"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath>
+            <filter id="f-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/>
+            </filter>
+          </defs>
+          <g clip-path="url(#f-clip)">
+            <polygon points="16,2.5 28,9 16,16"   fill="#A060E8"/>
+            <polygon points="28,9 28,23 16,16"    fill="#7030C0"/>
+            <polygon points="28,23 16,29.5 16,16" fill="#501888"/>
+            <polygon points="16,29.5 4,23 16,16"  fill="#280858"/>
+            <polygon points="4,23 4,9 16,16"      fill="#4B218E"/>
+            <polygon points="4,9 16,2.5 16,16"    fill="#6030A8"/>
+            <path d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#f-glow)"/>
+            <rect x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#f-glow)"/>
+          </g>
+          <polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/>
+        </svg>
+        <span>gestao<span style="color:#7B4DC4;">.</span>dev</span>
+      </div>
+      <span style="font-family:var(--f-mono); font-size:0.625rem; color:rgba(255,255,255,0.20); letter-spacing:0.08em; text-transform:uppercase;">Design System &nbsp;·&nbsp; v1.0 &nbsp;·&nbsp; 2026</span>
+    </div>
+
+  </div><!-- /ds-body -->
+</div><!-- /ds-page -->
+
+<script>
+  // ── GemLoader grid ──
+  (function() {
+    var VARIANTS = [
+      { id: 'pulse',   name: 'Pulse',   use: 'sistema ativo\nconectado' },
+      { id: 'shimmer', name: 'Shimmer', use: 'loading\naguardando' },
+      { id: 'symbol',  name: 'Symbol',  use: 'presença\nterminal' },
+      { id: 'cursor',  name: 'Cursor',  use: 'idle\ninput' },
+      { id: 'wave',    name: 'Wave',    use: 'AI thinking\nprocessando' },
+    ];
+    var SIZES = [20, 32, 48];
+    var uid = 0;
+
+    function gemSVG(variant, size) {
+      var i = ++uid;
+      var clipId = 'dsgc' + i, glowId = 'dsgg' + i;
+      return '<svg class="gem-loader gem-loader--' + variant + '" width="' + size + '" height="' + size + '" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
+        + '<defs>'
+        + '<clipPath id="' + clipId + '"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath>'
+        + '<filter id="' + glowId + '" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/></filter>'
+        + '</defs>'
+        + '<g clip-path="url(#' + clipId + ')">'
+        + '<polygon class="gem-f1" points="16,2.5 28,9 16,16" fill="#A060E8"/>'
+        + '<polygon class="gem-f2" points="28,9 28,23 16,16" fill="#7030C0"/>'
+        + '<polygon class="gem-f3" points="28,23 16,29.5 16,16" fill="#501888"/>'
+        + '<polygon class="gem-f4" points="16,29.5 4,23 16,16" fill="#280858"/>'
+        + '<polygon class="gem-f5" points="4,23 4,9 16,16" fill="#4B218E"/>'
+        + '<polygon class="gem-f6" points="4,9 16,2.5 16,16" fill="#6030A8"/>'
+        + '<path class="gem-chevron" d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#' + glowId + ')"/>'
+        + '<rect class="gem-cursor" x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#' + glowId + ')"/>'
+        + '</g>'
+        + '<polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/>'
+        + '</svg>';
+    }
+
+    var grid = document.getElementById('ds-gem-grid');
+    if (!grid) return;
+    VARIANTS.forEach(function(v) {
+      var card = document.createElement('div');
+      card.className = 'ds-gem-card';
+      card.innerHTML = '<div class="ds-gem-name">' + v.name + '</div>'
+        + '<div class="ds-gem-use">' + v.use.replace('\n', '<br>') + '</div>'
+        + '<div class="ds-gem-sizes">'
+        + SIZES.map(function(s) {
+            return '<div class="ds-gem-size-item">' + gemSVG(v.id, s) + '<span class="ds-gem-size-tag">' + s + 'px</span></div>';
+          }).join('')
+        + '</div>';
+      grid.appendChild(card);
+    });
+  })();
+
+  // ── Gem CTA animation: mousedown → gem-pressing, mouseup → gem-spinning ──
+  document.querySelectorAll('.gem-cta').forEach(function(btn) {
+    btn.addEventListener('mousedown', function() {
+      btn.classList.remove('gem-spinning');
+      btn.classList.add('gem-pressing');
+    });
+
+    btn.addEventListener('mouseup', function() {
+      btn.classList.remove('gem-pressing');
+      btn.classList.add('gem-spinning');
+    });
+
+    btn.addEventListener('mouseleave', function() {
+      btn.classList.remove('gem-pressing');
+    });
+
+    btn.addEventListener('animationend', function(e) {
+      if (e.animationName === 'gem-spin') {
+        btn.classList.remove('gem-spinning');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

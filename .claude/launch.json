@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "mockup",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": ["x", "serve", "-l", "5678", "."],
+      "port": 5678
+    }
+  ]
+}

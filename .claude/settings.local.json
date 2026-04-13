@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where node:*)",
+      "Bash('C:/Program Files/nodejs/node.exe' -e ':*)",
+      "Read(//c/Program Files/**)",
+      "Read(//mnt/c/Program Files/**)",
+      "Bash(cmd.exe /c \"where node\")",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(where bun:*)",
+      "Bash(where npm:*)",
+      "Bash(bun x:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5679/mockup-preview.html)",
+      "Bash(sed -n '7,2053p' \"C:\\\\Users\\\\victo\\\\OneDrive\\\\Documents\\\\Ceisc Tech\\\\gestao.dev-app\\\\app-mockup-claude.html\")",
+      "Read(//tmp/**)"
+    ]
+  }
+}
