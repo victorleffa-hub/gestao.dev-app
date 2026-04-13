@@ -1,9 +1,10 @@
 /* =========================================================
    GESTÃO.DEV — Billing View
-   Phase 2b · src/views/Billing/Billing.tsx
+   Phase 3 · src/views/Billing/Billing.tsx
 ========================================================= */
 
 import { useEffect, useRef } from 'react';
+import s from './Billing.module.css';
 
 // ── Plan data ─────────────────────────────────────────────
 interface Plan {
@@ -91,14 +92,8 @@ export function Billing() {
         <div className="page-header-left">
           <span className="section-tag">
             <span
-              style={{
-                width: '6px',
-                height: '6px',
-                borderRadius: '50%',
-                background: '#22c55e',
-                boxShadow: '0 0 6px #22c55e',
-                display: 'inline-block',
-              }}
+              style={{ width: '6px', height: '6px', borderRadius: '50%',
+                background: '#22c55e', boxShadow: '0 0 6px #22c55e', display: 'inline-block' }}
             />
             Billing
           </span>
@@ -109,164 +104,48 @@ export function Billing() {
       </div>
 
       {/* Current plan banner */}
-      <div ref={currentRef} className="reveal reveal-delay-1 card billing-current">
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '12px',
-          }}
-        >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <span
-              style={{
-                fontFamily: 'var(--f-mono)',
-                fontSize: '0.5rem',
-                textTransform: 'uppercase',
-                letterSpacing: '0.12em',
-                color: 'var(--c-primary-light)',
-              }}
-            >
-              Plano atual
-            </span>
-            <div
-              style={{
-                fontSize: '1.125rem',
-                fontWeight: 700,
-                color: 'var(--t-main)',
-                letterSpacing: '-0.02em',
-              }}
-            >
-              Pro · R$145/mo · 5 seats
-            </div>
-            <div
-              style={{
-                fontFamily: 'var(--f-mono)',
-                fontSize: '0.5625rem',
-                color: 'var(--t-dim)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.1em',
-              }}
-            >
-              Renovacao em 01/05/2026
-            </div>
+      <div ref={currentRef} className="reveal reveal-delay-1 card">
+        <div className={s.currentBanner}>
+          <div className={s.currentMeta}>
+            <span className={s.currentLabel}>Plano atual</span>
+            <div className={s.currentTitle}>Pro · R$145/mo · 5 seats</div>
+            <div className={s.currentRenewal}>Renovacao em 01/05/2026</div>
           </div>
           <button className="gem-cta gem-cta--sm">Gerenciar plano</button>
         </div>
       </div>
 
       {/* Plans grid */}
-      <div ref={plansRef} className="reveal reveal-delay-2 plans-grid">
+      <div ref={plansRef} className={`reveal reveal-delay-2 ${s.plansGrid}`}>
         {PLANS.map((plan) => (
           <div
             key={plan.name}
-            className="card"
-            style={
-              plan.isCurrent
-                ? {
-                    border: '1px solid rgba(123, 77, 196, 0.4)',
-                    background:
-                      'linear-gradient(135deg, rgba(123,77,196,0.08) 0%, rgba(59,130,246,0.04) 100%)',
-                    position: 'relative',
-                  }
-                : {}
-            }
+            className={`card ${s.planCard} ${plan.isCurrent ? s.planCardCurrent : ''}`}
           >
             {plan.isCurrent && (
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '-1px',
-                  left: '24px',
-                  padding: '2px 12px',
-                  background: '#7B4DC4',
-                  borderRadius: '0 0 8px 8px',
-                  fontFamily: 'var(--f-mono)',
-                  fontSize: '0.45rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.12em',
-                  color: '#fff',
-                  fontWeight: 600,
-                }}
-              >
-                Atual
-              </div>
+              <div className={s.planBadge}>Atual</div>
             )}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '4px',
-                marginBottom: '16px',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '0.9375rem',
-                  fontWeight: 700,
-                  color: 'var(--t-main)',
-                  letterSpacing: '-0.02em',
-                }}
-              >
-                {plan.name}
-              </div>
-              <div
-                style={{
-                  fontFamily: 'var(--f-mono)',
-                  fontSize: '1.25rem',
-                  fontWeight: 700,
-                  color: plan.isCurrent ? '#7B4DC4' : 'var(--t-main)',
-                  letterSpacing: '-0.03em',
-                }}
-              >
+
+            <div className={s.planHeader}>
+              <div className={s.planName}>{plan.name}</div>
+              <div className={`${s.planPrice} ${plan.isCurrent ? s.planPriceCurrent : s.planPriceDefault}`}>
                 {plan.price}
               </div>
-              <div
-                style={{
-                  fontFamily: 'var(--f-mono)',
-                  fontSize: '0.5rem',
-                  color: 'var(--t-dim)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.1em',
-                }}
-              >
-                {plan.seats}
-              </div>
+              <div className={s.planSeats}>{plan.seats}</div>
             </div>
 
-            <ul
-              style={{
-                listStyle: 'none',
-                padding: 0,
-                margin: '0 0 20px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '8px',
-              }}
-            >
+            <ul className={s.featureList}>
               {plan.features.map((f) => (
-                <li
-                  key={f}
-                  style={{
-                    fontSize: '0.8125rem',
-                    color: 'var(--t-muted)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                  }}
-                >
-                  <span style={{ color: '#22c55e', fontSize: '0.625rem' }}>✓</span>
+                <li key={f} className={s.featureItem}>
+                  <span className={s.featureCheck}>✓</span>
                   {f}
                 </li>
               ))}
             </ul>
 
             <button
-              className={plan.isCurrent ? 'gem-cta gem-cta--sm' : 'gem-cta gem-cta--sm gem-cta--ghost'}
+              className={`gem-cta gem-cta--sm ${s.planCta} ${plan.isCurrent ? s.planCtaCurrent : ''}`}
               disabled={plan.isCurrent}
-              style={plan.isCurrent ? { opacity: 0.7, cursor: 'default', width: '100%' } : { width: '100%' }}
             >
               {plan.ctaLabel}
             </button>
@@ -275,12 +154,12 @@ export function Billing() {
       </div>
 
       {/* Invoices table */}
-      <div ref={invoicesRef} className="reveal reveal-delay-3 card" style={{ marginTop: '24px' }}>
+      <div ref={invoicesRef} className={`reveal reveal-delay-3 card ${s.invoicesCard}`}>
         <div className="card-label">
           <span className="dot" />
           Historico de Faturas
         </div>
-        <table className="admin-table" style={{ marginTop: '16px', width: '100%' }}>
+        <table className={`admin-table ${s.invoicesTable}`}>
           <thead>
             <tr>
               <th>Periodo</th>
@@ -294,13 +173,7 @@ export function Billing() {
               <tr key={inv.period}>
                 <td>{inv.period}</td>
                 <td>
-                  <span
-                    style={{
-                      fontFamily: 'var(--f-mono)',
-                      fontWeight: 600,
-                      color: 'var(--t-main)',
-                    }}
-                  >
+                  <span style={{ fontFamily: 'var(--f-mono)', fontWeight: 600, color: 'var(--t-main)' }}>
                     {inv.amount}
                   </span>
                 </td>
@@ -308,21 +181,7 @@ export function Billing() {
                   <span className="status-pill s-approved">{inv.status}</span>
                 </td>
                 <td style={{ textAlign: 'right' }}>
-                  <button
-                    style={{
-                      fontFamily: 'var(--f-mono)',
-                      fontSize: '0.5rem',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.08em',
-                      color: 'var(--c-primary-light)',
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      padding: '4px 0',
-                    }}
-                  >
-                    Download PDF
-                  </button>
+                  <button className={s.downloadBtn}>Download PDF</button>
                 </td>
               </tr>
             ))}

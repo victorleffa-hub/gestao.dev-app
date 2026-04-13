@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import type { Project, ProjectHealth, ProjectStatus } from '../../types';
 import { PROJECTS } from '../../data/projects';
+import { ProjectDetail } from './ProjectDetail';
 import s from './Projects.module.css';
 
 // ── Gem health hexagon ────────────────────────────────────
@@ -33,14 +34,15 @@ function GemHealthIcon({ health }: { health: ProjectHealth }) {
 }
 
 // ── Project row ───────────────────────────────────────────
-function ProjectRow({ project }: { project: Project }) {
+function ProjectRow({ project, onOpen }: { project: Project; onOpen: (p: Project) => void }) {
   const isCompleted = project.status === 'completed';
   const healthAnim = HEALTH_ANIM[project.health];
 
   return (
     <div
       className={`project-row ${isCompleted ? 'project-row--completed' : ''}`}
-      style={{ position: 'relative' }}
+      style={{ position: 'relative', cursor: 'pointer' }}
+      onClick={() => onOpen(project)}
     >
       {/* Accent bar */}
       <div
@@ -122,14 +124,16 @@ function ProjectRow({ project }: { project: Project }) {
           )}
         </div>
         <div className="quick-actions">
-          <button className="quick-action" title="Abrir board" aria-label="Abrir board">
+          <button className="quick-action" title="Abrir board" aria-label="Abrir board"
+            onClick={(e) => { e.stopPropagation(); onOpen(project); }}>
             <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.5">
               <rect x="1" y="3" width="4" height="10" rx="1" />
               <rect x="6" y="3" width="4" height="7" rx="1" />
               <rect x="11" y="3" width="4" height="5" rx="1" />
             </svg>
           </button>
-          <button className="quick-action" title="Editar" aria-label="Editar projeto">
+          <button className="quick-action" title="Editar" aria-label="Editar projeto"
+            onClick={(e) => e.stopPropagation()}>
             <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M11 2.5l2.5 2.5-8 8H3v-2.5l8-8z" strokeLinejoin="round" />
             </svg>
@@ -146,6 +150,7 @@ type HealthFilter = ProjectHealth;
 
 // ── Projects view ─────────────────────────────────────────
 export function Projects() {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [statusFilters, setStatusFilters] = useState<StatusFilter[]>(['all']);
   const [healthFilters, setHealthFilters] = useState<HealthFilter[]>([]);
 
@@ -212,6 +217,18 @@ export function Projects() {
     { label: 'Encerrado', value: 'dim',    color: '#94a3b8' },
   ];
 
+  // ── Project detail sub-view ─────────────────────────────
+  if (selectedProject) {
+    return (
+      <div id="view-project-detail">
+        <ProjectDetail
+          project={selectedProject}
+          onBack={() => setSelectedProject(null)}
+        />
+      </div>
+    );
+  }
+
   return (
     <div id="view-projects">
       {/* Page header */}
@@ -272,7 +289,7 @@ export function Projects() {
       {/* Projects list */}
       <div ref={listRef} className="reveal reveal-delay-1 projects-list">
         {activeRows.map((project) => (
-          <ProjectRow key={project.id} project={project} />
+          <ProjectRow key={project.id} project={project} onOpen={setSelectedProject} />
         ))}
 
         {completedRows.length > 0 && (
@@ -281,7 +298,7 @@ export function Projects() {
               <span>Encerrados</span>
             </div>
             {completedRows.map((project) => (
-              <ProjectRow key={project.id} project={project} />
+              <ProjectRow key={project.id} project={project} onOpen={setSelectedProject} />
             ))}
           </>
         )}

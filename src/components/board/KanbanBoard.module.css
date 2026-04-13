@@ -1,0 +1,254 @@
+/* =========================================================
+   GESTÃO.DEV — KanbanBoard Module CSS
+   Phase 3 · src/components/board/KanbanBoard.module.css
+========================================================= */
+
+/* ── Sprint filter bar ────────────────────────────────── */
+.filterBar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 10px 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--b-subtle);
+  border-radius: var(--r-md);
+}
+
+.filterLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--f-mono);
+  font-size: 0.5625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--t-dim);
+  white-space: nowrap;
+}
+
+.sprintSelect {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--b-subtle);
+  border-radius: var(--r-sm);
+  padding: 5px 28px 5px 10px;
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  color: var(--t-main);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.3)' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.sprintSelect:focus {
+  outline: none;
+  border-color: rgba(123, 77, 196, 0.4);
+}
+
+.taskCount {
+  font-family: var(--f-mono);
+  font-size: 0.5rem;
+  color: var(--t-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* ── Board columns container ──────────────────────────── */
+.board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  align-items: start;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+/* ── Column ───────────────────────────────────────────── */
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 240px;
+  border-radius: var(--r-md);
+  transition: background 0.15s ease;
+}
+
+.columnOver {
+  background: rgba(123, 77, 196, 0.06);
+  outline: 1px dashed rgba(123, 77, 196, 0.25);
+}
+
+.columnHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--b-subtle);
+  border-radius: var(--r-sm);
+}
+
+.columnTitle {
+  font-family: var(--f-mono);
+  font-size: 0.5625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--t-dim);
+}
+
+.columnCount {
+  font-family: var(--f-mono);
+  font-size: 0.5rem;
+  color: var(--t-faint, rgba(255,255,255,0.2));
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+
+/* ── Card ─────────────────────────────────────────────── */
+.card {
+  background: var(--c-bg-raised, #040a12);
+  border: 1px solid var(--b-subtle);
+  border-radius: var(--r-md);
+  padding: 12px;
+  cursor: grab;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card:hover {
+  border-color: var(--b-edge);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.card:active {
+  cursor: grabbing;
+}
+
+.cardDragging {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.cardId {
+  font-family: var(--f-mono);
+  font-size: 0.45rem;
+  color: var(--t-faint, rgba(255,255,255,0.18));
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.cardTitle {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--t-main);
+  line-height: 1.4;
+}
+
+/* ── Tag row ──────────────────────────────────────────── */
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tag {
+  font-family: var(--f-mono);
+  font-size: 0.4375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--t-dim);
+}
+
+/* ── Card footer ──────────────────────────────────────── */
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.priorityBadge {
+  font-family: var(--f-mono);
+  font-size: 0.4375rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.priorityHigh {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.priorityMedium {
+  background: rgba(245, 158, 11, 0.12);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.priorityLow {
+  background: rgba(148, 163, 184, 0.10);
+  color: var(--t-dim);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.assignee {
+  font-family: var(--f-mono);
+  font-size: 0.45rem;
+  color: var(--t-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--b-subtle);
+  border-radius: 999px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
+/* ── Empty column placeholder ─────────────────────────── */
+.colEmpty {
+  padding: 20px 12px;
+  text-align: center;
+  font-family: var(--f-mono);
+  font-size: 0.5rem;
+  color: rgba(255, 255, 255, 0.08);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 1px dashed rgba(255, 255, 255, 0.06);
+  border-radius: var(--r-md);
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .board {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .board {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .filterBar {
+    flex-wrap: wrap;
+  }
+}

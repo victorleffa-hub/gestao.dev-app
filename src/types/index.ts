@@ -56,6 +56,7 @@ export interface KanbanTask {
   title: string;
   status: KanbanStatus;
   projectId: string;
+  sprintId?: string;
   tags: string[];
   priority: 'low' | 'medium' | 'high';
   assignee?: string;
@@ -74,6 +75,12 @@ export interface Sprint {
   endDate: string;
   tasksTotal: number;
   tasksDone: number;
+  // Project-scoped sprint fields
+  projectId?: string;
+  totalPoints?: number;
+  currentDay?: number;
+  burndownColor?: string;
+  burndownReal?: (number | null)[];
 }
 
 // ── Idea ─────────────────────────────────────────────────
