@@ -12,7 +12,9 @@
       "Bash(bun x:*)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5679/mockup-preview.html)",
       "Bash(sed -n '7,2053p' \"C:\\\\Users\\\\victo\\\\OneDrive\\\\Documents\\\\Ceisc Tech\\\\gestao.dev-app\\\\app-mockup-claude.html\")",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "Bash(Get-Item \"C:\\\\Users\\\\victo\\\\OneDrive\\\\Documents\\\\Ceisc Tech\\\\gestao.dev-app\\\\app-mockup-claude.html\")",
+      "Bash(Select-Object FullName, LastWriteTime, Length)"
     ]
   }
 }
