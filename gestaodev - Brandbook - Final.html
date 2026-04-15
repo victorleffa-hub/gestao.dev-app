@@ -1,0 +1,2937 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>gestao.dev — Brand Book + Design System</title>
+<style>
+@font-face { font-family:'Geist'; src:url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-Light.woff2') format('woff2'); font-weight:300; font-display:swap; }
+@font-face { font-family:'Geist'; src:url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-Regular.woff2') format('woff2'); font-weight:400; font-display:swap; }
+@font-face { font-family:'Geist'; src:url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Geist'; src:url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-SemiBold.woff2') format('woff2'); font-weight:600; font-display:swap; }
+@font-face { font-family:'Geist'; src:url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-Bold.woff2') format('woff2'); font-weight:700; font-display:swap; }
+@font-face { font-family:'Geist Mono'; src:url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-mono/GeistMono-Regular.woff2') format('woff2'); font-weight:400; font-display:swap; }
+@font-face { font-family:'Geist Mono'; src:url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-mono/GeistMono-Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Geist Mono'; src:url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-mono/GeistMono-SemiBold.woff2') format('woff2'); font-weight:600; font-display:swap; }
+
+:root {
+  --bg-deep:#030711; --bg-primary:#050b18; --bg-surface:#0a1628; --bg-elevated:#0f1d32;
+  --purple:#4B218E; --purple-light:#7B4DC4; --purple-dark:#371870;
+  --purple-glow:rgba(75,33,142,0.20); --purple-subtle:rgba(75,33,142,0.08);
+  --grey:#607D8B; --grey-light:#90A4AE;
+  --green:#22c55e; --red:#ef4444; --yellow:#f59e0b;
+  --text-primary:#ffffff; --text-secondary:rgba(255,255,255,0.65);
+  --text-muted:rgba(255,255,255,0.40); --text-faint:rgba(255,255,255,0.20);
+  --border:rgba(255,255,255,0.06); --border-vis:rgba(255,255,255,0.12);
+  --border-accent:rgba(75,33,142,0.35);
+  --gradient-primary:linear-gradient(135deg,#7B4DC4 0%,#4B218E 60%,#371870 100%);
+  --gradient-text:linear-gradient(135deg,#9B6DD4 0%,#4B218E 50%,#371870 100%);
+  --f-sans:'Geist','Inter',system-ui,sans-serif;
+  --f-mono:'Geist Mono','JetBrains Mono',monospace;
+  --r-xs:4px; --r-sm:6px; --r-md:12px; --r-lg:16px; --r-xl:24px; --r-full:9999px;
+  --shadow-card:0 4px 24px rgba(0,0,0,0.4),inset 0 1px 1px rgba(255,255,255,0.04);
+  --shadow-elevated:0 8px 32px rgba(0,0,0,0.5),inset 0 1px 1px rgba(255,255,255,0.06);
+  --shadow-glow:0 0 40px rgba(75,33,142,0.18);
+  --shadow-glow-strong:0 0 60px rgba(75,33,142,0.35);
+  --shadow-button:0 0 25px -5px rgba(75,33,142,0.50);
+  --shadow-button-hover:0 0 35px -5px rgba(75,33,142,0.80);
+
+  /* ═══ v1.1 aliases (para o DS anexado) ═══ */
+  --c-bg-deep:var(--bg-deep); --c-bg-primary:var(--bg-primary);
+  --c-bg-surface:var(--bg-surface); --c-bg-elevated:var(--bg-elevated);
+  --c-primary:var(--purple); --c-primary-light:var(--purple-light); --c-primary-dark:var(--purple-dark);
+  --c-primary-glow:var(--purple-glow); --c-primary-subtle:var(--purple-subtle);
+  --c-secondary:#607D8B; --c-secondary-light:#90A4AE; --c-secondary-dark:#455A64;
+  --c-secondary-glow:rgba(96,125,139,0.15); --c-secondary-subtle:rgba(96,125,139,0.06);
+  --c-success:var(--green); --c-error:var(--red); --c-warning:var(--yellow);
+  --c-text-primary:var(--text-primary); --c-text-secondary:var(--text-secondary);
+  --c-text-muted:var(--text-muted); --c-text-faint:var(--text-faint);
+  --c-border:var(--border); --c-border-visible:var(--border-vis);
+  --c-border-accent:var(--border-accent);
+  --gradient-secondary:linear-gradient(135deg,#90A4AE 0%,#607D8B 100%);
+  --gradient-brand:linear-gradient(135deg,#4B218E 0%,#607D8B 100%);
+  --gradient-glow:radial-gradient(ellipse at 50% 0%,rgba(75,33,142,0.14) 0%,transparent 70%);
+
+  /* ═══ v1.1 · spacing granular ═══ */
+  --space-1:4px; --space-2:6px; --space-3:8px; --space-4:12px;
+  --space-5:16px; --space-6:20px; --space-7:24px; --space-8:32px;
+  --space-9:40px; --space-10:48px; --space-11:56px; --space-12:64px;
+
+  /* ═══ v1.1 · z-index ═══ */
+  --z-base:0; --z-dropdown:100; --z-sticky:200; --z-overlay:300;
+  --z-modal:400; --z-toast:500; --z-nav:600; --z-tooltip:700;
+
+  /* ═══ v1.1 · breakpoints ═══ */
+  --bp-sm:640px; --bp-md:768px; --bp-lg:1024px; --bp-xl:1280px;
+
+  /* ═══ v1.1 · transitions ═══ */
+  --t-fast:150ms ease; --t-normal:300ms ease; --t-slow:500ms ease;
+  --t-spring:500ms cubic-bezier(0.23,1,0.32,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--f-sans);background:var(--bg-primary);color:var(--text-secondary);line-height:1.7;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(123,77,196,0.3);color:var(--purple-light)}
+.container{max-width:960px;margin:0 auto;padding:0 40px}
+
+/* ── NAV ── */
+.bb-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:52px;display:flex;align-items:center;background:rgba(5,11,24,0.94);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.bb-nav-inner{max-width:960px;margin:0 auto;padding:0 40px;width:100%;display:flex;align-items:center;justify-content:space-between}
+.bb-nav-logo{font-family:var(--f-mono);font-weight:600;font-size:1rem;color:#fff;letter-spacing:-0.01em}
+.bb-nav-logo .dot{color:var(--purple-light)}
+.bb-nav-meta{font-family:var(--f-mono);font-size:0.625rem;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase}
+
+/* ── COVER ── */
+.cover{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:80px 24px}
+.cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(75,33,142,0.18) 0%,transparent 60%);z-index:0}
+
+/* Hero · logo horizontal (gema + wordmark lado-a-lado) */
+.cover-hero{display:inline-flex;align-items:center;gap:clamp(16px,2.2vw,28px);position:relative;z-index:2;margin-bottom:8px}
+.cover-hero .gem{width:clamp(72px,9vw,108px);height:clamp(72px,9vw,108px);flex:none;
+  filter:drop-shadow(0 0 48px rgba(75,33,142,.55)) drop-shadow(0 0 20px rgba(123,77,196,.35));
+  animation:cover-breath 4.5s ease-in-out infinite}
+@keyframes cover-breath{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+
+.cover-logo{font-family:var(--f-mono);font-size:clamp(3rem,8vw,4.5rem);font-weight:700;letter-spacing:-0.04em;color:#fff;position:relative;line-height:1}
+.cover-logo .dot{color:var(--purple-light);text-shadow:0 0 24px rgba(123,77,196,.7)}
+
+.cover-divider{width:80px;height:2px;background:var(--purple);margin:28px auto;position:relative;z-index:2;
+  box-shadow:0 0 20px rgba(123,77,196,.6)}
+.cover-divider::before,.cover-divider::after{content:'';position:absolute;top:50%;width:4px;height:4px;
+  background:var(--purple-light);border-radius:50%;transform:translateY(-50%);box-shadow:0 0 10px var(--purple-light)}
+.cover-divider::before{left:-12px}.cover-divider::after{right:-12px}
+
+.cover-label{font-family:var(--f-mono);font-size:0.8125rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--purple-light);font-weight:600;position:relative;z-index:2}
+.cover-desc{color:var(--text-muted);font-size:0.875rem;margin-top:8px;position:relative;z-index:2;max-width:520px}
+.cover-parts{display:flex;gap:24px;margin-top:56px;position:relative;z-index:2;flex-wrap:wrap;justify-content:center}
+.cover-part{background:linear-gradient(160deg,rgba(75,33,142,0.08) 0%,var(--bg-surface) 60%);
+  border:1px solid rgba(75,33,142,0.22);border-radius:var(--r-lg);padding:18px 22px 18px 56px;
+  text-align:left;min-width:220px;position:relative;
+  box-shadow:var(--shadow-card),inset 0 1px 0 rgba(255,255,255,0.05);
+  transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s}
+.cover-part:hover{transform:translateY(-2px);border-color:var(--border-accent);box-shadow:var(--shadow-card),var(--shadow-glow)}
+.cover-part::before{content:'';position:absolute;left:16px;top:50%;width:28px;height:28px;transform:translateY(-50%);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpolygon points='16,2.5 28,9 16,16' fill='%23A060E8'/%3E%3Cpolygon points='28,9 28,23 16,16' fill='%237030C0'/%3E%3Cpolygon points='28,23 16,29.5 16,16' fill='%23501888'/%3E%3Cpolygon points='16,29.5 4,23 16,16' fill='%23280858'/%3E%3Cpolygon points='4,23 4,9 16,16' fill='%234B218E'/%3E%3Cpolygon points='4,9 16,2.5 16,16' fill='%236030A8'/%3E%3C/svg%3E") no-repeat center/contain;
+  filter:drop-shadow(0 0 8px rgba(75,33,142,.4))}
+.cover-part-num{font-family:var(--f-mono);font-size:0.625rem;color:var(--purple-light);letter-spacing:0.1em;text-transform:uppercase;font-weight:600;margin-bottom:4px}
+.cover-part-title{color:#fff;font-size:0.9375rem;font-weight:600}
+.cover-part-desc{color:var(--text-muted);font-size:0.75rem;margin-top:4px}
+.cover-version{color:var(--text-faint);font-size:0.6875rem;margin-top:56px;letter-spacing:0.04em;font-family:var(--f-mono);position:relative;z-index:2}
+.cover-version::before{content:'◇';color:var(--purple-light);margin-right:10px;font-size:.9rem}
+.cover-version::after{content:'◇';color:var(--purple-light);margin-left:10px;font-size:.9rem}
+
+@media(max-width:640px){
+  .cover-hero{flex-direction:column;gap:16px}
+}
+
+/* ── PART DIVIDER ── */
+.part-divider{padding:80px 0;text-align:center;border-bottom:1px dashed var(--border-vis);position:relative}
+.part-divider::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(75,33,142,0.08) 0%,transparent 60%)}
+.part-divider-label{font-family:var(--f-mono);font-size:0.6875rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--purple-light);font-weight:600;position:relative}
+.part-divider-title{font-family:var(--f-sans);font-size:clamp(1.5rem,4vw,2.25rem);font-weight:600;color:#fff;letter-spacing:-0.03em;margin-top:12px;position:relative}
+.part-divider-desc{color:var(--text-muted);font-size:0.875rem;margin-top:8px;position:relative}
+
+/* ── TOC ── */
+.toc{padding:60px 0;border-bottom:1px dashed var(--border-vis)}
+.toc h2{color:#fff;font-size:1.25rem;font-weight:600;margin-bottom:24px;letter-spacing:-0.02em}
+.toc .container{max-width:1280px}
+.toc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px 40px}
+@media(max-width:1024px){.toc-grid{grid-template-columns:repeat(2,1fr)}}
+.toc-group-label{font-family:var(--f-mono);font-size:0.5625rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple-light);font-weight:600;padding:12px 0 8px;border-bottom:1px solid var(--border-accent)}
+.toc-list{list-style:none;counter-reset:toc}
+.toc-list li{counter-increment:toc;border-bottom:1px solid var(--border);padding:10px 0;display:flex;align-items:center;gap:12px;transition:color 0.2s}
+.toc-list li:hover{color:var(--purple-light)}
+.toc-list li::before{content:counter(toc,decimal-leading-zero);font-family:var(--f-mono);font-size:0.625rem;font-weight:700;color:var(--purple-light);letter-spacing:0.1em;min-width:24px}
+.toc-list a{color:inherit;text-decoration:none;font-size:0.875rem}
+
+/* ── SECTIONS ── */
+.section{padding:72px 0;border-bottom:1px dashed var(--border-vis);position:relative}
+.section:last-child{border-bottom:none}
+.section-num{font-family:var(--f-mono);font-size:0.5625rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--purple-light);margin-bottom:6px;display:block}
+.section h2{color:#fff;font-size:clamp(1.375rem,3vw,1.75rem);font-weight:600;letter-spacing:-0.03em;line-height:1.15;margin-bottom:28px}
+.section h3{color:#fff;font-size:1rem;font-weight:600;margin-top:36px;margin-bottom:10px;letter-spacing:-0.01em}
+.section h3:first-of-type{margin-top:0}
+.section p{margin-bottom:14px;font-size:0.875rem}
+.section p strong{color:#fff;font-weight:600}
+.grad{background:var(--gradient-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ── QUOTE ── */
+.bb-quote{border-left:3px solid var(--purple);padding:16px 20px;margin:20px 0;background:linear-gradient(135deg,rgba(75,33,142,0.06) 0%,transparent 60%);border-radius:0 var(--r-md) var(--r-md) 0;font-size:0.9375rem;font-style:italic;color:var(--purple-light);line-height:1.6}
+
+/* ── CALLOUT ── */
+.callout{border-left:3px solid var(--red);padding:14px 18px;margin:20px 0;background:rgba(239,68,68,0.05);border-radius:0 var(--r-md) var(--r-md) 0;font-size:0.875rem}
+.callout strong{color:var(--red)}
+.callout.callout--purple{border-left-color:var(--purple-light);background:var(--purple-subtle)}
+.callout.callout--purple strong{color:var(--purple-light)}
+.callout p{margin-bottom:0}
+
+/* ── LISTS ── */
+.bb-list{list-style:none;margin:14px 0}
+.bb-list li{position:relative;padding-left:18px;margin-bottom:8px;font-size:0.875rem}
+.bb-list li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--purple-light)}
+.bb-list li strong{color:#fff}
+
+/* ── TABLES ── */
+.bb-table-wrap{overflow-x:auto;margin:16px 0;border-radius:var(--r-lg);border:1px solid var(--border-vis)}
+.bb-table{width:100%;border-collapse:collapse;font-size:0.8125rem}
+.bb-table th{text-align:left;padding:10px 14px;background:var(--purple-dark);color:#fff;font-weight:600;font-size:0.6875rem;letter-spacing:0.04em;text-transform:uppercase;border-bottom:1px solid rgba(75,33,142,0.5)}
+.bb-table td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+.bb-table tr:last-child td{border-bottom:none}
+.bb-table tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+.bb-table .label{color:var(--purple-light);font-weight:600}
+.bb-table .do{color:var(--green)}
+.bb-table .dont{color:var(--red)}
+
+/* ── CARDS ── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin:20px 0}
+.card{background:linear-gradient(160deg,rgba(75,33,142,0.08) 0%,var(--bg-surface) 55%);border:1px solid var(--border-accent);border-radius:var(--r-lg);padding:20px 18px}
+.card h4{color:#fff;font-size:0.875rem;font-weight:600;margin-bottom:6px}
+.card p{font-size:0.8125rem;margin-bottom:0}
+
+/* ── PERSONA CARDS ── */
+.persona-card{background:var(--bg-surface);border:1px solid var(--border-vis);border-radius:var(--r-xl);padding:28px 24px;margin:20px 0}
+.persona-header{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.persona-avatar{width:44px;height:44px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:1rem;flex-shrink:0}
+.persona-name{color:#fff;font-size:1rem;font-weight:600}
+.persona-role{color:var(--text-muted);font-size:0.75rem}
+
+/* ── MANIFESTO ── */
+.manifesto p{font-size:1.0625rem;line-height:1.7;margin-bottom:6px;color:rgba(255,255,255,0.5)}
+.manifesto p.hl{color:#fff;font-weight:600}
+.manifesto .sp{height:20px}
+
+/* ── ORDER LIST ── */
+.order-list{list-style:none;counter-reset:order;margin:14px 0}
+.order-list li{counter-increment:order;display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);font-size:0.875rem}
+.order-list li:last-child{border-bottom:none}
+.order-list li::before{content:counter(order) '\00BA';font-family:var(--f-mono);font-size:0.8125rem;font-weight:700;color:var(--purple-light);min-width:22px;flex-shrink:0;padding-top:1px}
+
+/* ── DS: COLOR SWATCHES ── */
+.ds-swatch-row{display:flex;flex-wrap:wrap;gap:12px;margin:14px 0}
+.ds-swatch{display:flex;flex-direction:column;align-items:center;gap:6px}
+.ds-swatch-box{width:52px;height:52px;border-radius:var(--r-md);border:1px solid var(--border-vis)}
+.ds-swatch-text{width:52px;height:52px;border-radius:var(--r-md);background:var(--bg-surface);border:1px solid var(--border-vis);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:700}
+.ds-swatch-label{font-family:var(--f-mono);font-size:0.5625rem;color:var(--text-muted);text-align:center;line-height:1.3}
+
+/* ── DS: GRADIENT BARS ── */
+.ds-grad-bar{height:40px;border-radius:var(--r-md);width:100%;margin:6px 0 16px}
+.ds-grad-name{font-family:var(--f-mono);font-size:0.6875rem;color:var(--text-muted)}
+
+/* ── DS: TYPOGRAPHY ROWS ── */
+.ds-type-row{display:grid;grid-template-columns:1fr 200px;gap:20px;align-items:center;padding:20px 0;border-bottom:1px solid var(--border)}
+.ds-type-row:last-child{border-bottom:none}
+.ds-type-meta{text-align:right;font-family:var(--f-mono);font-size:0.5625rem;color:var(--text-faint);line-height:1.8;white-space:pre-line}
+
+/* ── DS: SPACING BARS ── */
+.ds-space-item{display:grid;grid-template-columns:140px 1fr 70px;align-items:center;gap:16px;margin-bottom:10px}
+.ds-space-bar{height:10px;background:linear-gradient(90deg,rgba(75,33,142,0.7) 0%,rgba(123,77,196,0.35) 100%);border-radius:5px}
+.ds-space-px{font-family:var(--f-mono);font-size:0.75rem;color:var(--text-muted);text-align:right}
+
+/* ── DS: RADIUS ── */
+.ds-radius-row{display:flex;gap:20px;align-items:flex-end;flex-wrap:wrap;margin:14px 0}
+.ds-radius-item{display:flex;flex-direction:column;align-items:center;gap:8px}
+.ds-radius-box{width:52px;height:52px;background:rgba(75,33,142,0.25);border:1px solid rgba(75,33,142,0.50)}
+
+/* ── DS: SHADOWS ── */
+.ds-shadow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:14px 0}
+.ds-shadow-item{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:24px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.ds-shadow-swatch{width:44px;height:44px;border-radius:var(--r-md);background:var(--bg-elevated)}
+.ds-shadow-label{font-family:var(--f-mono);font-size:0.5625rem;color:var(--text-muted)}
+
+/* ── DS: CARDS DEMO ── */
+.ds-cards-demo{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:14px 0}
+
+/* ── DS: GEM CTA ── */
+.gem-cta{position:relative;z-index:0;overflow:hidden;display:inline-flex;align-items:center;font-weight:600;letter-spacing:0.02em;color:#fff;background:var(--gradient-primary);border-radius:var(--r-full);box-shadow:var(--shadow-button);transition:box-shadow 0.3s,transform 0.15s;cursor:pointer;border:none;font-family:var(--f-sans)}
+.gem-cta:hover{box-shadow:var(--shadow-button-hover);transform:translateY(-1px)}
+.gem-cta::before{content:'';position:absolute;height:210%;aspect-ratio:1;top:-55%;right:-26px;z-index:-1;transform-origin:center;pointer-events:none;opacity:.92;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='16,2.5 28,9 16,16' fill='%23A060E8' fill-opacity='.60'/%3E%3Cpolygon points='28,9 28,23 16,16' fill='%237030C0' fill-opacity='.60'/%3E%3Cpolygon points='28,23 16,29.5 16,16' fill='%23501888' fill-opacity='.60'/%3E%3Cpolygon points='16,29.5 4,23 16,16' fill='%23280858' fill-opacity='.60'/%3E%3Cpolygon points='4,23 4,9 16,16' fill='%234B218E' fill-opacity='.60'/%3E%3Cpolygon points='4,9 16,2.5 16,16' fill='%236030A8' fill-opacity='.60'/%3E%3C/svg%3E") no-repeat center/contain}
+.gem-cta.gem-pressing::before{transform:scale(0.78);transition:transform 0.12s cubic-bezier(0.4,0,0.2,1)}
+@keyframes gem-spin{from{transform:scale(0.78) rotate(0)}to{transform:scale(1) rotate(360deg)}}
+.gem-cta.gem-spinning::before{animation:gem-spin 0.55s cubic-bezier(0.16,1,0.3,1) forwards}
+.gem-cta--sm{padding:8px 20px;font-size:0.8125rem}
+.gem-cta--md{padding:12px 28px;font-size:0.9375rem}
+.gem-cta--lg{padding:14px 32px;font-size:1.0625rem}
+.gem-cta:disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
+.gem-cta.is-loading{opacity:.92;cursor:wait;pointer-events:none}
+@keyframes gem-loading-spin{to{transform:rotate(360deg)}}
+.gem-cta.is-loading::before{animation:gem-loading-spin 8s linear infinite}
+
+/* ── DS: GEM LOADER ── */
+.gem-loader{display:inline-block;flex-shrink:0}
+@keyframes gem-pulse{0%,100%{transform:scale(1);filter:drop-shadow(0 0 0px rgba(123,77,196,0))}50%{transform:scale(1.08);filter:drop-shadow(0 0 8px rgba(123,77,196,0.8))}}
+.gem-loader--pulse{transform-origin:50% 50%;animation:gem-pulse 2.4s ease-in-out infinite}
+@keyframes gem-shimmer-face{0%,15%,100%{filter:brightness(1)}7.5%{filter:brightness(3)}}
+.gem-loader--shimmer .gem-f1{animation:gem-shimmer-face 1.2s linear infinite 0s}
+.gem-loader--shimmer .gem-f2{animation:gem-shimmer-face 1.2s linear infinite -1.0s}
+.gem-loader--shimmer .gem-f3{animation:gem-shimmer-face 1.2s linear infinite -0.8s}
+.gem-loader--shimmer .gem-f4{animation:gem-shimmer-face 1.2s linear infinite -0.6s}
+.gem-loader--shimmer .gem-f5{animation:gem-shimmer-face 1.2s linear infinite -0.4s}
+.gem-loader--shimmer .gem-f6{animation:gem-shimmer-face 1.2s linear infinite -0.2s}
+@keyframes gem-symbol-pulse{0%,100%{opacity:0.3}50%{opacity:1}}
+.gem-loader--symbol .gem-chevron{animation:gem-symbol-pulse 1.8s ease-in-out infinite}
+.gem-loader--symbol .gem-cursor{animation:gem-symbol-pulse 1.8s ease-in-out infinite 0.12s}
+@keyframes gem-wave-face{0%,100%{opacity:0.5}50%{opacity:1}}
+.gem-loader--wave .gem-f1{animation:gem-wave-face 1.8s ease-in-out infinite 0s}
+.gem-loader--wave .gem-f2{animation:gem-wave-face 1.8s ease-in-out infinite 0.3s}
+.gem-loader--wave .gem-f3{animation:gem-wave-face 1.8s ease-in-out infinite 0.6s}
+.gem-loader--wave .gem-f4{animation:gem-wave-face 1.8s ease-in-out infinite 0.9s}
+.gem-loader--wave .gem-f5{animation:gem-wave-face 1.8s ease-in-out infinite 1.2s}
+.gem-loader--wave .gem-f6{animation:gem-wave-face 1.8s ease-in-out infinite 1.5s}
+@keyframes gem-draw-chevron{to{stroke-dashoffset:0}}
+@keyframes gem-blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+.gem-loader--cursor .gem-chevron{stroke-dasharray:28;stroke-dashoffset:28;animation:gem-draw-chevron 0.45s ease-out 0.1s forwards}
+.gem-loader--cursor .gem-cursor{opacity:0;animation:gem-blink 0.6s step-end infinite 0.6s}
+
+.ds-gem-grid{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--border-vis);border-radius:var(--r-lg);overflow:hidden;margin:14px 0}
+.ds-gem-card{background:var(--bg-surface);padding:20px 10px 24px;display:flex;flex-direction:column;align-items:center;border-right:1px solid var(--border)}
+.ds-gem-card:last-child{border-right:none}
+.ds-gem-name{font-family:var(--f-mono);font-size:0.5625rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple-light);margin-bottom:2px}
+.ds-gem-use{font-family:var(--f-mono);font-size:0.5rem;color:var(--text-faint);text-align:center;line-height:1.5;margin-bottom:16px}
+.ds-gem-sizes{display:flex;flex-direction:column;align-items:center;gap:14px}
+.ds-gem-size-item{display:flex;flex-direction:column;align-items:center;gap:4px}
+.ds-gem-size-tag{font-family:var(--f-mono);font-size:0.4375rem;color:var(--text-faint)}
+
+/* ── DS: TRANSITIONS TABLE ── */
+.ds-trans-list{border:1px solid var(--border-vis);border-radius:var(--r-lg);overflow:hidden;margin:14px 0}
+.ds-trans-row{display:grid;grid-template-columns:140px 1fr 1fr;align-items:center;padding:12px 20px;border-bottom:1px solid var(--border);gap:20px;font-size:0.8125rem}
+.ds-trans-row:last-child{border-bottom:none}
+.ds-trans-row:nth-child(odd){background:rgba(255,255,255,0.01)}
+.ds-trans-var{font-family:var(--f-mono);font-size:0.75rem;color:var(--purple-light)}
+.ds-trans-val{font-family:var(--f-mono);font-size:0.75rem;color:var(--text-muted)}
+
+/* ── DS: KEYFRAMES GRID ── */
+.ds-kf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+.ds-kf-item{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--r-md);padding:14px 16px}
+.ds-kf-name{font-family:var(--f-mono);font-size:0.6875rem;color:var(--purple-light);margin-bottom:4px}
+.ds-kf-desc{font-size:0.75rem;color:var(--text-muted)}
+
+/* ── DS: SECTION PATTERN DEMO ── */
+.ds-pattern-demo{background:var(--bg-surface);border:1px solid var(--border-vis);border-radius:var(--r-xl);padding:48px 32px;text-align:center;margin:14px 0}
+.section-tag{display:flex;width:fit-content;align-items:center;padding:4px 14px;font-family:var(--f-mono);font-size:0.625rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.55);background:rgba(75,33,142,0.08);border:1px solid rgba(75,33,142,0.35);border-radius:var(--r-full);margin:0 auto 16px}
+.section-title-demo{font-size:clamp(1.5rem,4vw,2.25rem);font-weight:500;line-height:1.1;letter-spacing:-0.035em;text-align:center;margin-bottom:12px;color:#fff;text-shadow:0 4px 32px rgba(123,77,196,0.32)}
+.section-subtitle-demo{text-align:center;color:rgba(255,255,255,0.80);font-size:clamp(0.875rem,1.5vw,1rem);max-width:500px;margin:0 auto;line-height:1.8}
+
+/* ── DS: PAIN/MCP/FEATURE CARDS (live) ── */
+.pain-card,.mcp-card,.feature-card{border-radius:var(--r-lg);padding:24px 20px;box-shadow:var(--shadow-card),inset 0 1px 0 rgba(255,255,255,0.07);transition:border-color 0.3s,box-shadow 0.3s,transform 0.5s cubic-bezier(0.23,1,0.32,1)}
+.pain-card{background:linear-gradient(160deg,rgba(75,33,142,0.08) 0%,var(--bg-surface) 55%);border:1px solid rgba(75,33,142,0.22)}
+.mcp-card{background:linear-gradient(160deg,rgba(75,33,142,0.09) 0%,var(--bg-surface) 55%);border:1px solid rgba(75,33,142,0.22)}
+.feature-card{background:linear-gradient(180deg,rgba(75,33,142,0.08) 0%,var(--bg-surface) 55%);border:1px solid rgba(75,33,142,0.22);text-align:center}
+.pain-card:hover,.mcp-card:hover,.feature-card:hover{border-color:rgba(75,33,142,0.45);box-shadow:var(--shadow-card),var(--shadow-glow),inset 0 1px 0 rgba(255,255,255,0.10);transform:translateY(-2px)}
+.pain-card-icon,.mcp-card-icon,.feature-card-icon{width:44px;height:44px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.mcp-card-icon,.feature-card-icon{background:var(--purple-subtle);border:1px solid var(--border-accent);color:var(--purple-light)}
+.feature-card-icon{width:52px;height:52px;border-radius:var(--r-lg);margin:0 auto 14px}
+.pain-card-title,.mcp-card-title,.feature-card-title{font-size:0.9375rem;font-weight:500;color:#fff;margin-bottom:6px}
+.pain-card-text,.mcp-card-text,.feature-card-text{color:var(--text-secondary);font-size:0.8125rem;line-height:1.65}
+
+/* ── DS: FONT DEMO ── */
+.ds-font-box{background:var(--bg-surface);border:1px solid var(--border-vis);border-radius:var(--r-lg);padding:24px;margin-bottom:14px}
+.ds-font-box-label{font-family:var(--f-mono);font-size:0.5625rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-faint);font-weight:600;margin-bottom:16px}
+.ds-font-weight{font-size:1rem;color:#fff;margin-bottom:4px}
+
+/* ── GAPS SECTION ── */
+.gap-card{background:linear-gradient(135deg,rgba(245,158,11,0.06) 0%,transparent 60%);border:1px solid rgba(245,158,11,0.25);border-radius:var(--r-lg);padding:20px;margin-bottom:12px}
+.gap-card h4{color:var(--yellow);font-size:0.875rem;font-weight:600;margin-bottom:6px}
+.gap-card p{font-size:0.8125rem;color:var(--text-secondary);margin-bottom:0}
+
+/* ── FOOTER ── */
+.bb-footer{text-align:center;padding:48px 0 32px;border-top:1px solid var(--border)}
+.bb-footer-logo{font-family:var(--f-mono);font-size:1.125rem;font-weight:700;color:#fff;margin-bottom:6px}
+.bb-footer-logo .dot{color:var(--purple-light)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){.container{padding:0 20px}.section{padding:40px 0}.bb-nav-inner{padding:0 20px}.card-grid{grid-template-columns:1fr}.ds-cards-demo{grid-template-columns:1fr}.ds-shadow-grid{grid-template-columns:1fr 1fr}.ds-gem-grid{grid-template-columns:repeat(3,1fr)}.ds-kf-grid{grid-template-columns:1fr 1fr}.toc-grid{grid-template-columns:1fr}.cover-parts{flex-direction:column}}
+@media print{.bb-nav{display:none}body{background:#fff;color:#222}.section{page-break-inside:avoid}}
+
+/* ═══════════════════════════════════════════════════════
+   v1.1 · DESIGN SYSTEM COMPLETO — layout e componentes
+═══════════════════════════════════════════════════════ */
+
+/* Wrapper que hospeda o DS v1.1 dentro do brand book — no-op
+   o <main class="ds-main"> interno já controla padding/max-width */
+.ds-embed > .ds-main{padding-top:16px}
+.ds-embed .ds-section:first-of-type{margin-top:0;padding-top:0;border-top:none}
+.ds-embed a{color:inherit}
+
+/* ════════ LAYOUT BASE ════════ */
+.ds-header{
+  position:sticky;top:0;z-index:var(--z-nav);
+  height:var(--nav-h);background:rgba(5,11,24,0.85);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--c-border);
+  display:flex;align-items:center;padding:0 var(--container-px);gap:var(--space-7);
+}
+.ds-header .brand{display:flex;align-items:center;gap:var(--space-3);font-weight:600;
+  font-family:var(--f-mono);letter-spacing:-.01em}
+.ds-header .brand .dot{color:var(--c-primary-light)}
+.ds-header .ver{font-family:var(--f-mono);font-size:.7rem;color:var(--c-text-muted);
+  padding:2px 8px;border:1px solid var(--c-border-visible);border-radius:var(--r-full)}
+.ds-header .nav{margin-left:auto;display:flex;gap:var(--space-5);overflow-x:auto;scrollbar-width:none}
+.ds-header .nav::-webkit-scrollbar{display:none}
+.ds-header .nav a{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--c-text-muted);padding:6px 10px;border-radius:var(--r-sm);
+  transition:var(--t-fast);white-space:nowrap}
+.ds-header .nav a:hover{color:var(--c-text-primary);background:rgba(255,255,255,.04)}
+
+.ds-main{max-width:var(--container-w);margin:0 auto;padding:var(--space-12) var(--container-px) var(--section-py-lg)}
+
+.ds-section{margin-top:var(--section-py);padding-top:var(--space-10);border-top:1px dashed var(--c-border-visible)}
+.ds-section:first-of-type{margin-top:var(--space-10);border-top:none;padding-top:0}
+.ds-section-head{margin-bottom:var(--space-10)}
+.ds-section-head .num{font-family:var(--f-mono);font-size:.75rem;color:var(--c-primary-light);
+  letter-spacing:.15em;text-transform:uppercase}
+.ds-section-head h2{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:500;letter-spacing:-.03em;
+  margin-top:var(--space-3);text-shadow:0 4px 32px rgba(123,77,196,0.32)}
+.ds-section-head p{margin-top:var(--space-4);color:var(--c-text-secondary);max-width:680px}
+
+.ds-block{margin-top:var(--space-10);padding:var(--space-9);
+  background:linear-gradient(160deg,rgba(75,33,142,0.06) 0%,var(--c-bg-surface) 55%);
+  border:1px solid rgba(75,33,142,0.20);border-radius:var(--r-lg);
+  box-shadow:var(--shadow-card),inset 0 1px 0 rgba(255,255,255,0.05)}
+.ds-block-title{display:flex;align-items:baseline;gap:var(--space-4);margin-bottom:var(--space-3)}
+.ds-block-title .id{font-family:var(--f-mono);font-size:.75rem;color:var(--c-primary-light);
+  background:rgba(75,33,142,.10);border:1px solid rgba(75,33,142,.20);
+  padding:2px 8px;border-radius:var(--r-sm)}
+.ds-block-title h3{font-size:1.25rem;font-weight:500;letter-spacing:-.02em}
+.ds-block-desc{color:var(--c-text-secondary);font-size:.95rem;margin-bottom:var(--space-8)}
+
+.ds-grid{display:grid;gap:var(--space-7)}
+.ds-grid-2{grid-template-columns:1fr 1fr}
+.ds-grid-3{grid-template-columns:repeat(3,1fr)}
+.ds-grid-4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:1024px){.ds-grid-3,.ds-grid-4{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.ds-grid-2,.ds-grid-3,.ds-grid-4{grid-template-columns:1fr}}
+
+.ds-demo{padding:var(--space-8);background:var(--c-bg-primary);
+  border:1px dashed var(--c-border-visible);border-radius:var(--r-md);position:relative}
+.ds-demo-label{position:absolute;top:-10px;left:14px;font-family:var(--f-mono);
+  font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--c-text-muted);
+  background:var(--c-bg-surface);padding:2px 8px;border-radius:var(--r-xs)}
+
+.ds-notes{margin-top:var(--space-7);display:flex;flex-wrap:wrap;gap:var(--space-3)}
+.ds-note{font-family:var(--f-mono);font-size:.7rem;color:var(--c-primary-light);
+  background:rgba(75,33,142,.10);border:1px solid rgba(75,33,142,.20);
+  padding:4px 10px;border-radius:var(--r-sm)}
+.ds-note.muted{color:var(--c-text-muted);background:rgba(255,255,255,.03);border-color:var(--c-border-visible)}
+
+.ds-code{font-family:var(--f-mono);font-size:.78rem;color:var(--c-text-secondary);
+  background:var(--c-bg-deep);border:1px solid var(--c-border-visible);
+  border-radius:var(--r-sm);padding:var(--space-5);margin-top:var(--space-5);
+  overflow-x:auto;white-space:pre;line-height:1.6}
+.ds-code .k{color:var(--c-primary-light)}
+.ds-code .v{color:#9bd1a1}
+.ds-code .c{color:var(--c-text-faint)}
+
+.ds-context{margin-top:var(--space-7);padding:var(--space-7);
+  background:var(--c-bg-deep);border:1px solid var(--c-border);border-radius:var(--r-md)}
+.ds-context-title{font-family:var(--f-mono);font-size:.625rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--c-text-muted);margin-bottom:var(--space-5)}
+
+/* ════════ A1 · SPACING SCALE ════════ */
+.gd-space-row{display:grid;grid-template-columns:80px 80px 1fr;align-items:center;
+  gap:var(--space-5);padding:var(--space-3) 0;border-bottom:1px dashed var(--c-border)}
+.gd-space-row:last-child{border-bottom:none}
+.gd-space-row .tok{font-family:var(--f-mono);font-size:.75rem;color:var(--c-primary-light)}
+.gd-space-row .val{font-family:var(--f-mono);font-size:.75rem;color:var(--c-text-muted)}
+.gd-space-bar{height:14px;background:var(--gradient-primary);border-radius:var(--r-xs);
+  box-shadow:0 0 16px -4px rgba(75,33,142,.5)}
+
+/* ════════ A2 · Z-INDEX STACK ════════ */
+.gd-z-stack{position:relative;height:340px;perspective:1200px}
+.gd-z-layer{position:absolute;left:50%;width:280px;padding:var(--space-5) var(--space-6);
+  background:var(--c-bg-surface);border:1px solid var(--c-border-accent);
+  border-radius:var(--r-md);box-shadow:var(--shadow-card),var(--shadow-glow);
+  font-family:var(--f-mono);font-size:.78rem;display:flex;justify-content:space-between;
+  transform-origin:left center}
+.gd-z-layer .lbl{color:var(--c-text-primary)}
+.gd-z-layer .val{color:var(--c-primary-light)}
+
+/* ════════ A3 · BREAKPOINTS ════════ */
+.gd-bp-bar{position:relative;height:48px;background:var(--c-bg-elevated);
+  border-radius:var(--r-sm);border:1px solid var(--c-border-visible);overflow:hidden;margin-top:var(--space-5)}
+.gd-bp-bar::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,var(--c-primary-glow) 0%,transparent 100%)}
+.gd-bp-mark{position:absolute;top:0;bottom:0;border-left:1px dashed var(--c-primary-light);
+  padding:6px 8px;font-family:var(--f-mono);font-size:.65rem;color:var(--c-primary-light)}
+.gd-bp-legend{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-5);margin-top:var(--space-7)}
+.gd-bp-card{padding:var(--space-5);background:var(--c-bg-surface);border:1px solid var(--c-border);
+  border-radius:var(--r-sm)}
+.gd-bp-card .name{font-family:var(--f-mono);color:var(--c-primary-light);font-size:.75rem}
+.gd-bp-card .px{font-family:var(--f-mono);color:var(--c-text-muted);font-size:.7rem;margin-top:2px}
+.gd-bp-card .desc{font-size:.78rem;color:var(--c-text-secondary);margin-top:var(--space-3)}
+
+/* ════════ B · FORM COMPONENTS ════════ */
+/* B1 · Input */
+.gd-field{display:flex;flex-direction:column;gap:var(--space-3)}
+.gd-label{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--c-text-muted)}
+.gd-input-wrap{position:relative;display:flex;align-items:center}
+.gd-input{width:100%;height:40px;padding:0 var(--space-5);
+  background:var(--c-bg-surface);color:var(--c-text-primary);
+  border:1px solid var(--c-border-visible);border-radius:var(--r-sm);
+  font-size:.875rem;transition:var(--t-fast);font-family:var(--f-sans)}
+.gd-input::placeholder{color:var(--c-text-muted)}
+.gd-input:hover{border-color:rgba(255,255,255,.20)}
+.gd-input:focus{outline:none;border-color:var(--c-primary);
+  box-shadow:0 0 0 3px rgba(75,33,142,.15)}
+.gd-input.is-error{border-color:var(--c-error);box-shadow:0 0 0 3px rgba(239,68,68,.12)}
+.gd-input:disabled{opacity:.4;cursor:not-allowed}
+.gd-input--sm{height:32px;font-size:.8125rem}
+.gd-input--lg{height:48px;font-size:.95rem;padding:0 var(--space-6)}
+.gd-input--has-icon{padding-left:var(--space-9)}
+.gd-input-icon{position:absolute;left:var(--space-4);color:var(--c-text-muted);
+  pointer-events:none;display:flex}
+.gd-error-msg{font-size:.75rem;color:var(--c-error);font-family:var(--f-mono)}
+
+/* Label flutuante */
+.gd-float{position:relative}
+.gd-float input{width:100%;height:56px;padding:24px var(--space-5) 8px;
+  background:var(--c-bg-surface);color:var(--c-text-primary);
+  border:1px solid var(--c-border-visible);border-radius:var(--r-sm);
+  font-size:.9rem;transition:var(--t-fast)}
+.gd-float input:focus{outline:none;border-color:var(--c-primary);
+  box-shadow:0 0 0 3px rgba(75,33,142,.15)}
+.gd-float label{position:absolute;left:var(--space-5);top:50%;transform:translateY(-50%);
+  font-size:.875rem;color:var(--c-text-muted);pointer-events:none;transition:var(--t-fast);
+  background:transparent;padding:0 4px}
+.gd-float input:focus + label,
+.gd-float input:not(:placeholder-shown) + label{
+  top:8px;transform:translateY(0);font-size:.625rem;color:var(--c-primary-light);
+  font-family:var(--f-mono);text-transform:uppercase;letter-spacing:.1em}
+
+/* B2 · Select */
+.gd-select-wrap{position:relative}
+.gd-select{appearance:none;-webkit-appearance:none;width:100%;height:40px;
+  padding:0 var(--space-9) 0 var(--space-5);
+  background:var(--c-bg-surface);color:var(--c-text-primary);
+  border:1px solid var(--c-border-visible);border-radius:var(--r-sm);
+  font-size:.875rem;cursor:pointer;transition:var(--t-fast)}
+.gd-select:focus{outline:none;border-color:var(--c-primary);
+  box-shadow:0 0 0 3px rgba(75,33,142,.15)}
+.gd-select-arrow{position:absolute;right:var(--space-4);top:50%;transform:translateY(-50%);
+  color:var(--c-text-muted);pointer-events:none}
+/* Dropdown list visual mock */
+.gd-dropdown{margin-top:var(--space-3);background:var(--c-bg-elevated);
+  border:1px solid var(--c-border-visible);border-radius:var(--r-sm);
+  box-shadow:var(--shadow-elevated);overflow:hidden}
+.gd-dropdown-item{padding:var(--space-4) var(--space-5);font-size:.85rem;
+  color:var(--c-text-secondary);cursor:pointer;transition:var(--t-fast);
+  display:flex;justify-content:space-between;align-items:center}
+.gd-dropdown-item:hover{background:var(--c-primary-subtle);color:var(--c-text-primary)}
+.gd-dropdown-item.is-active{background:var(--c-primary-subtle);color:var(--c-primary-light)}
+
+/* B3 · Checkbox + Toggle */
+.gd-check{display:inline-flex;align-items:center;gap:var(--space-4);cursor:pointer;
+  font-size:.875rem;color:var(--c-text-secondary)}
+.gd-check input{position:absolute;opacity:0;pointer-events:none}
+.gd-check-box{width:18px;height:18px;border:1px solid var(--c-border-visible);
+  border-radius:var(--r-xs);background:var(--c-bg-surface);
+  display:flex;align-items:center;justify-content:center;transition:var(--t-fast)}
+.gd-check input:checked + .gd-check-box{background:var(--c-primary);border-color:var(--c-primary);
+  box-shadow:0 0 12px -2px var(--c-primary-glow)}
+.gd-check-box svg{opacity:0;transition:var(--t-fast);color:#fff}
+.gd-check input:checked + .gd-check-box svg{opacity:1}
+.gd-check input:focus-visible + .gd-check-box{outline:2px solid var(--c-primary);outline-offset:2px}
+
+.gd-toggle{display:inline-flex;align-items:center;gap:var(--space-4);cursor:pointer;
+  font-size:.875rem;color:var(--c-text-secondary)}
+.gd-toggle input{position:absolute;opacity:0;pointer-events:none}
+.gd-toggle-track{position:relative;width:40px;height:20px;border-radius:var(--r-full);
+  background:var(--c-bg-elevated);border:1px solid var(--c-border-visible);transition:var(--t-fast)}
+.gd-toggle-thumb{position:absolute;top:1px;left:1px;width:16px;height:16px;border-radius:50%;
+  background:var(--c-text-secondary);transition:var(--t-spring)}
+.gd-toggle input:checked + .gd-toggle-track{background:var(--gradient-primary);border-color:transparent;
+  box-shadow:0 0 16px -4px var(--c-primary-glow)}
+.gd-toggle input:checked + .gd-toggle-track .gd-toggle-thumb{left:21px;background:#fff}
+
+/* B4 · Textarea */
+.gd-textarea{width:100%;min-height:120px;padding:var(--space-5);
+  background:var(--c-bg-surface);color:var(--c-text-primary);
+  border:1px solid var(--c-border-visible);border-radius:var(--r-sm);
+  font-family:var(--f-sans);font-size:.875rem;resize:vertical;
+  line-height:1.6;transition:var(--t-fast)}
+.gd-textarea:focus{outline:none;border-color:var(--c-primary);
+  box-shadow:0 0 0 3px rgba(75,33,142,.15)}
+.gd-textarea::placeholder{color:var(--c-text-muted)}
+
+/* ════════ C · DASHBOARD ════════ */
+/* C1 · KPI card */
+.gd-kpi{padding:var(--space-7);background:var(--c-bg-surface);
+  border:1px solid var(--c-border-visible);border-radius:var(--r-md);
+  display:flex;flex-direction:column;gap:var(--space-4);
+  transition:var(--t-normal);position:relative;overflow:hidden}
+.gd-kpi:hover{border-color:var(--c-border-accent);box-shadow:var(--shadow-glow);transform:translateY(-2px)}
+.gd-kpi-label{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--c-text-muted)}
+.gd-kpi-value{font-family:var(--f-mono);font-weight:300;font-size:2.25rem;line-height:1;
+  background:var(--gradient-text);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;letter-spacing:-.02em}
+.gd-kpi-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--space-4)}
+.gd-kpi-delta{font-family:var(--f-mono);font-size:.75rem;display:inline-flex;align-items:center;gap:4px}
+.gd-kpi-delta.up{color:var(--c-success)}
+.gd-kpi-delta.down{color:var(--c-error)}
+
+/* C2 · Semáforo */
+.gd-light{display:inline-flex;align-items:center;gap:var(--space-3);font-size:.78rem;
+  color:var(--c-text-secondary);font-family:var(--f-mono)}
+.gd-light-dot{width:8px;height:8px;border-radius:50%;flex:none}
+.gd-light.green .gd-light-dot{background:var(--c-success);box-shadow:0 0 12px var(--c-success)}
+.gd-light.yellow .gd-light-dot{background:var(--c-warning);box-shadow:0 0 12px var(--c-warning)}
+.gd-light.red .gd-light-dot{background:var(--c-error);box-shadow:0 0 12px var(--c-error)}
+
+.gd-task{padding:var(--space-5) var(--space-6);background:var(--c-bg-surface);
+  border:1px solid var(--c-border);border-radius:var(--r-sm);
+  display:flex;align-items:center;gap:var(--space-5);transition:var(--t-fast)}
+.gd-task:hover{border-color:var(--c-border-accent);background:var(--c-bg-elevated)}
+.gd-task .title{flex:1;font-size:.875rem}
+.gd-task .who{font-family:var(--f-mono);font-size:.7rem;color:var(--c-text-muted)}
+
+/* C3 · Progress */
+.gd-progress{display:flex;flex-direction:column;gap:var(--space-3)}
+.gd-progress-meta{display:flex;justify-content:space-between;font-family:var(--f-mono);
+  font-size:.75rem;color:var(--c-text-muted)}
+.gd-progress-meta strong{color:var(--c-text-primary);font-weight:500}
+.gd-progress-track{height:6px;background:var(--c-bg-elevated);
+  border-radius:var(--r-full);overflow:hidden}
+.gd-progress-fill{height:100%;background:var(--gradient-primary);border-radius:var(--r-full);
+  transition:width var(--t-spring);box-shadow:0 0 12px -2px var(--c-primary-glow)}
+.gd-progress.success .gd-progress-fill{background:var(--c-success);box-shadow:0 0 12px -2px var(--c-success)}
+.gd-progress.risk .gd-progress-fill{background:var(--c-error);box-shadow:0 0 12px -2px var(--c-error)}
+
+/* C4 · Sparkline */
+.gd-spark{display:block;width:120px;height:32px}
+
+/* ════════ D · INTERFACE ════════ */
+
+
+/* Gem CTA · port direto do v1.0 (preserva press/spin) */
+.gem-cta{position:relative;z-index:0;overflow:hidden;display:inline-flex;align-items:center;
+  font-weight:600;letter-spacing:.02em;color:#fff;background:var(--gradient-primary);
+  border-radius:var(--r-full);box-shadow:var(--shadow-button);
+  transition:box-shadow var(--t-normal),transform var(--t-fast);cursor:pointer;border:none}
+.gem-cta:hover{box-shadow:var(--shadow-button-hover);transform:translateY(-1px)}
+.gem-cta::before{content:'';position:absolute;height:210%;aspect-ratio:1;top:-55%;right:-26px;
+  z-index:-1;transform-origin:center center;pointer-events:none;opacity:.92;
+  background:var(--cta-gem-bg) no-repeat center / contain}
+.gem-cta.gem-pressing::before{transform:scale(.78);transition:transform .12s cubic-bezier(.4,0,.2,1)}
+@keyframes gem-spin{from{transform:scale(.78) rotate(0)}to{transform:scale(1) rotate(360deg)}}
+.gem-cta.gem-spinning::before{animation:gem-spin .55s cubic-bezier(.16,1,.3,1) forwards}
+.gem-cta--sm{padding:8px 20px;font-size:.8125rem}
+.gem-cta--md{padding:12px 28px;font-size:.9375rem}
+.gem-cta--lg{padding:14px 32px;font-size:1.0625rem}
+.gem-cta:disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
+.gem-cta.is-loading{opacity:.92;cursor:wait;pointer-events:none}
+@keyframes gem-loading-spin{to{transform:rotate(360deg)}}
+.gem-cta.is-loading::before{animation:gem-loading-spin 8s linear infinite}
+
+/* Ghost button (v1.1) */
+.gd-btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-3);
+  padding:10px var(--space-6);border-radius:var(--r-full);font-weight:500;font-size:.85rem;
+  cursor:pointer;transition:var(--t-fast);
+  background:transparent;border:1px solid var(--c-border-visible);color:var(--c-text-secondary)}
+.gd-btn-ghost:hover{color:var(--c-text-primary);border-color:var(--c-border-accent);
+  background:rgba(255,255,255,.03)}
+.gd-btn-ghost:disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
+
+
+/* ════════ E · STATES ════════ */
+.gd-state-row{display:grid;grid-template-columns:120px 1fr;gap:var(--space-7);
+  align-items:center;padding:var(--space-5) 0;border-bottom:1px dashed var(--c-border)}
+.gd-state-row:last-child{border-bottom:none}
+.gd-state-row .name{font-family:var(--f-mono);font-size:.78rem;color:var(--c-primary-light)}
+.gd-state-row .demo{display:flex;gap:var(--space-5);align-items:center;flex-wrap:wrap}
+.gd-state-row .desc{font-size:.78rem;color:var(--c-text-muted);font-family:var(--f-mono)}
+
+/* GemLoader · único padrão de loading no gestao.dev (port do v1.0) */
+.gem-loader{display:inline-block;flex-shrink:0}
+@keyframes gem-pulse{0%,100%{transform:scale(.82);opacity:.85}50%{transform:scale(1.05);opacity:1}}
+.gem-loader--pulse{transform-origin:50% 50%;animation:gem-pulse 2.4s ease-in-out infinite;
+  filter:drop-shadow(0 0 12px rgba(123,77,196,.45))}
+
+/* Helpers para compor loading nos wrappers de input */
+.gd-input-wrap .gem-loader{position:absolute;right:12px;top:50%;transform-origin:50% 50%;
+  transform:translateY(-50%);pointer-events:none;
+  animation:gem-pulse 2.4s ease-in-out infinite;
+  filter:drop-shadow(0 0 12px rgba(123,77,196,.45))}
+.gd-input-wrap.is-loading .gd-input{padding-right:44px;cursor:wait}
+
+/* ════════ F · BRAND ASSETS ════════ */
+.gd-brand-clear{background:var(--c-bg-deep);border:1px dashed var(--c-border-visible);
+  border-radius:var(--r-md);padding:var(--space-9);display:flex;align-items:center;
+  justify-content:center;min-height:280px;position:relative}
+
+.gd-brand-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-5)}
+.gd-brand-cell{padding:var(--space-8);border-radius:var(--r-md);
+  display:flex;align-items:center;justify-content:center;gap:var(--space-5);min-height:120px}
+.gd-brand-cell.dark{background:var(--c-bg-deep);border:1px solid var(--c-border-visible)}
+.gd-brand-cell.light{background:#fff;border:1px solid #e5e7eb}
+.gd-brand-cell .lbl{position:absolute}
+.gd-brand-wrap{position:relative;display:flex;align-items:center;gap:var(--space-4)}
+.gd-brand-wrap .word{font-family:var(--f-mono);font-weight:600;font-size:1.25rem;letter-spacing:-.01em}
+.gd-brand-wrap .word.dark{color:#fff}
+.gd-brand-wrap .word.light{color:#0a0a0a}
+.gd-brand-wrap .word.dark .dot{color:var(--c-primary-light)}
+.gd-brand-wrap .word.light .dot{color:var(--c-primary)}
+.gd-brand-tag{position:absolute;top:8px;left:8px;font-family:var(--f-mono);font-size:.6rem;
+  letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;border-radius:var(--r-xs)}
+.gd-brand-tag.on-dark{color:var(--c-text-muted);background:rgba(255,255,255,.06)}
+.gd-brand-tag.on-light{color:#666;background:rgba(0,0,0,.06)}
+
+/* OG */
+.gd-og{position:relative;width:100%;aspect-ratio:1200/630;background:var(--c-bg-primary);
+  border-radius:var(--r-md);overflow:hidden;
+  display:flex;align-items:center;padding:var(--space-12);
+  background-image:radial-gradient(ellipse at 20% 50%,rgba(75,33,142,.30) 0%,transparent 55%)}
+.gd-og::before{content:'';position:absolute;inset:24px;border:1px dashed var(--c-border-visible);
+  border-radius:var(--r-md);pointer-events:none}
+.gd-og-gem{width:120px;height:120px;margin-right:var(--space-9);flex:none;
+  filter:drop-shadow(0 0 40px rgba(75,33,142,.45))}
+.gd-og-text h5{font-size:clamp(1.25rem,3.2vw,2.4rem);font-weight:600;letter-spacing:-.03em;line-height:1.1}
+.gd-og-text p{margin-top:var(--space-5);color:var(--c-text-secondary);font-size:clamp(.85rem,1.4vw,1.05rem);
+  max-width:560px;line-height:1.5}
+.gd-og-text .url{margin-top:var(--space-7);font-family:var(--f-mono);color:var(--c-primary-light);
+  font-size:clamp(.7rem,1vw,.85rem)}
+
+/* ════════ G · UX ════════ */
+/* G1 · Empty */
+.gd-empty{display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:var(--space-12) var(--space-7);gap:var(--space-5)}
+.gd-empty-icon{width:64px;height:64px;border-radius:var(--r-lg);
+  background:var(--c-primary-subtle);border:1px solid var(--c-border-accent);
+  color:var(--c-primary-light);display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--shadow-glow)}
+.gd-empty h4{font-size:1.125rem;font-weight:500;color:var(--c-text-primary)}
+.gd-empty p{color:var(--c-text-muted);font-size:.875rem;max-width:320px}
+
+/* G2 · Tooltip */
+.gd-tt{position:relative;display:inline-flex;align-items:center;gap:var(--space-3);
+  color:var(--c-text-secondary);font-size:.85rem;cursor:default}
+.gd-tt-trigger{width:18px;height:18px;border-radius:50%;
+  border:1px solid var(--c-border-visible);color:var(--c-text-muted);
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--f-mono);font-size:.65rem;cursor:help;transition:var(--t-fast)}
+.gd-tt-trigger:hover{color:var(--c-primary-light);border-color:var(--c-border-accent)}
+.gd-tt-bubble{position:absolute;bottom:calc(100% + 10px);left:50%;
+  transform:translateX(-50%) translateY(4px);
+  background:var(--c-bg-elevated);border:1px solid var(--c-border-visible);
+  border-radius:var(--r-sm);padding:6px 12px;font-size:.75rem;color:var(--c-text-secondary);
+  white-space:nowrap;z-index:var(--z-tooltip);
+  opacity:0;pointer-events:none;transition:var(--t-fast);box-shadow:var(--shadow-card)}
+.gd-tt-bubble::after{content:'';position:absolute;top:100%;left:50%;
+  transform:translateX(-50%);border:5px solid transparent;
+  border-top-color:var(--c-bg-elevated)}
+.gd-tt:hover .gd-tt-bubble,.gd-tt-trigger:focus-visible + .gd-tt-bubble{
+  opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* G3 · Skeleton */
+.gd-skel{background:var(--c-bg-elevated);border-radius:var(--r-sm);position:relative;overflow:hidden}
+.gd-skel::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.04) 50%,transparent 100%);
+  animation:gdShimmer 1.6s linear infinite;transform:translateX(-100%)}
+@keyframes gdShimmer{to{transform:translateX(100%)}}
+
+/* ════════ H1 · Icon system ════════ */
+.gd-icon{stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;
+  color:var(--c-text-secondary);flex:none}
+.gd-icon-size-row{display:flex;gap:var(--space-8);align-items:flex-end;flex-wrap:wrap;
+  padding:var(--space-7);background:var(--c-bg-surface);border:1px solid var(--c-border);
+  border-radius:var(--r-md)}
+.gd-icon-size-row figure{display:flex;flex-direction:column;align-items:center;gap:var(--space-3)}
+.gd-icon-size-row figcaption{font-family:var(--f-mono);font-size:.65rem;color:var(--c-text-muted);
+  letter-spacing:.1em;text-transform:uppercase}
+.gd-icon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:var(--space-4)}
+.gd-icon-cell{display:flex;flex-direction:column;align-items:center;gap:var(--space-3);
+  padding:var(--space-5);background:var(--c-bg-surface);border:1px solid var(--c-border);
+  border-radius:var(--r-sm);transition:var(--t-fast);color:var(--c-text-secondary)}
+.gd-icon-cell:hover{border-color:var(--c-border-accent);color:var(--c-primary-light);
+  background:var(--c-bg-elevated)}
+.gd-icon-cell .nm{font-family:var(--f-mono);font-size:.62rem;color:var(--c-text-muted)}
+
+/* ════════ I1 · Breadcrumbs ════════ */
+.gd-breadcrumb{display:flex;align-items:center;flex-wrap:wrap;gap:var(--space-2);
+  font-size:.8125rem;font-family:var(--f-mono);color:var(--c-text-muted)}
+.gd-breadcrumb a{color:var(--c-text-muted);transition:var(--t-fast);padding:4px 2px;
+  border-radius:var(--r-xs)}
+.gd-breadcrumb a:hover{color:var(--c-primary-light)}
+.gd-breadcrumb .sep{color:var(--c-text-faint);margin:0 2px}
+.gd-breadcrumb .current{color:var(--c-text-primary);font-weight:500}
+.gd-breadcrumb .home{display:inline-flex;align-items:center;gap:6px}
+
+/* ════════ J1 · Social templates ════════ */
+.gd-social-grid{display:grid;gap:var(--space-7)}
+.gd-social{position:relative;border-radius:var(--r-md);overflow:hidden;
+  border:1px solid var(--c-border-visible);background:var(--c-bg-primary);
+  display:flex;align-items:center;padding:var(--space-8)}
+.gd-social-label{position:absolute;top:10px;left:12px;font-family:var(--f-mono);
+  font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--c-text-muted);
+  background:rgba(255,255,255,.06);padding:3px 8px;border-radius:var(--r-xs);z-index:2}
+.gd-social-x{aspect-ratio:16/9;background-image:radial-gradient(ellipse at 25% 50%,rgba(75,33,142,.32) 0%,transparent 60%)}
+.gd-social-gh{aspect-ratio:2/1;background:linear-gradient(135deg,var(--c-bg-deep) 0%,var(--c-bg-surface) 100%)}
+.gd-social-dc{aspect-ratio:16/9;background:var(--c-bg-deep);justify-content:center;flex-direction:column;text-align:center;gap:var(--space-5)}
+.gd-social-dc::before{content:'';position:absolute;inset:16px;border:1px dashed var(--c-border-visible);
+  border-radius:var(--r-sm);pointer-events:none}
+.gd-social .gem-svg{width:clamp(64px,10vw,120px);height:clamp(64px,10vw,120px);flex:none;
+  filter:drop-shadow(0 0 40px rgba(75,33,142,.45))}
+.gd-social h5{font-size:clamp(1rem,2.6vw,1.9rem);font-weight:600;letter-spacing:-.025em;line-height:1.15}
+.gd-social p{color:var(--c-text-secondary);font-size:clamp(.75rem,1.3vw,.95rem);margin-top:var(--space-4);line-height:1.5;max-width:520px}
+.gd-social .hl{color:var(--c-primary-light);font-family:var(--f-mono)}
+.gd-social-spec{margin-top:var(--space-3);display:flex;justify-content:space-between;
+  font-family:var(--f-mono);font-size:.65rem;color:var(--c-text-muted);
+  padding:0 var(--space-3)}
+
+/* ════════ K1 · Fotografia / ilustração ════════ */
+.gd-media-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5)}
+.gd-media-cell{padding:var(--space-7);border-radius:var(--r-md);min-height:180px;
+  display:flex;flex-direction:column;justify-content:space-between;gap:var(--space-5);position:relative}
+.gd-media-cell.ok{background:linear-gradient(160deg,rgba(34,197,94,0.05) 0%,var(--c-bg-surface) 60%);
+  border:1px solid rgba(34,197,94,.22)}
+.gd-media-cell.no{background:linear-gradient(160deg,rgba(239,68,68,0.05) 0%,var(--c-bg-surface) 60%);
+  border:1px solid rgba(239,68,68,.22)}
+.gd-media-tag{position:absolute;top:12px;right:12px;font-family:var(--f-mono);font-size:.65rem;
+  letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:var(--r-full)}
+.gd-media-cell.ok .gd-media-tag{color:var(--c-success);background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25)}
+.gd-media-cell.no .gd-media-tag{color:var(--c-error);background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25)}
+.gd-media-cell ul{display:flex;flex-direction:column;gap:var(--space-3);font-size:.85rem;color:var(--c-text-secondary)}
+.gd-media-cell ul li{padding-left:var(--space-5);position:relative}
+.gd-media-cell ul li::before{position:absolute;left:0;font-family:var(--f-mono);color:inherit}
+.gd-media-cell.ok ul li::before{content:'✓';color:var(--c-success)}
+.gd-media-cell.no ul li::before{content:'×';color:var(--c-error)}
+.gd-media-cell h5{font-size:.95rem;font-weight:500;color:var(--c-text-primary)}
+
+/* ════════ L1 · Email transacional ════════ */
+.gd-email-frame{background:#0c1322;border:1px solid var(--c-border-visible);
+  border-radius:var(--r-md);overflow:hidden;display:flex;flex-direction:column;
+  box-shadow:var(--shadow-card)}
+.gd-email-bar{background:var(--c-bg-elevated);padding:var(--space-4) var(--space-5);
+  display:flex;align-items:center;gap:var(--space-3);border-bottom:1px solid var(--c-border)}
+.gd-email-bar .dot{width:10px;height:10px;border-radius:50%}
+.gd-email-bar .dot.r{background:#ef4444}.gd-email-bar .dot.y{background:#f59e0b}.gd-email-bar .dot.g{background:#22c55e}
+.gd-email-bar .subj{margin-left:auto;font-family:var(--f-mono);font-size:.7rem;color:var(--c-text-muted)}
+.gd-email-body{background:#0a1628;padding:var(--space-10) var(--space-9);display:flex;flex-direction:column;gap:var(--space-6)}
+.gd-email-head{display:flex;align-items:center;gap:var(--space-4);padding-bottom:var(--space-6);
+  border-bottom:1px dashed var(--c-border-visible)}
+.gd-email-head .word{font-family:var(--f-mono);font-weight:600;font-size:1.1rem;color:#fff;letter-spacing:-.01em}
+.gd-email-head .word .dot{color:var(--c-primary-light)}
+.gd-email-body h5{font-size:1.4rem;font-weight:500;letter-spacing:-.025em;color:#fff}
+.gd-email-body p{color:var(--c-text-secondary);font-size:.92rem;line-height:1.65}
+.gd-email-body code{font-family:var(--f-mono);font-size:.82rem;color:var(--c-primary-light);
+  background:rgba(75,33,142,.10);border:1px solid rgba(75,33,142,.20);
+  padding:2px 7px;border-radius:var(--r-sm)}
+.gd-email-foot{padding:var(--space-6) var(--space-9);border-top:1px solid var(--c-border);
+  background:var(--c-bg-deep);font-family:var(--f-mono);font-size:.7rem;color:var(--c-text-muted);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--space-3)}
+.gd-email-foot a{color:var(--c-primary-light)}
+
+/* table-of-contents */
+.ds-toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:var(--space-4);margin-top:var(--space-7)}
+.ds-toc a{padding:var(--space-4) var(--space-5);background:var(--c-bg-surface);
+  border:1px solid var(--c-border);border-radius:var(--r-sm);transition:var(--t-fast);
+  display:flex;flex-direction:column;gap:2px}
+.ds-toc a:hover{border-color:var(--c-border-accent);background:var(--c-bg-elevated)}
+.ds-toc .id{font-family:var(--f-mono);font-size:.65rem;color:var(--c-primary-light);
+  letter-spacing:.1em;text-transform:uppercase}
+.ds-toc .name{font-size:.85rem;color:var(--c-text-secondary)}
+
+</style>
+</head>
+<body>
+
+<!-- ═══════ SVG SYMBOL · Logo oficial (gema com >_) — disponível para todo o documento ═══════ -->
+<svg width="0" height="0" aria-hidden="true" style="position:absolute" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="gd-logo-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/>
+    </filter>
+    <clipPath id="gd-logo-clip"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath>
+    <symbol id="gd-logo" viewBox="0 0 32 32">
+      <g clip-path="url(#gd-logo-clip)">
+        <polygon points="16,2.5 28,9 16,16"   fill="#A060E8"/>
+        <polygon points="28,9 28,23 16,16"    fill="#7030C0"/>
+        <polygon points="28,23 16,29.5 16,16" fill="#501888"/>
+        <polygon points="16,29.5 4,23 16,16"  fill="#280858"/>
+        <polygon points="4,23 4,9 16,16"      fill="#4B218E"/>
+        <polygon points="4,9 16,2.5 16,16"    fill="#6030A8"/>
+        <path d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#gd-logo-glow)"/>
+        <rect x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#gd-logo-glow)"/>
+      </g>
+      <polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/>
+    </symbol>
+    <symbol id="gd-logo-mono" viewBox="0 0 32 32">
+      <polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="currentColor" fill-opacity="0.12"/>
+      <g clip-path="url(#gd-logo-clip)">
+        <path d="M4,9 L16,16 L4,23" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="currentColor"/>
+      </g>
+      <polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="currentColor" stroke-width="1.2"/>
+    </symbol>
+  </defs>
+</svg>
+
+<nav class="bb-nav">
+  <div class="bb-nav-inner">
+    <div class="bb-nav-logo">gestao<span class="dot">.</span>dev</div>
+    <div class="bb-nav-meta">Brand Book + Design System · v1.1</div>
+  </div>
+</nav>
+
+<!-- ═══════ COVER ═══════ -->
+<section class="cover">
+  <!-- Hero · logo horizontal (gema + wordmark) -->
+  <div class="cover-hero">
+    <svg class="gem" aria-hidden="true"><use href="#gd-logo"/></svg>
+    <div class="cover-logo">gestao<span class="dot">.</span>dev</div>
+  </div>
+  <div class="cover-divider"></div>
+  <div class="cover-label">Brand Book + Design System</div>
+  <div class="cover-desc">Posicionamento, Identidade, Playbook &amp; Referência Visual Completa</div>
+
+  <div class="cover-parts">
+    <div class="cover-part">
+      <div class="cover-part-num">Parte I</div>
+      <div class="cover-part-title">Marca &amp; Posicionamento</div>
+      <div class="cover-part-desc">15 seções — estratégia, tom, personas</div>
+    </div>
+    <div class="cover-part">
+      <div class="cover-part-num">Parte II</div>
+      <div class="cover-part-title">Design System</div>
+      <div class="cover-part-desc">Tokens, componentes, UX &amp; brand assets</div>
+    </div>
+  </div>
+  <div class="cover-version">v1.1 · Abril 2026 · Confidencial</div>
+</section>
+
+<!-- ═══════ TOC ═══════ -->
+<div class="toc">
+  <div class="container">
+    <h2>Sumário</h2>
+    <div class="toc-grid">
+      <div>
+        <div class="toc-group-label">Parte I — Marca &amp; Posicionamento</div>
+        <ol class="toc-list">
+          <li><a href="#s01">Visão Geral da Marca</a></li>
+          <li><a href="#s02">Propósito, Missão, Visão e Valores</a></li>
+          <li><a href="#s03">Posicionamento Estratégico</a></li>
+          <li><a href="#s04">Arquitetura de Mensagem</a></li>
+          <li><a href="#s05">Arquétipo de Marca</a></li>
+          <li><a href="#s06">Persona da Marca</a></li>
+          <li><a href="#s07">Buyer Personas</a></li>
+          <li><a href="#s08">Tom de Voz &amp; Diretrizes</a></li>
+          <li><a href="#s09">Dicionário de Marca</a></li>
+          <li><a href="#s10">Manifesto</a></li>
+          <li><a href="#s11">Taglines &amp; Slogans</a></li>
+          <li><a href="#s12">Aplicações por Canal</a></li>
+          <li><a href="#s13">Do's &amp; Don'ts</a></li>
+          <li><a href="#s14">Métricas de Marca</a></li>
+        </ol>
+      </div>
+      <div>
+        <div class="toc-group-label">Parte II — Design System</div>
+        <ol class="toc-list" style="counter-reset:toc 14">
+          <li><a href="#ds01">Logo &amp; Identidade Visual</a></li>
+          <li><a href="#ds02">Paleta de Cores</a></li>
+          <li><a href="#ds03">Gradientes</a></li>
+          <li><a href="#ds04">Tipografia</a></li>
+          <li><a href="#ds05">Espaçamento &amp; Layout</a></li>
+          <li><a href="#ds06">Border Radius</a></li>
+          <li><a href="#ds07">Sombras</a></li>
+          <li><a href="#ds08">Padrão de Seção</a></li>
+          <li><a href="#ds09">Cards</a></li>
+          <li><a href="#ds10">CTAs — Gem Button</a></li>
+          <li><a href="#ds11">GemLoader</a></li>
+          <li><a href="#ds12">Motion &amp; Transições</a></li>
+        </ol>
+      </div>
+      <div>
+        <div class="toc-group-label">Parte II · continuação — Componentes, UX &amp; Brand</div>
+        <ol class="toc-list" style="counter-reset:toc 26">
+          <li><a href="#a">Tokens (spacing, z-index, breakpoints)</a></li>
+          <li><a href="#b">Formulários (input, select, checkbox, textarea)</a></li>
+          <li><a href="#c">Dashboard (KPI, semáforo, progress, sparkline)</a></li>
+          <li><a href="#e">Estados de componentes</a></li>
+          <li><a href="#f">Brand assets (clear space, variantes, OG)</a></li>
+          <li><a href="#g">UX patterns (empty, tooltip, skeleton)</a></li>
+          <li><a href="#h">Sistema de ícones</a></li>
+          <li><a href="#i">Breadcrumbs</a></li>
+          <li><a href="#j">Templates sociais</a></li>
+          <li><a href="#k">Guia de mídia</a></li>
+          <li><a href="#l">Email transacional</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--                    PART I — MARCA                         -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="part-divider">
+  <div class="part-divider-label">Parte I</div>
+  <div class="part-divider-title">Marca & Posicionamento</div>
+  <div class="part-divider-desc">Estratégia, identidade verbal e diretrizes de comunicação</div>
+</div>
+
+<section class="section" id="s01">
+  <div class="container">
+    <span class="section-num">01</span>
+    <h2>Visão Geral da Marca</h2>
+
+    <h3>O que é o gestao.dev</h3>
+    <p>O gestao.dev é um project manager construído exclusivamente para <strong>desenvolvedores e squads de desenvolvimento</strong>. Diferente de ferramentas de gestão genéricas, ele foi desenhado para devolver ao time o tempo perdido com tarefas operacionais — atualizar boards, mover cards, preencher status, re-explicar contexto.</p>
+    <p>A ferramenta cuida da burocracia de gestão para que o dev cuide do código. Sprints, tarefas, ideias e bugs vivem num lugar só, com <strong>dashboards que mostram exatamente o que está acontecendo</strong> — quem está fazendo o quê, o que está atrasado, onde o time está travado — sem precisar perguntar para ninguém.</p>
+    <p>Além disso, possui integração nativa com o protocolo MCP (Model Context Protocol), permitindo que ferramentas de AI coding acessem tarefas e contexto diretamente no terminal. Mas a IA é meio, não fim: <strong>o produto é a gestão fluida, não o hype de inteligência artificial.</strong></p>
+
+    <h3>Categoria de mercado</h3>
+    <p><strong>Project Management para Desenvolvedores</strong> — uma subcategoria que o gestao.dev está definindo. Não competimos com Jira, Linear ou Asana por features de PM genérico. Competimos com o fato de que nenhuma ferramenta de gestão existente foi construída para se encaixar no dia a dia real de quem coda.</p>
+
+    <h3>Diferenciais inegáveis</h3>
+    <div class="card-grid">
+      <div class="card">
+        <h4>Board que se atualiza</h4>
+        <p>O squad para de gastar 25+ min/dia arrastando cards. A ferramenta mantém o board em sincronia com o que está acontecendo de verdade.</p>
+      </div>
+      <div class="card">
+        <h4>Dashboards de clareza total</h4>
+        <p>Visão em tempo real de prazos, velocidade do time, tarefas bloqueadas e distribuição de carga. Leitura instantânea.</p>
+      </div>
+      <div class="card">
+        <h4>MCP nativo</h4>
+        <p>O Claude Code (ou qualquer ferramenta compatível) acessa tarefas direto no terminal. Zero copy-paste.</p>
+      </div>
+      <div class="card">
+        <h4>Dev Virtual</h4>
+        <p>Agente autônomo que pega tarefas do kanban, implementa e abre PRs — paga apenas quando trabalha.</p>
+      </div>
+      <div class="card">
+        <h4>Workflow Ideia→Exec</h4>
+        <p>De uma ideia no banco de ideias até um PR aberto, sem fricções.</p>
+      </div>
+      <div class="card">
+        <h4>Setup em 2 minutos</h4>
+        <p>Zero configuração complexa. Criou conta, montou o board, pronto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 02 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s02">
+  <div class="container">
+    <span class="section-num">02</span>
+    <h2>Propósito, Missão, Visão e Valores</h2>
+
+    <h3>Propósito <span style="color:var(--text-muted);font-weight:400;font-size:0.875rem;">— Por que existimos</span></h3>
+    <div class="bb-quote">Devolver ao desenvolvedor o tempo que ferramentas de gestão roubam dele todos os dias.</div>
+    <p>Toda hora gasta arrastando cards, preenchendo status e montando relatórios manuais é uma hora roubada da criação. Existimos para eliminar essa burocracia e dar ao dev visão clara do que importa — sem esforço.</p>
+
+    <h3>Missão <span style="color:var(--text-muted);font-weight:400;font-size:0.875rem;">— O que fazemos</span></h3>
+    <p>Simplificar radicalmente a gestão de projetos de desenvolvimento, automatizando o trabalho operacional e entregando dashboards que transformam dados dispersos em decisões claras — para que o time foque em resolver problemas, não em manter ferramentas.</p>
+
+    <h3>Visão <span style="color:var(--text-muted);font-weight:400;font-size:0.875rem;">— Onde queremos chegar</span></h3>
+    <p>Ser o project manager padrão de squads de desenvolvimento em todo o mundo — a ferramenta que finalmente fez a gestão desaparecer dentro do fluxo de trabalho.</p>
+
+    <h3>Valores da marca</h3>
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Valor</th><th>Significado prático</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Clareza</td><td>O time precisa ver o que está acontecendo em 3 segundos. Dashboards legíveis, dados em tempo real, zero ambiguidade sobre prazos, responsáveis e bloqueios.</td></tr>
+          <tr><td class="label">Fluidez</td><td>Tudo deve fluir. Se o dev precisa trocar de aba ou gastar tempo atualizando board, a ferramenta falhou.</td></tr>
+          <tr><td class="label">Precisão</td><td>Funcionalidade cirúrgica. Zero feature bloat. Cada elemento resolve um problema real de quem desenvolve.</td></tr>
+          <tr><td class="label">Transparência</td><td>Preço claro, roadmap aberto, comunicação honesta. Sem asteriscos.</td></tr>
+          <tr><td class="label">Autonomia</td><td>A ferramenta se adapta ao time, nunca o contrário. Sem impor processos rígidos.</td></tr>
+          <tr><td class="label">Craft</td><td>Obsessão por qualidade no detalhe: tipografia, animações, performance, UX. Software feito por quem se importa.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 03 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s03">
+  <div class="container">
+    <span class="section-num">03</span>
+    <h2>Posicionamento Estratégico</h2>
+
+    <h3>Declaração de posicionamento</h3>
+    <div class="callout callout--purple">
+      <p>Para <strong>desenvolvedores e squads de desenvolvimento</strong> que perdem tempo gerenciando ferramentas em vez de codar, o <strong style="color:var(--purple-light);">gestao.dev</strong> é o <strong>project manager que cuida da burocracia de gestão sozinho</strong> — mantendo o board atualizado, mostrando prazos e bloqueios em dashboards claras, e conectando tarefas ao terminal via MCP — para que o time gaste zero tempo organizando e 100% do tempo criando.</p>
+    </div>
+
+    <h3>Framework de posicionamento</h3>
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Dimensão</th><th>Definição</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Público-alvo</td><td>Devs solo, squads de 2-15 desenvolvedores, founders técnicos, tech leads de startups</td></tr>
+          <tr><td class="label">Categoria</td><td>Project Management para Desenvolvedores</td></tr>
+          <tr><td class="label">Promessa central</td><td>O board se atualiza, as dashboards mostram tudo, e o time ganha horas de volta todo dia</td></tr>
+          <tr><td class="label">Razão para acreditar</td><td>Automação real do board + dashboards em tempo real + MCP nativo + Dev Virtual</td></tr>
+          <tr><td class="label">Território emocional</td><td>O alívio de abrir o board e ele já estar certo. Sem ter feito nada.</td></tr>
+          <tr><td class="label">Inimigo</td><td>O tempo perdido com burocracia de gestão: arrastar cards, preencher status, montar relatórios, re-explicar contexto.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Diferenciação competitiva</h3>
+    <p>O gestao.dev não compete por features de PM genérico. Compete por relevância no dia a dia do desenvolvedor. Ferramentas tradicionais exigem que o dev pare de codar para gerenciar. O gestao.dev faz a gestão acontecer automaticamente, mostra o status real via dashboards e devolve ao time o tempo que antes era gasto em trabalho operacional.</p>
+    <p>A conexão com IA (MCP) é uma consequência natural dessa filosofia: se a ferramenta já organiza o contexto de forma estruturada, entregar isso para um agente de IA no terminal é o próximo passo lógico — não o ponto de partida.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 04 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s04">
+  <div class="container">
+    <span class="section-num">04</span>
+    <h2>Arquitetura de Mensagem</h2>
+
+    <h3>Narrativa central</h3>
+    <div class="bb-quote">O gestao.dev é o project manager que cuida da gestão para você cuidar do código. O board se atualiza sozinho, as dashboards mostram prazos e bloqueios em tempo real, e o Claude Code lê tudo via MCP. Seu time ganha horas de volta todo dia.</div>
+
+    <h3>Hierarquia de mensagens</h3>
+    <ul class="bb-list">
+      <li><strong>Nível 1 — Promessa:</strong> "A gestão que se resolve sozinha. O tempo que volta pro seu squad."</li>
+      <li><strong>Nível 2 — Suporte:</strong> "Board atualizado automaticamente. Dashboards com visibilidade total. MCP nativo para o terminal."</li>
+      <li><strong>Nível 3 — Prova:</strong> Dashboards reais mostrando dados do sprint, terminal rodando com MCP, ROI de 13×.</li>
+      <li><strong>Nível 4 — CTA:</strong> "Quero acesso antecipado" / "Ver demo"</li>
+    </ul>
+
+    <h3>Pilares de comunicação</h3>
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Pilar</th><th>Mensagem-chave</th><th>Prova</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Tempo devolvido</td><td>Pare de gerenciar a ferramenta. Ela se gerencia.</td><td>Board automático, 25min/dia economizados por dev, ROI 13×</td></tr>
+          <tr><td class="label">Clareza de dados</td><td>Veja tudo que importa em 3 segundos.</td><td>Dashboards de sprint, velocidade, prazos, bloqueios, carga por dev</td></tr>
+          <tr><td class="label">Conexão nativa</td><td>Seu terminal já sabe o que fazer.</td><td>MCP Server, zero copy-paste, contexto persistente</td></tr>
+          <tr><td class="label">Autonomia inteligente</td><td>Um dev que nunca dorme.</td><td>Dev Virtual: 3 PRs/dia, 17min/tarefa, custo zero em idle</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Ordem de ênfase na comunicação</h3>
+    <ol class="order-list">
+      <li><strong>A ferramenta:</strong> O que o gestao.dev faz pelo time (automatiza board, mostra dados, economiza tempo).</li>
+      <li><strong>Os dados:</strong> As dashboards que dão visibilidade total ao que está acontecendo.</li>
+      <li><strong>A conexão:</strong> MCP como extensão natural para quem usa IA no terminal.</li>
+      <li><strong>A automação avançada:</strong> Dev Virtual como multiplicador para quem quer ir além.</li>
+    </ol>
+
+    <div class="callout">
+      <p><strong>Regra de ouro:</strong> A IA nunca é o protagonista. O protagonista é o tempo que o squad ganha de volta e a clareza que as dashboards entregam. Se a frase faz sentido sem mencionar IA, ela está certa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 05 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s05">
+  <div class="container">
+    <span class="section-num">05</span>
+    <h2>Arquétipo de Marca</h2>
+
+    <h3>Primário: O Mago <span style="color:var(--text-muted);font-weight:400;">(The Magician)</span></h3>
+    <p>O Mago transforma a realidade. Pega algo complexo e faz parecer simples. É exatamente o que o gestao.dev faz: transforma a gestão de projetos de um fardo burocrático em algo que simplesmente acontece — o board se atualiza, as dashboards se montam, o dev nunca precisou parar de codar.</p>
+    <ul class="bb-list">
+      <li><strong>Motivação:</strong> Entender as leis fundamentais e usá-las para criar transformação real — não teatral.</li>
+      <li><strong>Medo:</strong> Prometer magia e entregar fumaça (por isso, dashboards com dados reais, não storytelling vazio).</li>
+      <li><strong>Estratégia:</strong> Mostrar resultado, não tecnologia. O dev vê o board atualizado e sente que é mágica. Sob o capô, é engenharia.</li>
+    </ul>
+
+    <h3>Secundário: O Criador <span style="color:var(--text-muted);font-weight:400;">(The Creator)</span></h3>
+    <p>Valoriza a excelência artística. No gestao.dev, isso se manifesta no design system obsessivamente construído, nas animações da gema, na tipografia Geist, na paleta deep purple. A ferramenta não é apenas funcional — é bonita. Porque desenvolvedores merecem ferramentas com a mesma qualidade do código que escrevem.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 06 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s06">
+  <div class="container">
+    <span class="section-num">06</span>
+    <h2>Persona da Marca</h2>
+
+    <div class="bb-quote">Se o gestao.dev fosse uma pessoa, seria o tech lead que mantém o squad organizado sem ninguém perceber — direto, eficiente, zero bullshit, e surpreendentemente atencioso com quem precisa de uma dashboard clara às 17h de sexta.</div>
+
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Atributo</th><th>Definição</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Nome simbólico</td><td>O Tech Lead silencioso</td></tr>
+          <tr><td class="label">Personalidade</td><td>Calmo, confiante, preciso. Fala pouco, mas quando fala, resolve. Organiza sem burocratizar.</td></tr>
+          <tr><td class="label">Tom emocional</td><td>Empoderamento silencioso. Não grita "revolução IA". Mostra o board atualizado e a dashboard limpa.</td></tr>
+          <tr><td class="label">Postura social</td><td>Presente onde devs estão (X/Twitter, GitHub, Discord). Conversa sobre produtividade real, não hype.</td></tr>
+          <tr><td class="label">Humor</td><td>Seco, técnico, sutil. Referências de dev culture. Nunca forçado.</td></tr>
+          <tr><td class="label">É</td><td>A ferramenta. O aliado silencioso do squad. O board que funciona.</td></tr>
+          <tr><td class="label">Não é</td><td>Vendedor de IA. Hype machine. "Gamechanger" genérico. Corporação de terno.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 07 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s07">
+  <div class="container">
+    <span class="section-num">07</span>
+    <h2>Buyer Personas</h2>
+
+    <!-- Persona 1 -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-avatar">R</div>
+        <div>
+          <div class="persona-name">O Dev Solo Produtivo</div>
+          <div class="persona-role">"Rafael" — Full-stack dev, 26 anos, 3-5 anos de experiência</div>
+        </div>
+      </div>
+      <ul class="bb-list">
+        <li><strong>Cenário:</strong> Trabalha sozinho ou com 1-2 freelancers. Tem 3+ projetos paralelos.</li>
+        <li><strong>Dor principal:</strong> Perde tempo mantendo Trello/Notion atualizados. Não tem visão clara do que está atrasado.</li>
+        <li><strong>Motivação:</strong> Quer abrir o board e ver o status real, sem ter atualizado nada.</li>
+        <li><strong>Gatilho de compra:</strong> Ver a dashboard mostrando onde cada projeto está. "Não preciso atualizar nada?"</li>
+        <li><strong>Objeção:</strong> "Já tenho meu sistema no Notion." → "Seu Notion exige que você atualize ele manualmente. Todo dia."</li>
+        <li><strong>Plano ideal:</strong> Free → Pro</li>
+      </ul>
+    </div>
+
+    <!-- Persona 2 -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-avatar">C</div>
+        <div>
+          <div class="persona-name">O Tech Lead Pragmático</div>
+          <div class="persona-role">"Camila" — Tech Lead, 32 anos, squad de 4-8 devs</div>
+        </div>
+      </div>
+      <ul class="bb-list">
+        <li><strong>Cenário:</strong> Lidera um squad em startup. Gasta 1h+ por dia verificando status e montando reports.</li>
+        <li><strong>Dor principal:</strong> Sprint meetings longas porque ninguém atualiza o board. Reports manuais toda sexta.</li>
+        <li><strong>Motivação:</strong> Uma dashboard onde ela abre e vê: quem fez o quê, o que está atrasado, velocidade do time.</li>
+        <li><strong>Gatilho de compra:</strong> ROI de 13× + a dashboard de sprint com dados reais. "Isso substitui minha planilha."</li>
+        <li><strong>Objeção:</strong> "E se não tiver feature X do Jira?" → "Você usa 100% das features do Jira? Ou gasta tempo configurando features que ninguém usa?"</li>
+        <li><strong>Plano ideal:</strong> Pro → Max</li>
+      </ul>
+    </div>
+
+    <!-- Persona 3 -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-avatar">M</div>
+        <div>
+          <div class="persona-name">O Founder Técnico</div>
+          <div class="persona-role">"Marcos" — CTO/Co-founder, 35 anos, startup early-stage</div>
+        </div>
+      </div>
+      <ul class="bb-list">
+        <li><strong>Cenário:</strong> Squad pequeno (2-5 devs), queimando caixa. Faz code review, PM e product ao mesmo tempo.</li>
+        <li><strong>Dor principal:</strong> Precisa de visibilidade total sem microgerenciar. Mais output com menos overhead.</li>
+        <li><strong>Motivação:</strong> Dashboard de CTO: velocidade, prazos, carga, bloqueios. Tudo em uma tela. Dev Virtual como multiplicador.</li>
+        <li><strong>Gatilho de compra:</strong> Ver o Dev Virtual abrindo 3 PRs enquanto o time faz code review.</li>
+        <li><strong>Objeção:</strong> "Será que o código tem qualidade?" → "Testes passam. Code review é seu."</li>
+        <li><strong>Plano ideal:</strong> Max (direto)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 08 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s08">
+  <div class="container">
+    <span class="section-num">08</span>
+    <h2>Tom de Voz & Diretrizes de Comunicação</h2>
+
+    <h3>Princípios do tom</h3>
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Atributo</th><th>Significa</th><th>Não significa</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Técnico</td><td>Usa termos que devs entendem. PRs, sprints, dashboards sem traduzir.</td><td>Jargão forçado. Gatekeeping.</td></tr>
+          <tr><td class="label">Direto</td><td>Vai ao ponto. Respeita o tempo. Frases curtas e acionáveis.</td><td>Rude, frio ou descartável.</td></tr>
+          <tr><td class="label">Confiante</td><td>Afirma com clareza. A ferramenta entrega, não promete.</td><td>Arrogante. Nunca desmerece concorrentes com nome.</td></tr>
+          <tr><td class="label">Prático</td><td>Foca no que a ferramenta FAZ, não no que ela É. Resultados > tecnologia.</td><td>Hype de IA. Buzzwords. "Revolucionário".</td></tr>
+          <tr><td class="label">Artesanal</td><td>Cada palavra é escolhida. A formação visual da frase importa.</td><td>Rebuscado. Poesia corporativa.</td></tr>
+          <tr><td class="label">Com humor</td><td>Referências sutis de dev culture. Terminal como storytelling.</td><td>Memes forçados que precisam de explicação.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Regra de ouro para IA na comunicação</h3>
+    <div class="callout">
+      <p><strong>Nunca lidere com IA.</strong> A mensagem primária é sempre sobre o que a ferramenta faz pelo dev: economiza tempo, mostra dados, mantém o board atualizado. A IA (MCP, Dev Virtual) aparece como <strong style="color:#fff;">extensão natural</strong> dessa proposta, nunca como o ponto central. Se a frase faz sentido sem mencionar IA, ela está certa.</p>
+    </div>
+
+    <h3>Escala de formalidade por canal</h3>
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Canal</th><th>Formalidade</th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Landing page</td><td>5/10 — Assertivo</td><td>"O board que se atualiza. As dashboards que mostram tudo."</td></tr>
+          <tr><td class="label">Docs/Help</td><td>6/10 — Didático</td><td>"Configure seu primeiro sprint em 3 passos."</td></tr>
+          <tr><td class="label">Twitter/X</td><td>3/10 — Casual</td><td>"Quem ainda arrasta card manualmente na sexta às 17h?"</td></tr>
+          <tr><td class="label">Email</td><td>5/10 — Pessoal</td><td>"Seu sprint fechou. Aqui está o resumo. Você não precisou montar nada."</td></tr>
+          <tr><td class="label">Changelogs</td><td>4/10 — Técnico</td><td>"v0.9: Dashboard de velocidade agora com comparativo por sprint."</td></tr>
+          <tr><td class="label">Suporte</td><td>6/10 — Empático</td><td>"Entendi o problema. Já ajustamos. Tenta de novo?"</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 09 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s09">
+  <div class="container">
+    <span class="section-num">09</span>
+    <h2>Dicionário de Marca</h2>
+
+    <h3>Termos oficiais</h3>
+    <p>Use sempre exatamente como descrito. Consistência é crítica.</p>
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Termo</th><th>Grafia correta</th><th>Uso</th><th>Nunca use</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Nome</td><td>gestao.dev</td><td>Sempre em minúscula, com ponto.</td><td class="dont">Gestao.Dev, GESTAO.DEV</td></tr>
+          <tr><td class="label">Público</td><td>desenvolvedores / devs</td><td>A marca fala com quem coda.</td><td class="dont">engenheiros, programadores</td></tr>
+          <tr><td class="label">Painéis</td><td>dashboards</td><td>Minúscula. Nunca traduzir.</td><td class="dont">painéis, relatórios</td></tr>
+          <tr><td class="label">Protocolo</td><td>MCP</td><td>Maiúscula. 1ª menção: MCP (Model Context Protocol)</td><td class="dont">mcp, Mcp</td></tr>
+          <tr><td class="label">Agente</td><td>Dev Virtual</td><td>Com maiúsculas.</td><td class="dont">dev virtual, DV (só UI)</td></tr>
+          <tr><td class="label">Logo icon</td><td>Gema</td><td>Hexágono 6 faces, gradiente purple.</td><td class="dont">Diamante, cristal</td></tr>
+          <tr><td class="label">Planos</td><td>Free / Pro / Max</td><td>Maiúscula inicial.</td><td class="dont">free, pro, PREMIUM</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Vocabulário preferido</h3>
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Use ✓</th><th>Evite ✗</th><th>Motivo</th></tr></thead>
+        <tbody>
+          <tr><td class="do">desenvolvedores / devs</td><td class="dont">engenheiros / programadores</td><td>"Engenheiro" é frio e corporativo</td></tr>
+          <tr><td class="do">squad / time</td><td class="dont">equipe / departamento</td><td>Cultura dev</td></tr>
+          <tr><td class="do">dashboard</td><td class="dont">painel / relatório</td><td>Termo universal, não traduzir</td></tr>
+          <tr><td class="do">visibilidade</td><td class="dont">monitoramento / tracking</td><td>"Visibilidade" = clareza; "monitoramento" = vigilância</td></tr>
+          <tr><td class="do">board / kanban</td><td class="dont">quadro / painel de tarefas</td><td>Universais em dev</td></tr>
+          <tr><td class="do">automaticamente</td><td class="dont">com IA / inteligentemente</td><td>Foco no resultado, não na tecnologia</td></tr>
+          <tr><td class="do">bloqueio</td><td class="dont">impedimento</td><td>Direto, sem jargão de PMO</td></tr>
+          <tr><td class="do">ferramenta</td><td class="dont">plataforma / solução</td><td>"Ferramenta" é honesto. "Plataforma" é corporação.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 10 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s10">
+  <div class="container">
+    <span class="section-num">10</span>
+    <h2>Manifesto</h2>
+
+    <div class="manifesto">
+      <p class="highlight">Nós acreditamos que a melhor gestão é a que você não percebe.</p>
+      <div class="spacer"></div>
+      <p>Que o board ideal não é o mais bonito — é o que se atualiza sozinho.</p>
+      <p>Que a melhor dashboard é a que responde antes de você perguntar.</p>
+      <p>Que o melhor processo é o que desaparece no fluxo.</p>
+      <div class="spacer"></div>
+      <p>Construímos o gestao.dev porque cansamos de ferramentas que existem pra ser gerenciadas.</p>
+      <p>Ferramentas que pedem mais tempo do que devolvem.</p>
+      <p>Ferramentas que vivem numa aba que você nunca quer abrir.</p>
+      <div class="spacer"></div>
+      <p>Aqui, o board sabe o que está acontecendo.</p>
+      <p>As dashboards mostram prazos, bloqueios e velocidade — sem você montar nada.</p>
+      <p>O sprint fecha e o resumo já está lá.</p>
+      <div class="spacer"></div>
+      <p>E se você usa IA pra codar, ela lê tudo direto no terminal.</p>
+      <p>Sem copiar. Sem colar. Sem trocar de aba.</p>
+      <div class="spacer"></div>
+      <p class="highlight">Mas o ponto não é a IA.</p>
+      <p class="highlight">O ponto é o tempo que volta pro seu squad.</p>
+      <div class="spacer"></div>
+      <p>Isso não é o futuro.</p>
+      <p class="highlight">É o presente que construímos juntos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 11 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s11">
+  <div class="container">
+    <span class="section-num">11</span>
+    <h2>Taglines & Slogans</h2>
+
+    <h3>Tagline principal</h3>
+    <div class="bb-quote">O project manager que cuida da gestão para você cuidar do código.</div>
+    <p>Uso: footer, assinaturas de email, meta descriptions, perfis sociais.</p>
+
+    <h3>Tagline secundária <span style="color:var(--text-muted);font-weight:400;font-size:0.875rem;">— quando MCP é relevante</span></h3>
+    <div class="bb-quote">O project manager que sua IA consegue usar.</div>
+    <p>Uso: contextos onde o público já usa Claude Code ou ferramentas MCP. Não usar como tagline principal.</p>
+
+    <h3>Headlines cenário-específicas</h3>
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Contexto</th><th>Headline</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Landing hero</td><td>A gestão que se resolve sozinha. O tempo que volta pro seu squad.</td></tr>
+          <tr><td class="label">Dashboards</td><td>Veja tudo que importa em 3 segundos.</td></tr>
+          <tr><td class="label">Board automático</td><td>O board que se atualiza. O dev que não para de codar.</td></tr>
+          <tr><td class="label">MCP</td><td>Seu terminal já sabe o que fazer.</td></tr>
+          <tr><td class="label">Dev Virtual</td><td>Um dev que nunca dorme.</td></tr>
+          <tr><td class="label">ROI</td><td>O ROI é matemática, não marketing.</td></tr>
+          <tr><td class="label">Pricing</td><td>Simples. Transparente. Justo.</td></tr>
+          <tr><td class="label">Pain point</td><td>25 minutos por dia arrastando cards. Multiplica pelo time. Faz as contas.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 12 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s12">
+  <div class="container">
+    <span class="section-num">12</span>
+    <h2>Aplicações por Canal</h2>
+
+    <h3>Website (gestao.dev)</h3>
+    <ul class="bb-list">
+      <li>Background escuro. Nunca fundo branco.</li>
+      <li>Hero focado na proposta de valor da ferramenta (tempo devolvido, board automático).</li>
+      <li>Seção de dashboards com screenshots reais mostrando dados de sprint.</li>
+      <li>MCP e Dev Virtual aparecem como features, não como o pitch central.</li>
+      <li>CTAs sempre com Gem CTA.</li>
+      <li>Internacionalização: PT, EN, ES.</li>
+    </ul>
+
+    <h3>Redes sociais</h3>
+    <ul class="bb-list">
+      <li><strong>Twitter/X:</strong> Conteúdo sobre dores reais (board desatualizado, sprint meeting de 1h). Screenshots de dashboards.</li>
+      <li><strong>GitHub:</strong> README impecável. GIFs das dashboards e do MCP funcionando.</li>
+      <li><strong>Discord:</strong> Comunidade, feedback loop, early adopters.</li>
+      <li><strong>LinkedIn:</strong> Apenas ROI e case studies com dados. Nunca "post motivacional".</li>
+    </ul>
+
+    <h3>Produto (UI/UX)</h3>
+    <ul class="bb-list">
+      <li>Design System v1.0 é a referência absoluta.</li>
+      <li><strong>Dashboards são first-class citizens:</strong> proeminentes, dados sempre frescos, leitura em &lt;3 segundos.</li>
+      <li>Indicadores semáforos em cards: verde (no prazo), amarelo (risco), vermelho (atrasado).</li>
+      <li>Loading states com GemLoader (gema animada).</li>
+      <li>Micro-interações com spring easing.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 14 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s13">
+  <div class="container">
+    <span class="section-num">13</span>
+    <h2>Do's & Don'ts</h2>
+
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th style="color:var(--green);">✓ Do (Sempre)</th><th style="color:var(--red);">✗ Don't (Nunca)</th></tr></thead>
+        <tbody>
+          <tr><td class="do">Liderar com o que a ferramenta faz pelo dev</td><td class="dont">Liderar com IA, MCP ou tecnologia</td></tr>
+          <tr><td class="do">Falar "desenvolvedores" ou "devs"</td><td class="dont">Falar "engenheiros" ou "profissionais de TI"</td></tr>
+          <tr><td class="do">Mostrar dashboards com dados reais como prova</td><td class="dont">Mostrar screenshots genéricos sem dados</td></tr>
+          <tr><td class="do">Focar no resultado: "o board se atualiza sozinho"</td><td class="dont">Focar na tecnologia: "algoritmos avançados de IA"</td></tr>
+          <tr><td class="do">Escrever gestao.dev em minúscula</td><td class="dont">Capitalizar como Gestao.Dev ou GESTAO.DEV</td></tr>
+          <tr><td class="do">Usar o ponto roxo (#7B4DC4) no logo</td><td class="dont">Usar ponto cinza, preto ou de outra cor</td></tr>
+          <tr><td class="do">Manter fundo escuro em materiais visuais</td><td class="dont">Usar fundo branco com logo colorido</td></tr>
+          <tr><td class="do">Usar Geist como fonte em tudo</td><td class="dont">Substituir por Arial ou outra fonte</td></tr>
+          <tr><td class="do">Referenciar concorrentes como "ferramentas tradicionais"</td><td class="dont">Citar Jira, Linear ou Asana por nome</td></tr>
+          <tr><td class="do">Comunicar preço com clareza</td><td class="dont">Esconder custos em letras miúdas</td></tr>
+          <tr><td class="do">Mostrar dashboards como diferencial central</td><td class="dont">Tratar dashboards como feature secundária</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 15 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s14">
+  <div class="container">
+    <span class="section-num">14</span>
+    <h2>Métricas de Marca</h2>
+
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Métrica</th><th>O que mede</th><th>Meta inicial</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Brand recall</td><td>% que lembram "gestao.dev" ao pensar em PM pra devs</td><td>&gt;5% no nicho em 6 meses</td></tr>
+          <tr><td class="label">NPS de marca</td><td>Recomendação da marca</td><td>&gt;60</td></tr>
+          <tr><td class="label">Associação "ferramenta"</td><td>% que descrevem como "ferramenta pra devs" (não "IA")</td><td>&gt;80%</td></tr>
+          <tr><td class="label">Share of voice</td><td>% de mentions vs concorrentes em PM+dev</td><td>&gt;15% em 3 meses</td></tr>
+          <tr><td class="label">Waitlist conversion</td><td>% visitantes → inscrição</td><td>&gt;8%</td></tr>
+          <tr><td class="label">Demo completion</td><td>% que assiste a demo até o final</td><td>&gt;45%</td></tr>
+          <tr><td class="label">Time to "aha"</td><td>Tempo até o dev ver o board funcionando sozinho</td><td>&lt;3 minutos</td></tr>
+          <tr><td class="label">Dashboard engagement</td><td>% que abrem dashboards diariamente</td><td>&gt;60%</td></tr>
+          <tr><td class="label">Consistency score</td><td>Auditoria trimestral visual/verbal</td><td>&gt;90%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--                  PART II — DESIGN SYSTEM                  -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="part-divider">
+  <div class="part-divider-label">Parte II</div>
+  <div class="part-divider-title">Design System v1.0</div>
+  <div class="part-divider-desc">Tokens, componentes e referência visual completa</div>
+</div>
+
+<!-- DS 01 — LOGO -->
+<section class="section" id="ds01">
+  <div class="container">
+    <span class="section-num">DS·01</span>
+    <h2>Logo & Identidade Visual</h2>
+
+    <h3>Variante — Icon</h3>
+    <div style="display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap;margin:14px 0">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div style="background:var(--bg-surface);border:1px solid var(--border-vis);border-radius:var(--r-lg);padding:24px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 32 32" width="96" height="96" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="ic96"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath><filter id="ig96" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/></filter></defs><g clip-path="url(#ic96)"><polygon points="16,2.5 28,9 16,16" fill="#A060E8"/><polygon points="28,9 28,23 16,16" fill="#7030C0"/><polygon points="28,23 16,29.5 16,16" fill="#501888"/><polygon points="16,29.5 4,23 16,16" fill="#280858"/><polygon points="4,23 4,9 16,16" fill="#4B218E"/><polygon points="4,9 16,2.5 16,16" fill="#6030A8"/><path d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#ig96)"/><rect x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#ig96)"/></g><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/></svg>
+        </div>
+        <span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-muted)">96px</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div style="background:var(--bg-surface);border:1px solid var(--border-vis);border-radius:var(--r-lg);padding:20px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 32 32" width="48" height="48" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="ic48"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath><filter id="ig48" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/></filter></defs><g clip-path="url(#ic48)"><polygon points="16,2.5 28,9 16,16" fill="#A060E8"/><polygon points="28,9 28,23 16,16" fill="#7030C0"/><polygon points="28,23 16,29.5 16,16" fill="#501888"/><polygon points="16,29.5 4,23 16,16" fill="#280858"/><polygon points="4,23 4,9 16,16" fill="#4B218E"/><polygon points="4,9 16,2.5 16,16" fill="#6030A8"/><path d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#ig48)"/><rect x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#ig48)"/></g><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/></svg>
+        </div>
+        <span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-muted)">48px</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <div style="background:var(--bg-surface);border:1px solid var(--border-vis);border-radius:var(--r-lg);padding:20px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 32 32" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="ic24"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath><filter id="ig24" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/></filter></defs><g clip-path="url(#ic24)"><polygon points="16,2.5 28,9 16,16" fill="#A060E8"/><polygon points="28,9 28,23 16,16" fill="#7030C0"/><polygon points="28,23 16,29.5 16,16" fill="#501888"/><polygon points="16,29.5 4,23 16,16" fill="#280858"/><polygon points="4,23 4,9 16,16" fill="#4B218E"/><polygon points="4,9 16,2.5 16,16" fill="#6030A8"/><path d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#ig24)"/><rect x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#ig24)"/></g><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/></svg>
+        </div>
+        <span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-muted)">24px</span>
+      </div>
+    </div>
+
+    <h3>Variantes compostas</h3>
+    <div style="display:flex;gap:32px;flex-wrap:wrap;margin:14px 0">
+      <div>
+        <p style="font-family:var(--f-mono);font-size:0.5625rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px">Horizontal — gema 40px + wordmark 22px</p>
+        <div style="background:var(--bg-surface);border:1px solid var(--border-vis);border-radius:var(--r-lg);padding:20px 28px;display:inline-flex;align-items:center;gap:10px;font-family:var(--f-mono);font-weight:600;font-size:22px;letter-spacing:-0.01em;color:#fff">
+          <svg viewBox="0 0 32 32" width="40" height="40" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="ich"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath><filter id="igh" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/></filter></defs><g clip-path="url(#ich)"><polygon points="16,2.5 28,9 16,16" fill="#A060E8"/><polygon points="28,9 28,23 16,16" fill="#7030C0"/><polygon points="28,23 16,29.5 16,16" fill="#501888"/><polygon points="16,29.5 4,23 16,16" fill="#280858"/><polygon points="4,23 4,9 16,16" fill="#4B218E"/><polygon points="4,9 16,2.5 16,16" fill="#6030A8"/><path d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#igh)"/><rect x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#igh)"/></g><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/></svg>
+          <span>gestao<span style="color:#7B4DC4">.</span>dev</span>
+        </div>
+      </div>
+      <div>
+        <p style="font-family:var(--f-mono);font-size:0.5625rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px">Vertical — gema 64px + wordmark 15px</p>
+        <div style="background:var(--bg-surface);border:1px solid var(--border-vis);border-radius:var(--r-lg);padding:20px 32px;display:inline-flex;flex-direction:column;align-items:center;gap:10px;font-family:var(--f-mono);font-weight:600;font-size:15px;color:#fff">
+          <svg viewBox="0 0 32 32" width="56" height="56" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="icv"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath><filter id="igv" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/></filter></defs><g clip-path="url(#icv)"><polygon points="16,2.5 28,9 16,16" fill="#A060E8"/><polygon points="28,9 28,23 16,16" fill="#7030C0"/><polygon points="28,23 16,29.5 16,16" fill="#501888"/><polygon points="16,29.5 4,23 16,16" fill="#280858"/><polygon points="4,23 4,9 16,16" fill="#4B218E"/><polygon points="4,9 16,2.5 16,16" fill="#6030A8"/><path d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#igv)"/><rect x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#igv)"/></g><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/></svg>
+          <span>gestao<span style="color:#7B4DC4">.</span>dev</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DS 02 — CORES -->
+<section class="section" id="ds02">
+  <div class="container">
+    <span class="section-num">DS·02</span>
+    <h2>Paleta de Cores</h2>
+    <h3>Backgrounds</h3>
+    <div class="ds-swatch-row">
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:#030711"></div><div class="ds-swatch-label">--c-bg-deep<br>#030711</div></div>
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:#050b18"></div><div class="ds-swatch-label">--c-bg-primary<br>#050b18</div></div>
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:#0a1628"></div><div class="ds-swatch-label">--c-bg-surface<br>#0a1628</div></div>
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:#0f1d32"></div><div class="ds-swatch-label">--c-bg-elevated<br>#0f1d32</div></div>
+    </div>
+    <h3>Primary — Deep Purple</h3>
+    <div class="ds-swatch-row">
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:#4B218E"></div><div class="ds-swatch-label">--c-primary<br>#4B218E</div></div>
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:#7B4DC4"></div><div class="ds-swatch-label">--c-primary-light<br>#7B4DC4</div></div>
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:#371870"></div><div class="ds-swatch-label">--c-primary-dark<br>#371870</div></div>
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:rgba(75,33,142,0.20)"></div><div class="ds-swatch-label">--c-primary-glow<br>rgba(75,33,142,.20)</div></div>
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:rgba(75,33,142,0.08)"></div><div class="ds-swatch-label">--c-primary-subtle<br>rgba(75,33,142,.08)</div></div>
+    </div>
+    <h3>Secondary — Blue Grey</h3>
+    <div class="ds-swatch-row">
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:#607D8B"></div><div class="ds-swatch-label">--c-secondary<br>#607D8B</div></div>
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:#90A4AE"></div><div class="ds-swatch-label">--c-secondary-light<br>#90A4AE</div></div>
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:#455A64"></div><div class="ds-swatch-label">--c-secondary-dark<br>#455A64</div></div>
+    </div>
+    <h3>Text — Opacidades sobre escuro</h3>
+    <div class="ds-swatch-row">
+      <div class="ds-swatch"><div class="ds-swatch-text" style="color:#fff">Aa</div><div class="ds-swatch-label">--c-text-primary<br>100%</div></div>
+      <div class="ds-swatch"><div class="ds-swatch-text" style="color:rgba(255,255,255,0.65)">Aa</div><div class="ds-swatch-label">--c-text-secondary<br>65%</div></div>
+      <div class="ds-swatch"><div class="ds-swatch-text" style="color:rgba(255,255,255,0.40)">Aa</div><div class="ds-swatch-label">--c-text-muted<br>40%</div></div>
+      <div class="ds-swatch"><div class="ds-swatch-text" style="color:rgba(255,255,255,0.20)">Aa</div><div class="ds-swatch-label">--c-text-faint<br>20%</div></div>
+    </div>
+    <h3>Semânticas</h3>
+    <div class="ds-swatch-row">
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:#22c55e"></div><div class="ds-swatch-label">--c-success<br>#22c55e</div></div>
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:#ef4444"></div><div class="ds-swatch-label">--c-error<br>#ef4444</div></div>
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:#f59e0b"></div><div class="ds-swatch-label">--c-warning<br>#f59e0b</div></div>
+    </div>
+    <h3>Bordas</h3>
+    <div class="ds-swatch-row">
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:rgba(255,255,255,0.06)"></div><div class="ds-swatch-label">--c-border<br>6%</div></div>
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:rgba(255,255,255,0.12)"></div><div class="ds-swatch-label">--c-border-visible<br>12%</div></div>
+      <div class="ds-swatch"><div class="ds-swatch-box" style="background:rgba(75,33,142,0.35)"></div><div class="ds-swatch-label">--c-border-accent<br>purple 35%</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DS 03 — GRADIENTS -->
+<section class="section" id="ds03">
+  <div class="container">
+    <span class="section-num">DS·03</span>
+    <h2>Gradientes</h2>
+    <div class="ds-grad-name">--gradient-primary · linear-gradient(135deg, #7B4DC4 0%, #4B218E 60%, #371870 100%)</div>
+    <div class="ds-grad-bar" style="background:linear-gradient(135deg,#7B4DC4 0%,#4B218E 60%,#371870 100%)"></div>
+    <div class="ds-grad-name">--gradient-text · linear-gradient(135deg, #9B6DD4 0%, #4B218E 50%, #371870 100%)</div>
+    <div class="ds-grad-bar" style="background:linear-gradient(135deg,#9B6DD4 0%,#4B218E 50%,#371870 100%)"></div>
+    <div class="ds-grad-name">--gradient-brand · linear-gradient(135deg, #4B218E 0%, #607D8B 100%)</div>
+    <div class="ds-grad-bar" style="background:linear-gradient(135deg,#4B218E 0%,#607D8B 100%)"></div>
+    <div class="ds-grad-name">--gradient-secondary · linear-gradient(135deg, #90A4AE 0%, #607D8B 100%)</div>
+    <div class="ds-grad-bar" style="background:linear-gradient(135deg,#90A4AE 0%,#607D8B 100%)"></div>
+    <div class="ds-grad-name">--gradient-glow · radial-gradient(ellipse at 50% 0%, rgba(75,33,142,0.14) 0%, transparent 70%)</div>
+    <div class="ds-grad-bar" style="background:#0a1628 radial-gradient(ellipse at 50% 0%,rgba(75,33,142,0.50) 0%,transparent 70%);border:1px solid var(--border-vis)"></div>
+  </div>
+</section>
+
+<!-- DS 04 — TYPOGRAPHY -->
+<section class="section" id="ds04">
+  <div class="container">
+    <span class="section-num">DS·04</span>
+    <h2>Tipografia</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px">
+      <div class="ds-font-box">
+        <div class="ds-font-box-label">Geist — Sans</div>
+        <div class="ds-font-weight" style="font-family:var(--f-sans);font-weight:300">Light 300 — The quick brown fox</div>
+        <div class="ds-font-weight" style="font-family:var(--f-sans);font-weight:400">Regular 400 — The quick brown fox</div>
+        <div class="ds-font-weight" style="font-family:var(--f-sans);font-weight:500">Medium 500 — The quick brown fox</div>
+        <div class="ds-font-weight" style="font-family:var(--f-sans);font-weight:600">SemiBold 600 — The quick brown fox</div>
+        <div class="ds-font-weight" style="font-family:var(--f-sans);font-weight:700">Bold 700 — The quick brown fox</div>
+      </div>
+      <div class="ds-font-box">
+        <div class="ds-font-box-label">Geist Mono — Monospace</div>
+        <div class="ds-font-weight" style="font-family:var(--f-mono);font-weight:400;color:var(--purple-light)">Regular 400 — npm run dev</div>
+        <div class="ds-font-weight" style="font-family:var(--f-mono);font-weight:500;color:var(--purple-light)">Medium 500 — npm run build</div>
+        <div class="ds-font-weight" style="font-family:var(--f-mono);font-weight:600;color:var(--purple-light)">SemiBold 600 — gestao.dev</div>
+      </div>
+    </div>
+    <h3>Escala tipográfica</h3>
+    <div class="ds-type-row">
+      <div style="font-size:clamp(1.5rem,4vw,2.25rem);font-weight:500;letter-spacing:-0.035em;color:#fff;text-shadow:0 4px 32px rgba(123,77,196,0.32)">O jeito antigo não funciona</div>
+      <div class="ds-type-meta">.section-title&#10;clamp(1.75rem→2.75rem)&#10;weight 500 · -0.035em</div>
+    </div>
+    <div class="ds-type-row">
+      <div style="font-size:1rem;color:rgba(255,255,255,0.80);line-height:1.8">Times de dev perdem horas por semana com ferramentas que não conversam.</div>
+      <div class="ds-type-meta">.section-subtitle&#10;clamp(1rem→1.125rem)&#10;opacity 80% · lh 1.8</div>
+    </div>
+    <div class="ds-type-row">
+      <div><span class="section-tag" style="margin:0">Diagnóstico</span></div>
+      <div class="ds-type-meta">.section-tag&#10;0.625rem Geist Mono&#10;uppercase · purple border</div>
+    </div>
+    <div class="ds-type-row">
+      <div style="font-size:1.375rem;font-weight:300;letter-spacing:-0.03em;background:var(--gradient-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent">87% menos tempo em setup</div>
+      <div class="ds-type-meta">Stat / Display&#10;1.5–2.5rem · weight 300&#10;gradient-text</div>
+    </div>
+  </div>
+</section>
+
+<!-- DS 05 — SPACING -->
+<section class="section" id="ds05">
+  <div class="container">
+    <span class="section-num">DS·05</span>
+    <h2>Espaçamento & Layout</h2>
+    <div class="ds-space-item"><span style="font-family:var(--f-mono);font-size:0.6875rem;color:var(--text-muted)">--nav-h</span><div class="ds-space-bar" style="width:64px"></div><span class="ds-space-px">64px</span></div>
+    <div class="ds-space-item"><span style="font-family:var(--f-mono);font-size:0.6875rem;color:var(--text-muted)">--container-px</span><div class="ds-space-bar" style="width:80px"></div><span class="ds-space-px">40px × 2</span></div>
+    <div class="ds-space-item"><span style="font-family:var(--f-mono);font-size:0.6875rem;color:var(--text-muted)">--section-py</span><div class="ds-space-bar" style="width:192px"></div><span class="ds-space-px">96px</span></div>
+    <div class="ds-space-item"><span style="font-family:var(--f-mono);font-size:0.6875rem;color:var(--text-muted)">--section-py-lg</span><div class="ds-space-bar" style="width:256px"></div><span class="ds-space-px">128px</span></div>
+    <div class="ds-space-item"><span style="font-family:var(--f-mono);font-size:0.6875rem;color:var(--text-muted)">--container-w</span><div class="ds-space-bar" style="width:100%;max-width:500px"></div><span class="ds-space-px">1280px</span></div>
+  </div>
+</section>
+
+<!-- DS 06 — RADIUS -->
+<section class="section" id="ds06">
+  <div class="container">
+    <span class="section-num">DS·06</span>
+    <h2>Border Radius</h2>
+    <div class="ds-radius-row">
+      <div class="ds-radius-item"><div class="ds-radius-box" style="border-radius:4px"></div><span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-muted)">--r-xs · 4px</span></div>
+      <div class="ds-radius-item"><div class="ds-radius-box" style="border-radius:6px"></div><span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-muted)">--r-sm · 6px</span></div>
+      <div class="ds-radius-item"><div class="ds-radius-box" style="border-radius:12px"></div><span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-muted)">--r-md · 12px</span></div>
+      <div class="ds-radius-item"><div class="ds-radius-box" style="border-radius:16px"></div><span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-muted)">--r-lg · 16px</span></div>
+      <div class="ds-radius-item"><div class="ds-radius-box" style="border-radius:24px"></div><span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-muted)">--r-xl · 24px</span></div>
+      <div class="ds-radius-item"><div class="ds-radius-box" style="border-radius:9999px;width:80px"></div><span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-muted)">--r-full · pill</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DS 07 — SHADOWS -->
+<section class="section" id="ds07">
+  <div class="container">
+    <span class="section-num">DS·07</span>
+    <h2>Sombras</h2>
+    <div class="ds-shadow-grid">
+      <div class="ds-shadow-item"><div class="ds-shadow-swatch" style="box-shadow:var(--shadow-card)"></div><div class="ds-shadow-label">--shadow-card</div></div>
+      <div class="ds-shadow-item"><div class="ds-shadow-swatch" style="box-shadow:var(--shadow-elevated)"></div><div class="ds-shadow-label">--shadow-elevated</div></div>
+      <div class="ds-shadow-item"><div class="ds-shadow-swatch" style="box-shadow:var(--shadow-glow)"></div><div class="ds-shadow-label">--shadow-glow</div></div>
+      <div class="ds-shadow-item"><div class="ds-shadow-swatch" style="box-shadow:var(--shadow-glow-strong)"></div><div class="ds-shadow-label">--shadow-glow-strong</div></div>
+      <div class="ds-shadow-item"><div class="ds-shadow-swatch" style="border-radius:var(--r-full);width:72px;height:28px;background:var(--gradient-primary);box-shadow:var(--shadow-button)"></div><div class="ds-shadow-label">--shadow-button</div></div>
+      <div class="ds-shadow-item"><div class="ds-shadow-swatch" style="border-radius:var(--r-full);width:72px;height:28px;background:var(--gradient-primary);box-shadow:var(--shadow-button-hover)"></div><div class="ds-shadow-label">--shadow-button-hover</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DS 08 — SECTION PATTERN -->
+<section class="section" id="ds08">
+  <div class="container">
+    <span class="section-num">DS·08</span>
+    <h2>Padrão de Seção</h2>
+    <div class="ds-pattern-demo">
+      <div class="section-tag">Diagnóstico</div>
+      <div class="section-title-demo">O jeito antigo não funciona mais</div>
+      <div class="section-subtitle-demo">Times de dev perdem <strong style="color:#fff">horas por semana</strong> com ferramentas que não conversam entre si.</div>
+    </div>
+    <p style="margin-top:14px;font-size:0.8125rem;color:var(--text-muted)">Composição: <code style="font-family:var(--f-mono);color:var(--purple-light);background:var(--purple-subtle);padding:2px 6px;border-radius:4px">.section-tag</code> + <code style="font-family:var(--f-mono);color:var(--purple-light);background:var(--purple-subtle);padding:2px 6px;border-radius:4px">.section-title</code> + <code style="font-family:var(--f-mono);color:var(--purple-light);background:var(--purple-subtle);padding:2px 6px;border-radius:4px">.section-subtitle</code> + CTA opcional.</p>
+
+    <h3 style="margin-top:40px">Divider tracejado — padrão oficial</h3>
+    <p>Toda separação entre seções do brand book, do site e do produto usa uma <strong style="color:#fff">linha tracejada de 1px</strong>. É o marcador visual da estética "blueprint/tech" — remete a diagramas técnicos, plantas de arquitetura e grids de construção.</p>
+
+    <!-- Demo visual · dashed divider em seus 3 contextos -->
+    <div style="margin-top:24px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:32px">
+      <div style="font-family:var(--f-mono);font-size:0.6875rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px">Entre seções · border-top 1px dashed</div>
+      <div style="border-top:1px dashed var(--border-vis);padding-top:20px;color:var(--text-muted);font-size:0.875rem">Conteúdo da próxima seção começa aqui</div>
+
+      <div style="font-family:var(--f-mono);font-size:0.6875rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin:32px 0 10px">Dentro de container · border dashed completo</div>
+      <div style="border:1px dashed var(--border-vis);border-radius:var(--r-sm);padding:20px;color:var(--text-muted);font-size:0.875rem;text-align:center">Placeholder / área de atenção</div>
+
+      <div style="font-family:var(--f-mono);font-size:0.6875rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin:32px 0 10px">Borda interna decorativa · inset 24px (ex: OG Image)</div>
+      <div style="position:relative;background:var(--bg-primary);border-radius:var(--r-md);padding:32px;height:120px;overflow:hidden">
+        <div style="position:absolute;inset:16px;border:1px dashed var(--border-vis);border-radius:var(--r-sm);pointer-events:none"></div>
+        <div style="font-family:var(--f-mono);font-size:0.75rem;color:var(--text-muted);position:relative">conteúdo principal com moldura tracejada interna</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:32px">Configuração</h3>
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Contexto</th><th>CSS</th><th>Token</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Entre seções (padrão)</td><td><code style="font-family:var(--f-mono);color:var(--purple-light)">border-bottom: 1px dashed var(--border-vis)</code></td><td><code style="font-family:var(--f-mono);color:var(--purple-light)">--border-vis</code> · rgba(255,255,255,.12)</td></tr>
+          <tr><td class="label">Mais sutil (interno de card)</td><td><code style="font-family:var(--f-mono);color:var(--purple-light)">border-top: 1px dashed var(--border)</code></td><td><code style="font-family:var(--f-mono);color:var(--purple-light)">--border</code> · rgba(255,255,255,.06)</td></tr>
+          <tr><td class="label">Accent purple (destaque)</td><td><code style="font-family:var(--f-mono);color:var(--purple-light)">border: 1px dashed var(--border-accent)</code></td><td><code style="font-family:var(--f-mono);color:var(--purple-light)">--border-accent</code> · rgba(75,33,142,.35)</td></tr>
+          <tr><td class="label">Espessura</td><td><code style="font-family:var(--f-mono);color:var(--purple-light)">1px</code> sempre</td><td>nunca 2px+ (perde a estética técnica)</td></tr>
+          <tr><td class="label">Cor</td><td>Via tokens de borda</td><td>nunca cor sólida — sempre rgba com opacidade</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:14px;font-size:0.8125rem;color:var(--text-muted)">
+      <strong style="color:#fff">Regra:</strong> use <code style="font-family:var(--f-mono);color:var(--purple-light);background:var(--purple-subtle);padding:2px 6px;border-radius:4px">dashed</code> para separar conteúdo; use <code style="font-family:var(--f-mono);color:var(--purple-light);background:var(--purple-subtle);padding:2px 6px;border-radius:4px">solid</code> só em cards, botões e containers estruturais.
+    </p>
+  </div>
+</section>
+
+<!-- DS 09 — CARDS -->
+<section class="section" id="ds09">
+  <div class="container">
+    <span class="section-num">DS·09</span>
+    <h2>Cards</h2>
+    <p>Três variantes de card, cada uma com gradiente direcional e hover com glow:</p>
+    <div class="ds-cards-demo">
+      <div class="pain-card">
+        <div class="pain-card-icon" style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25)"><svg width="22" height="22" fill="none" stroke="#ef4444" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z"/></svg></div>
+        <div class="pain-card-title">pain-card</div>
+        <div class="pain-card-text">Gradient 160° · borda purple 0.22 · hover glow + translateY(-2px)</div>
+      </div>
+      <div class="mcp-card">
+        <div class="mcp-card-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg></div>
+        <div class="mcp-card-title">mcp-card</div>
+        <div class="mcp-card-text">Gradient 160° · ícone purple-subtle · hover scale icon 1.1</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+        <div class="feature-card-title">feature-card</div>
+        <div class="feature-card-text">Gradient 180° · text-align center · icon scale on hover</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DS 10 — CTAs -->
+<section class="section" id="ds10">
+  <div class="container">
+    <span class="section-num">DS·10</span>
+    <h2>CTAs — Gem Button</h2>
+    <p>Botão com gema hexagonal animada. Mousedown → compress. Mouseup → spin 360°.</p>
+    <div style="display:flex;flex-direction:column;gap:20px;margin:20px 0">
+      <div style="display:flex;align-items:center;gap:20px">
+        <span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-faint);min-width:50px">SM</span>
+        <button class="gem-cta gem-cta--sm">Começar grátis</button>
+        <span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-faint)">8px 20px · 0.8125rem</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px">
+        <span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-faint);min-width:50px">MD</span>
+        <button class="gem-cta gem-cta--md">Agendar demo</button>
+        <span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-faint)">12px 28px · 0.9375rem</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px">
+        <span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-faint);min-width:50px">LG</span>
+        <button class="gem-cta gem-cta--lg">Começar agora — é grátis</button>
+        <span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-faint)">14px 32px · 1.0625rem</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DS 11 — GEMLOADER -->
+<section class="section" id="ds11">
+  <div class="container">
+    <span class="section-num">DS·11</span>
+    <h2>GemLoader — Insígnia Animada</h2>
+    <p>5 variantes de animação para a gema. Cada uma com uso semântico definido.</p>
+    <div class="ds-gem-grid" id="ds-gem-grid"></div>
+  </div>
+</section>
+
+<!-- DS 12 — MOTION -->
+<section class="section" id="ds12">
+  <div class="container">
+    <span class="section-num">DS·12</span>
+    <h2>Motion & Transições</h2>
+    <h3>Tokens de transição</h3>
+    <div class="ds-trans-list">
+      <div class="ds-trans-row" style="background:var(--bg-surface)"><span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-faint);font-weight:600;text-transform:uppercase;letter-spacing:0.08em">Variável</span><span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-faint);font-weight:600;text-transform:uppercase;letter-spacing:0.08em">Valor</span><span style="font-family:var(--f-mono);font-size:0.625rem;color:var(--text-faint);font-weight:600;text-transform:uppercase;letter-spacing:0.08em">Uso</span></div>
+      <div class="ds-trans-row"><span class="ds-trans-var">--t-fast</span><span class="ds-trans-val">150ms ease</span><span style="font-size:0.8125rem;color:var(--text-muted)">Hover states, cores</span></div>
+      <div class="ds-trans-row"><span class="ds-trans-var">--t-normal</span><span class="ds-trans-val">300ms ease</span><span style="font-size:0.8125rem;color:var(--text-muted)">Bordas, sombras, backgrounds</span></div>
+      <div class="ds-trans-row"><span class="ds-trans-var">--t-slow</span><span class="ds-trans-val">500ms ease</span><span style="font-size:0.8125rem;color:var(--text-muted)">Reveals, animações de entrada</span></div>
+      <div class="ds-trans-row"><span class="ds-trans-var">--t-spring</span><span class="ds-trans-val">500ms cubic-bezier(.23,1,.32,1)</span><span style="font-size:0.8125rem;color:var(--text-muted)">Ícones, transforms elásticos</span></div>
+    </div>
+    <h3>Keyframes globais</h3>
+    <div class="ds-kf-grid">
+      <div class="ds-kf-item"><div class="ds-kf-name">reveal</div><div class="ds-kf-desc">opacity 0→1, translateY 20→0</div></div>
+      <div class="ds-kf-item"><div class="ds-kf-name">ambient-drift</div><div class="ds-kf-desc">translate(3%,4%) scale(1.05)</div></div>
+      <div class="ds-kf-item"><div class="ds-kf-name">glow-pulse</div><div class="ds-kf-desc">box-shadow 0→purple glow</div></div>
+      <div class="ds-kf-item"><div class="ds-kf-name">gem-spin</div><div class="ds-kf-desc">scale(0.78→1) + rotate(360°)</div></div>
+      <div class="ds-kf-item"><div class="ds-kf-name">cursor-blink</div><div class="ds-kf-desc">opacity 1→0→1 (terminal)</div></div>
+      <div class="ds-kf-item"><div class="ds-kf-name">node-float</div><div class="ds-kf-desc">translateY(0→-4px→0)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--   PARTE II · CONTINUAÇÃO — COMPONENTES, UX & BRAND ASSETS    -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<!-- DS v1.1 embed -->
+<div class="ds-embed">
+<main class="ds-main">
+
+  <!-- INTRO -->
+  <section class="ds-section" style="border-top:none;margin-top:0;padding-top:0">
+    <div class="ds-section-head">
+      <div class="num">v1.1 · Extensão</div>
+      <h2>Design System — Extensão</h2>
+      <p>Continuação direta do <strong>DS v1.0</strong>: novos tokens (spacing granular, z-index, breakpoints), componentes de formulário, dashboard, interface, estados, brand assets e padrões de UX. Tudo implementado com os tokens existentes — sem novas cores ou fontes.</p>
+    </div>
+    <nav class="ds-toc" aria-label="Sumário">
+      <a href="#a1"><span class="id">A1</span><span class="name">Spacing granular</span></a>
+      <a href="#a2"><span class="id">A2</span><span class="name">Z-index scale</span></a>
+      <a href="#a3"><span class="id">A3</span><span class="name">Breakpoints</span></a>
+      <a href="#b1"><span class="id">B1</span><span class="name">Input text</span></a>
+      <a href="#b2"><span class="id">B2</span><span class="name">Select</span></a>
+      <a href="#b3"><span class="id">B3</span><span class="name">Checkbox + Toggle</span></a>
+      <a href="#b4"><span class="id">B4</span><span class="name">Área de texto</span></a>
+      <a href="#c1"><span class="id">C1</span><span class="name">KPI card</span></a>
+      <a href="#c2"><span class="id">C2</span><span class="name">Semáforo</span></a>
+      <a href="#c3"><span class="id">C3</span><span class="name">Progress bar</span></a>
+      <a href="#c4"><span class="id">C4</span><span class="name">Sparkline</span></a>
+      <a href="#e1"><span class="id">E1</span><span class="name">Mapa de estados</span></a>
+      <a href="#f1"><span class="id">F1</span><span class="name">Clear space logo</span></a>
+      <a href="#f2"><span class="id">F2</span><span class="name">Logo variants</span></a>
+      <a href="#f3"><span class="id">F3</span><span class="name">OG Image</span></a>
+      <a href="#g1"><span class="id">G1</span><span class="name">Empty state</span></a>
+      <a href="#g2"><span class="id">G2</span><span class="name">Tooltip</span></a>
+      <a href="#g3"><span class="id">G3</span><span class="name">Skeleton loader</span></a>
+      <a href="#h1"><span class="id">H1</span><span class="name">Sistema de ícones</span></a>
+      <a href="#i1"><span class="id">I1</span><span class="name">Breadcrumbs</span></a>
+      <a href="#j1"><span class="id">J1</span><span class="name">Templates sociais</span></a>
+      <a href="#k1"><span class="id">K1</span><span class="name">Guia de mídia</span></a>
+      <a href="#l1"><span class="id">L1</span><span class="name">Email transacional</span></a>
+    </nav>
+  </section>
+
+  <!-- ═══════ A · TOKENS ═══════ -->
+  <section class="ds-section" id="a">
+    <div class="ds-section-head">
+      <div class="num">Bloco A · Novos tokens</div>
+      <h2>Fundações ampliadas</h2>
+      <p>Spacing granular para layouts mais precisos, escala de z-index normalizada e referência de breakpoints. Todos adicionados ao <code>:root</code> deste arquivo e consumidos por todos os componentes abaixo.</p>
+    </div>
+
+    <!-- A1 -->
+    <article class="ds-block" id="a1">
+      <div class="ds-block-title"><span class="id">A1</span><h3>Escala de spacing granular</h3></div>
+      <p class="ds-block-desc">12 níveis de 4px a 64px. Substitui valores hard-coded em paddings, gaps e margens internas.</p>
+      <div class="ds-demo">
+        <span class="ds-demo-label">Live</span>
+        <div id="gd-space-list"></div>
+      </div>
+      <div class="ds-code"><span class="c">/* :root */</span>
+<span class="k">--space-1</span>: <span class="v">4px</span>;   <span class="k">--space-2</span>: <span class="v">6px</span>;   <span class="k">--space-3</span>: <span class="v">8px</span>;
+<span class="k">--space-4</span>: <span class="v">12px</span>;  <span class="k">--space-5</span>: <span class="v">16px</span>;  <span class="k">--space-6</span>: <span class="v">20px</span>;
+<span class="k">--space-7</span>: <span class="v">24px</span>;  <span class="k">--space-8</span>: <span class="v">32px</span>;  <span class="k">--space-9</span>: <span class="v">40px</span>;
+<span class="k">--space-10</span>: <span class="v">48px</span>; <span class="k">--space-11</span>: <span class="v">56px</span>; <span class="k">--space-12</span>: <span class="v">64px</span>;</div>
+      <div class="ds-notes">
+        <span class="ds-note">12 níveis</span>
+        <span class="ds-note">4 → 64 px</span>
+        <span class="ds-note muted">Coexiste com --section-py (96px) e --section-py-lg (128px)</span>
+      </div>
+    </article>
+
+    <!-- A2 -->
+    <article class="ds-block" id="a2">
+      <div class="ds-block-title"><span class="id">A2</span><h3>Z-index scale</h3></div>
+      <p class="ds-block-desc">Escala discreta que evita "z-index war" — cada camada tem ordem semântica e gap suficiente para ajustes locais.</p>
+      <div class="ds-demo">
+        <span class="ds-demo-label">Stack visual</span>
+        <div class="gd-z-stack" id="gd-z-stack"></div>
+      </div>
+      <div class="ds-code"><span class="k">--z-base</span>: <span class="v">0</span>;       <span class="c">/* conteúdo */</span>
+<span class="k">--z-dropdown</span>: <span class="v">100</span>; <span class="k">--z-sticky</span>: <span class="v">200</span>;
+<span class="k">--z-overlay</span>: <span class="v">300</span>;  <span class="k">--z-modal</span>: <span class="v">400</span>;
+<span class="k">--z-toast</span>: <span class="v">500</span>;    <span class="k">--z-nav</span>: <span class="v">600</span>;
+<span class="k">--z-tooltip</span>: <span class="v">700</span>;  <span class="c">/* sempre por cima */</span></div>
+      <div class="ds-notes">
+        <span class="ds-note">Gap de 100</span>
+        <span class="ds-note">Tooltip = topo</span>
+        <span class="ds-note muted">Modais ficam abaixo de toasts/tooltips por design</span>
+      </div>
+    </article>
+
+    <!-- A3 -->
+    <article class="ds-block" id="a3">
+      <div class="ds-block-title"><span class="id">A3</span><h3>Breakpoints responsivos</h3></div>
+      <p class="ds-block-desc">Mobile-first. Cada quebra resolve uma classe de problema diferente: leitura, navegação, densidade, layout.</p>
+      <div class="ds-demo">
+        <span class="ds-demo-label">Pontos de quebra</span>
+        <div class="gd-bp-bar" aria-hidden="true">
+          <div class="gd-bp-mark" style="left:33.6%">640</div>
+          <div class="gd-bp-mark" style="left:40.3%">768</div>
+          <div class="gd-bp-mark" style="left:53.7%">1024</div>
+          <div class="gd-bp-mark" style="left:67.1%">1280</div>
+        </div>
+        <div class="gd-bp-legend">
+          <div class="gd-bp-card"><div class="name">--bp-sm</div><div class="px">≥ 640px</div><div class="desc">Smartphones largos. Botões side-by-side, badges em linha.</div></div>
+          <div class="gd-bp-card"><div class="name">--bp-md</div><div class="px">≥ 768px</div><div class="desc">Tablets. Grid 2 colunas, navbar mostra links.</div></div>
+          <div class="gd-bp-card"><div class="name">--bp-lg</div><div class="px">≥ 1024px</div><div class="desc">Desktop. Sidebar expandida, grid 3 colunas.</div></div>
+          <div class="gd-bp-card"><div class="name">--bp-xl</div><div class="px">≥ 1280px</div><div class="desc">Telas grandes. Container completo, grid 4 colunas (KPIs).</div></div>
+        </div>
+      </div>
+      <div class="ds-code"><span class="k">@media</span> (min-width: <span class="v">var(--bp-md)</span>) { <span class="c">/* tablet+ */</span> }
+<span class="k">@media</span> (min-width: <span class="v">var(--bp-lg)</span>) { <span class="c">/* desktop+ */</span> }</div>
+      <div class="ds-notes">
+        <span class="ds-note">4 quebras</span>
+        <span class="ds-note">Mobile-first</span>
+        <span class="ds-note muted">Container w max = 1280px (--container-w)</span>
+      </div>
+    </article>
+  </section>
+
+  <!-- ═══════ B · FORM ═══════ -->
+  <section class="ds-section" id="b">
+    <div class="ds-section-head">
+      <div class="num">Bloco B · Formulários</div>
+      <h2>Componentes de entrada</h2>
+      <p>Inputs, selects, checkboxes, toggles e áreas de texto. Foco visível em <code>--c-primary</code>, estados consistentes, suporte a label flutuante.</p>
+    </div>
+
+    <!-- B1 -->
+    <article class="ds-block" id="b1">
+      <div class="ds-block-title"><span class="id">B1</span><h3>Input text</h3></div>
+      <p class="ds-block-desc">3 tamanhos × 6 estados. Foco com glow purple, erro com glow vermelho, ícone opcional, label flutuante.</p>
+
+      <div class="ds-grid ds-grid-2">
+        <div class="ds-demo">
+          <span class="ds-demo-label">Tamanhos</span>
+          <div class="gd-field"><label class="gd-label">SM (32px)</label>
+            <div class="gd-input-wrap"><input class="gd-input gd-input--sm" placeholder="Buscar..."></div></div>
+          <div class="gd-field" style="margin-top:16px"><label class="gd-label">MD (40px)</label>
+            <div class="gd-input-wrap"><input class="gd-input" placeholder="email@gestao.dev"></div></div>
+          <div class="gd-field" style="margin-top:16px"><label class="gd-label">LG (48px)</label>
+            <div class="gd-input-wrap"><input class="gd-input gd-input--lg" placeholder="Título da tarefa"></div></div>
+        </div>
+
+        <div class="ds-demo">
+          <span class="ds-demo-label">Estados</span>
+          <div class="gd-field"><label class="gd-label">Default</label>
+            <input class="gd-input" placeholder="Digite aqui"></div>
+          <div class="gd-field" style="margin-top:16px"><label class="gd-label">Erro</label>
+            <input class="gd-input is-error" value="email-invalido">
+            <span class="gd-error-msg">→ formato de email inválido</span></div>
+          <div class="gd-field" style="margin-top:16px"><label class="gd-label">Disabled</label>
+            <input class="gd-input" placeholder="Indisponível" disabled></div>
+        </div>
+
+        <div class="ds-demo">
+          <span class="ds-demo-label">Com ícone à esquerda</span>
+          <div class="gd-field"><label class="gd-label">Buscar</label>
+            <div class="gd-input-wrap">
+              <span class="gd-input-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+              <input class="gd-input gd-input--has-icon" placeholder="Tarefas, PRs, ideias...">
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-demo">
+          <span class="ds-demo-label">Label flutuante</span>
+          <div class="gd-float">
+            <input id="gdf1" type="text" placeholder=" ">
+            <label for="gdf1">Nome do projeto</label>
+          </div>
+          <div class="gd-float" style="margin-top:16px">
+            <input id="gdf2" type="email" placeholder=" " value="dev@gestao.dev">
+            <label for="gdf2">Email</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-code"><span class="c">/* Foco */</span>
+.gd-input:focus { border-color: <span class="k">var(--c-primary)</span>;
+  box-shadow: <span class="v">0 0 0 3px rgba(75,33,142,.15)</span>; }
+<span class="c">/* Erro */</span>
+.gd-input.is-error { border-color: <span class="k">var(--c-error)</span>; }</div>
+
+      <div class="ds-notes">
+        <span class="ds-note">SM 32 · MD 40 · LG 48</span>
+        <span class="ds-note">--r-sm</span>
+        <span class="ds-note">Glow ring 3px no focus</span>
+        <span class="ds-note muted">Disabled: opacity .4, cursor not-allowed</span>
+      </div>
+
+      <div class="ds-context">
+        <div class="ds-context-title">Em contexto · formulário "Criar tarefa"</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:520px">
+          <div class="gd-float"><input id="gdc1" placeholder=" " value="Refatorar webhook"><label for="gdc1">Título</label></div>
+          <div class="gd-float"><input id="gdc2" placeholder=" "><label for="gdc2">Estimativa</label></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- B2 -->
+    <article class="ds-block" id="b2">
+      <div class="ds-block-title"><span class="id">B2</span><h3>Select</h3></div>
+      <p class="ds-block-desc">Mesmo padrão visual do input, com seta customizada e mock de dropdown panel.</p>
+      <div class="ds-grid ds-grid-2">
+        <div class="ds-demo">
+          <span class="ds-demo-label">Native select</span>
+          <div class="gd-field"><label class="gd-label">Status</label>
+            <div class="gd-select-wrap">
+              <select class="gd-select">
+                <option>To-do</option><option>Em progresso</option><option>Code review</option><option>Concluído</option>
+              </select>
+              <span class="gd-select-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4.5L6 7.5L9 4.5"/></svg></span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-demo">
+          <span class="ds-demo-label">Dropdown panel</span>
+          <div class="gd-dropdown">
+            <div class="gd-dropdown-item">Sprint 11 — Q1<span style="font-family:var(--f-mono);color:var(--c-text-faint);font-size:.7rem">↑</span></div>
+            <div class="gd-dropdown-item is-active">Sprint 12 — Q1<span style="font-family:var(--f-mono);font-size:.7rem">●</span></div>
+            <div class="gd-dropdown-item">Sprint 13 — Q1</div>
+            <div class="gd-dropdown-item">Sprint 14 — Q1</div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-notes">
+        <span class="ds-note">appearance: none</span>
+        <span class="ds-note">Dropdown bg = --c-bg-elevated</span>
+        <span class="ds-note muted">Hover item = --c-primary-subtle</span>
+      </div>
+    </article>
+
+    <!-- B3 -->
+    <article class="ds-block" id="b3">
+      <div class="ds-block-title"><span class="id">B3</span><h3>Checkbox + Toggle</h3></div>
+      <p class="ds-block-desc">Checkbox 18×18 com checkmark animado. Toggle 40×20 com thumb deslizante via spring.</p>
+      <div class="ds-grid ds-grid-2">
+        <div class="ds-demo">
+          <span class="ds-demo-label">Checkbox</span>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <label class="gd-check"><input type="checkbox" checked>
+              <span class="gd-check-box"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 5L4 7L8 3"/></svg></span>
+              <span>Notificar squad ao concluir</span></label>
+            <label class="gd-check"><input type="checkbox">
+              <span class="gd-check-box"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 5L4 7L8 3"/></svg></span>
+              <span>Adicionar à milestone</span></label>
+            <label class="gd-check"><input type="checkbox" checked>
+              <span class="gd-check-box"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 5L4 7L8 3"/></svg></span>
+              <span>Vincular a PR aberto</span></label>
+          </div>
+        </div>
+        <div class="ds-demo">
+          <span class="ds-demo-label">Toggle</span>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <label class="gd-toggle"><input type="checkbox" checked>
+              <span class="gd-toggle-track"><span class="gd-toggle-thumb"></span></span>
+              <span>Auto-update do board</span></label>
+            <label class="gd-toggle"><input type="checkbox">
+              <span class="gd-toggle-track"><span class="gd-toggle-thumb"></span></span>
+              <span>Modo Dev Virtual</span></label>
+            <label class="gd-toggle"><input type="checkbox" checked>
+              <span class="gd-toggle-track"><span class="gd-toggle-thumb"></span></span>
+              <span>MCP integrations</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="ds-notes">
+        <span class="ds-note">Checkbox 18×18 · --r-xs</span>
+        <span class="ds-note">Toggle 40×20 · thumb 16</span>
+        <span class="ds-note muted">Transição: --t-fast (check) / --t-spring (thumb)</span>
+      </div>
+    </article>
+
+    <!-- B4 -->
+    <article class="ds-block" id="b4">
+      <div class="ds-block-title"><span class="id">B4</span><h3>Área de texto</h3></div>
+      <p class="ds-block-desc">Altura mínima de 120px, redimensionamento vertical. Herda os mesmos estados do input text.</p>
+      <div class="ds-demo">
+        <span class="ds-demo-label">Default</span>
+        <div class="gd-field">
+          <label class="gd-label">Descrição</label>
+          <textarea class="gd-textarea" placeholder="Descreva a tarefa em uma frase. O Dev Virtual vai usar isso pra abrir o PR..."></textarea>
+        </div>
+      </div>
+      <div class="ds-notes">
+        <span class="ds-note">min-h: 120px</span>
+        <span class="ds-note">resize: vertical</span>
+      </div>
+    </article>
+  </section>
+
+  <!-- ═══════ C · DASHBOARD ═══════ -->
+  <section class="ds-section" id="c">
+    <div class="ds-section-head">
+      <div class="num">Bloco C · Dashboard</div>
+      <h2>KPIs e indicadores</h2>
+      <p>Componentes de visualização de dados específicos do produto: KPI cards com sparkline, indicador semáforo de prazo, progress bar de sprint.</p>
+    </div>
+
+    <!-- C1 -->
+    <article class="ds-block" id="c1">
+      <div class="ds-block-title"><span class="id">C1</span><h3>KPI card</h3></div>
+      <p class="ds-block-desc">Métrica numérica grande em mono + label + variação semântica + sparkline opcional.</p>
+
+      <div class="ds-grid ds-grid-4">
+        <div class="gd-kpi">
+          <div class="gd-kpi-label">Tarefas concluídas</div>
+          <div class="gd-kpi-value">128</div>
+          <div class="gd-kpi-foot">
+            <span class="gd-kpi-delta up">↑ 12.4%</span>
+            <svg class="gd-spark" viewBox="0 0 120 32"></svg>
+          </div>
+        </div>
+        <div class="gd-kpi">
+          <div class="gd-kpi-label">Velocidade do sprint</div>
+          <div class="gd-kpi-value">42<span style="font-size:1rem;color:var(--c-text-muted)"> pts</span></div>
+          <div class="gd-kpi-foot">
+            <span class="gd-kpi-delta up">↑ 8.0%</span>
+            <svg class="gd-spark" viewBox="0 0 120 32"></svg>
+          </div>
+        </div>
+        <div class="gd-kpi">
+          <div class="gd-kpi-label">Bloqueios ativos</div>
+          <div class="gd-kpi-value">3</div>
+          <div class="gd-kpi-foot">
+            <span class="gd-kpi-delta down">↓ 25.0%</span>
+            <svg class="gd-spark" viewBox="0 0 120 32"></svg>
+          </div>
+        </div>
+        <div class="gd-kpi">
+          <div class="gd-kpi-label">PRs abertos</div>
+          <div class="gd-kpi-value">17</div>
+          <div class="gd-kpi-foot">
+            <span class="gd-kpi-delta up">↑ 3</span>
+            <svg class="gd-spark" viewBox="0 0 120 32"></svg>
+          </div>
+        </div>
+      </div>
+      <div class="ds-notes">
+        <span class="ds-note">Valor: Geist Mono · 300 · 2.25rem</span>
+        <span class="ds-note">--gradient-text aplicado</span>
+        <span class="ds-note muted">Hover: translateY(-2px) + glow</span>
+      </div>
+    </article>
+
+    <!-- C2 -->
+    <article class="ds-block" id="c2">
+      <div class="ds-block-title"><span class="id">C2</span><h3>Indicador semáforo</h3></div>
+      <p class="ds-block-desc">Dot 8px com glow correspondente. Usado em cards de tarefa para indicar saúde do prazo.</p>
+      <div class="ds-grid ds-grid-3">
+        <div class="ds-demo"><span class="ds-demo-label">No prazo</span>
+          <span class="gd-light green"><span class="gd-light-dot"></span>3 dias restantes</span></div>
+        <div class="ds-demo"><span class="ds-demo-label">Atenção</span>
+          <span class="gd-light yellow"><span class="gd-light-dot"></span>vence amanhã</span></div>
+        <div class="ds-demo"><span class="ds-demo-label">Atrasado</span>
+          <span class="gd-light red"><span class="gd-light-dot"></span>2 dias em atraso</span></div>
+      </div>
+      <div class="ds-context">
+        <div class="ds-context-title">Em contexto · cards de tarefa</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="gd-task"><span class="gd-light green"><span class="gd-light-dot"></span></span>
+            <span class="title">Refatorar webhook de Stripe</span>
+            <span class="who">@victor</span></div>
+          <div class="gd-task"><span class="gd-light yellow"><span class="gd-light-dot"></span></span>
+            <span class="title">Migrar autenticação para Clerk</span>
+            <span class="who">@fer</span></div>
+          <div class="gd-task"><span class="gd-light red"><span class="gd-light-dot"></span></span>
+            <span class="title">Bug: filtro de board quebra com 0 itens</span>
+            <span class="who">@dev-virtual</span></div>
+        </div>
+      </div>
+      <div class="ds-notes">
+        <span class="ds-note">8px dot</span>
+        <span class="ds-note">Glow box-shadow 12px</span>
+        <span class="ds-note muted">Cores: --c-success / --c-warning / --c-error</span>
+      </div>
+    </article>
+
+    <!-- C3 -->
+    <article class="ds-block" id="c3">
+      <div class="ds-block-title"><span class="id">C3</span><h3>Progress bar</h3></div>
+      <p class="ds-block-desc">Track 6px com fill em gradient primário. Variantes para sucesso (100%) e risco (em atraso).</p>
+      <div class="ds-grid ds-grid-3">
+        <div class="ds-demo">
+          <span class="ds-demo-label">Normal</span>
+          <div class="gd-progress">
+            <div class="gd-progress-meta"><span>Sprint 12</span><strong>68%</strong></div>
+            <div class="gd-progress-track"><div class="gd-progress-fill" style="width:68%"></div></div>
+          </div>
+        </div>
+        <div class="ds-demo">
+          <span class="ds-demo-label">Sucesso</span>
+          <div class="gd-progress success">
+            <div class="gd-progress-meta"><span>Sprint 11</span><strong>100%</strong></div>
+            <div class="gd-progress-track"><div class="gd-progress-fill" style="width:100%"></div></div>
+          </div>
+        </div>
+        <div class="ds-demo">
+          <span class="ds-demo-label">Em risco</span>
+          <div class="gd-progress risk">
+            <div class="gd-progress-meta"><span>Sprint 10 · atrasada</span><strong>34%</strong></div>
+            <div class="gd-progress-track"><div class="gd-progress-fill" style="width:34%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-notes">
+        <span class="ds-note">height: 6px</span>
+        <span class="ds-note">--r-full</span>
+        <span class="ds-note muted">Transição de width: --t-spring</span>
+      </div>
+    </article>
+
+    <!-- C4 -->
+    <article class="ds-block" id="c4">
+      <div class="ds-block-title"><span class="id">C4</span><h3>Mini chart (sparkline)</h3></div>
+      <p class="ds-block-desc">SVG 120×32px, stroke purple light, área sob curva com gradient vertical.</p>
+      <div class="ds-demo">
+        <span class="ds-demo-label">Velocity por sprint</span>
+        <div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap">
+          <svg class="gd-spark" viewBox="0 0 120 32" data-data="28,32,30,38,42,40,45,42"></svg>
+          <svg class="gd-spark" viewBox="0 0 120 32" data-data="10,14,18,22,28,34,40,42"></svg>
+          <svg class="gd-spark" viewBox="0 0 120 32" data-data="40,32,28,30,22,18,14,8"></svg>
+        </div>
+      </div>
+      <div class="ds-notes">
+        <span class="ds-note">120 × 32 · stroke 1.5</span>
+        <span class="ds-note">Gradient fill purple → transparent</span>
+        <span class="ds-note muted">stroke: --c-primary-light</span>
+      </div>
+    </article>
+  </section>
+  <!-- ═══════ E · STATES ═══════ -->
+  <section class="ds-section" id="e">
+    <div class="ds-section-head">
+      <div class="num">Bloco E · Estados</div>
+      <h2>Mapa de estados universais</h2>
+      <p>6 estados aplicáveis a qualquer componente interativo. Tokens modificadores padronizados.</p>
+    </div>
+
+    <article class="ds-block" id="e1">
+      <div class="ds-block-title"><span class="id">E1</span><h3>Mapa de estados (botão + input)</h3></div>
+      <p class="ds-block-desc">Cada estado tem regras universais: opacity, cursor, border-color, box-shadow, transform.</p>
+
+      <div class="ds-demo">
+        <span class="ds-demo-label">Botão · 6 estados</span>
+        <div class="gd-state-row"><div class="name">default</div>
+          <div class="demo"><button class="gem-cta gem-cta--md">Salvar</button>
+            <span class="desc">opacity:1 · cursor:pointer · shadow-button</span></div></div>
+        <div class="gd-state-row"><div class="name">hover</div>
+          <div class="demo"><button class="gem-cta gem-cta--md" style="box-shadow:var(--shadow-button-hover);transform:translateY(-1px)">Salvar</button>
+            <span class="desc">shadow-button-hover · translateY(-1px)</span></div></div>
+        <div class="gd-state-row"><div class="name">focus-visible</div>
+          <div class="demo"><button class="gem-cta gem-cta--md" style="outline:2px solid var(--c-primary);outline-offset:2px">Salvar</button>
+            <span class="desc">outline 2px primary · offset 2px</span></div></div>
+        <div class="gd-state-row"><div class="name">active</div>
+          <div class="demo"><button class="gem-cta gem-cta--md" style="transform:scale(.98)">Salvar</button>
+            <span class="desc">transform: scale(.98)</span></div></div>
+        <div class="gd-state-row"><div class="name">disabled</div>
+          <div class="demo"><button class="gem-cta gem-cta--md" disabled>Salvar</button>
+            <span class="desc">opacity:.4 · cursor:not-allowed · pointer-events:none</span></div></div>
+        <div class="gd-state-row"><div class="name">loading</div>
+          <div class="demo"><button class="gem-cta gem-cta--md is-loading" aria-busy="true">Salvando...</button>
+            <span class="desc">Gema interna (::before) em rotação constante · 8s linear infinite</span></div></div>
+      </div>
+
+      <div class="ds-demo" style="margin-top:24px">
+        <span class="ds-demo-label">Input · 6 estados</span>
+        <div class="gd-state-row"><div class="name">default</div>
+          <div class="demo" style="width:100%"><input class="gd-input" placeholder="Texto"></div></div>
+        <div class="gd-state-row"><div class="name">hover</div>
+          <div class="demo" style="width:100%"><input class="gd-input" placeholder="Texto" style="border-color:rgba(255,255,255,.20)"></div></div>
+        <div class="gd-state-row"><div class="name">focus-visible</div>
+          <div class="demo" style="width:100%"><input class="gd-input" placeholder="Texto" style="border-color:var(--c-primary);box-shadow:0 0 0 3px rgba(75,33,142,.15)"></div></div>
+        <div class="gd-state-row"><div class="name">error</div>
+          <div class="demo" style="width:100%"><input class="gd-input is-error" value="formato inválido"></div></div>
+        <div class="gd-state-row"><div class="name">disabled</div>
+          <div class="demo" style="width:100%"><input class="gd-input" value="Indisponível" disabled></div></div>
+        <div class="gd-state-row"><div class="name">loading</div>
+          <div class="demo" style="width:100%">
+            <div class="gd-input-wrap is-loading" style="width:100%">
+              <input class="gd-input" placeholder="Carregando..." disabled>
+              <svg class="gem-loader" width="18" height="18" aria-hidden="true"><use href="#gd-logo"/></svg>
+            </div>
+          </div></div>
+      </div>
+
+      <div class="ds-code"><span class="c">/* Tokens universais */</span>
+:disabled            { opacity: <span class="v">.4</span>; cursor: <span class="v">not-allowed</span>; pointer-events: <span class="v">none</span>; }
+:focus-visible       { outline: <span class="v">2px solid var(--c-primary)</span>; outline-offset: <span class="v">2px</span>; }
+loading              { <span class="c">/* GemLoader inline + disabled (nunca mimetizar a gema via ::after) */</span> }
+:active              { transform: <span class="v">scale(.98)</span>; }
+:hover (botão primário) { transform: <span class="v">translateY(-1px)</span>; box-shadow: <span class="v">var(--shadow-button-hover)</span>; }</div>
+    </article>
+  </section>
+
+  <!-- ═══════ F · BRAND ═══════ -->
+  <section class="ds-section" id="f">
+    <div class="ds-section-head">
+      <div class="num">Bloco F · Brand assets</div>
+      <h2>Identidade visual completa</h2>
+      <p>Clear space, variantes monocromáticas e template de OG image.</p>
+    </div>
+
+    <!-- F1 -->
+    <article class="ds-block" id="f1">
+      <div class="ds-block-title"><span class="id">F1</span><h3>Clear space do logo</h3></div>
+      <p class="ds-block-desc">Área de proteção: <strong>1× a altura da gema</strong> em todas as direções. Nunca posicionar texto, ícones ou bordas dentro dessa área.</p>
+      <div class="ds-grid ds-grid-2">
+        <div class="gd-brand-clear">
+          <span class="gd-brand-tag on-dark">Certo</span>
+          <div style="position:relative">
+            <div style="position:absolute;inset:-64px;border:1px dashed rgba(123,77,196,.4);border-radius:8px;pointer-events:none"></div>
+            <div style="position:absolute;top:-80px;left:50%;transform:translateX(-50%);font-family:var(--f-mono);font-size:.65rem;color:var(--c-primary-light)">↕ 1× h</div>
+            <div class="gd-brand-wrap"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo"/></svg><div class="word dark">gestao<span class="dot">.</span>dev</div></div>
+          </div>
+        </div>
+        <div class="gd-brand-clear">
+          <span class="gd-brand-tag on-dark" style="color:var(--c-error);background:rgba(239,68,68,.1)">Errado</span>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+            <p style="font-size:.7rem;color:var(--c-text-muted);font-family:var(--f-mono)">Texto sufocando o logo:</p>
+            <div style="display:flex;align-items:center;gap:4px">
+              <span style="font-size:.85rem;color:var(--c-text-secondary)">Bem-vindo ao</span>
+              <div class="gd-brand-wrap"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo"/></svg><div class="word dark">gestao<span class="dot">.</span>dev</div></div>
+              <span style="font-size:.85rem;color:var(--c-text-secondary)">— vamos lá!</span>
+            </div>
+            <p style="font-size:.65rem;color:var(--c-error);margin-top:8px;font-family:var(--f-mono)">→ Sem respiro = sem hierarquia</p>
+          </div>
+        </div>
+      </div>
+      <div class="ds-notes">
+        <span class="ds-note">Clear space = 1× h (gema)</span>
+        <span class="ds-note muted">Para gema 32px → margem 32px mínima</span>
+      </div>
+    </article>
+
+    <!-- F2 -->
+    <article class="ds-block" id="f2">
+      <div class="ds-block-title"><span class="id">F2</span><h3>Logo: variantes de fundo + monocromáticas</h3></div>
+      <p class="ds-block-desc">4 variantes obrigatórias para diferentes contextos (apresentações, documentos, parceiros, impressão).</p>
+      <div class="gd-brand-grid">
+        <div class="gd-brand-cell dark" style="position:relative">
+          <span class="gd-brand-tag on-dark">01 · Original / dark bg</span>
+          <div class="gd-brand-wrap"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo"/></svg><div class="word dark">gestao<span class="dot">.</span>dev</div></div>
+        </div>
+        <div class="gd-brand-cell light" style="position:relative">
+          <span class="gd-brand-tag on-light">02 · Original / light bg</span>
+          <div class="gd-brand-wrap"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo"/></svg><div class="word light">gestao<span class="dot">.</span>dev</div></div>
+        </div>
+        <div class="gd-brand-cell dark" style="position:relative">
+          <span class="gd-brand-tag on-dark">03 · Mono branco / dark bg</span>
+          <div class="gd-brand-wrap" style="color:#fff"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo-mono"/></svg><div class="word dark">gestao<span class="dot" style="color:#fff">.</span>dev</div></div>
+        </div>
+        <div class="gd-brand-cell light" style="position:relative">
+          <span class="gd-brand-tag on-light">04 · Mono preto / light bg</span>
+          <div class="gd-brand-wrap" style="color:#000"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo-mono"/></svg><div class="word light">gestao<span class="dot" style="color:#000">.</span>dev</div></div>
+        </div>
+      </div>
+      <div class="ds-notes">
+        <span class="ds-note">4 variantes oficiais</span>
+        <span class="ds-note muted">Mono = parceiros, impressão B&W, PDFs gerados</span>
+      </div>
+    </article>
+
+    <!-- F3 -->
+    <article class="ds-block" id="f3">
+      <div class="ds-block-title"><span class="id">F3</span><h3>Template de OG Image — 1200×630</h3></div>
+      <p class="ds-block-desc">Card de Open Graph para previews em redes sociais. Borda dashed interna como assinatura visual.</p>
+      <div class="ds-demo">
+        <span class="ds-demo-label">Preview · ratio 1200×630</span>
+        <div class="gd-og">
+          <svg class="gd-og-gem" aria-hidden="true"><use href="#gd-logo"/></svg>
+          <div class="gd-og-text">
+            <h5>O project manager que cuida da gestão</h5>
+            <p>...para você cuidar do código. Board que se atualiza sozinho, dashboards em tempo real e um Dev Virtual que abre PRs.</p>
+            <div class="url">→ gestao.dev</div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-notes">
+        <span class="ds-note">1200 × 630 px</span>
+        <span class="ds-note">Gema 120px com glow</span>
+        <span class="ds-note muted">Geist SemiBold · borda interna dashed 24px de offset</span>
+      </div>
+    </article>
+  </section>
+
+  <!-- ═══════ G · UX ═══════ -->
+  <section class="ds-section" id="g">
+    <div class="ds-section-head">
+      <div class="num">Bloco G · Padrões de UX</div>
+      <h2>Estados de conteúdo</h2>
+      <p>Empty state, tooltip e skeleton loader — o tripé de UX para qualquer interface data-driven.</p>
+    </div>
+
+    <!-- G1 -->
+    <article class="ds-block" id="g1">
+      <div class="ds-block-title"><span class="id">G1</span><h3>Empty state</h3></div>
+      <p class="ds-block-desc">Sempre 4 elementos: ícone grande · heading · descrição · CTA primário.</p>
+      <div class="ds-demo">
+        <span class="ds-demo-label">Live</span>
+        <div class="gd-empty">
+          <div class="gd-empty-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg>
+          </div>
+          <h4>Nenhuma tarefa ainda</h4>
+          <p>Crie a primeira tarefa do sprint ou conecte um repositório para o Dev Virtual sugerir tarefas a partir do código.</p>
+          <button class="gem-cta gem-cta--md">Criar primeira tarefa</button>
+        </div>
+      </div>
+      <div class="ds-notes">
+        <span class="ds-note">Ícone 64px · --r-lg</span>
+        <span class="ds-note">primary-subtle bg + border-accent</span>
+        <span class="ds-note muted">CTA primário (gem-cta--md)</span>
+      </div>
+    </article>
+
+    <!-- G2 -->
+    <article class="ds-block" id="g2">
+      <div class="ds-block-title"><span class="id">G2</span><h3>Tooltip</h3></div>
+      <p class="ds-block-desc">Bubble pequeno com seta. Hover ou foco no trigger ativa. Use para explicar ícones ou siglas.</p>
+      <div class="ds-demo">
+        <span class="ds-demo-label">Hover sobre o "i"</span>
+        <div style="display:flex;flex-direction:column;gap:24px;align-items:flex-start">
+          <div class="gd-tt">Velocidade do sprint
+            <button class="gd-tt-trigger" aria-describedby="tt1">i</button>
+            <span class="gd-tt-bubble" id="tt1" role="tooltip">Pontos completados / dias úteis · média móvel 3 sprints</span>
+          </div>
+          <div class="gd-tt">MCP integrations
+            <button class="gd-tt-trigger" aria-describedby="tt2">i</button>
+            <span class="gd-tt-bubble" id="tt2" role="tooltip">Model Context Protocol — conecta seu IDE ao gestao.dev</span>
+          </div>
+          <div class="gd-tt">Dev Virtual
+            <button class="gd-tt-trigger" aria-describedby="tt3">i</button>
+            <span class="gd-tt-bubble" id="tt3" role="tooltip">Agente autônomo que pega tarefas e abre PRs</span>
+          </div>
+        </div>
+      </div>
+      <div class="ds-notes">
+        <span class="ds-note">--r-sm · --c-bg-elevated</span>
+        <span class="ds-note">z-tooltip (700)</span>
+        <span class="ds-note muted">Animação: fade + translateY(4px) · --t-fast</span>
+      </div>
+    </article>
+
+    <!-- G3 -->
+    <article class="ds-block" id="g3">
+      <div class="ds-block-title"><span class="id">G3</span><h3>Skeleton loader</h3></div>
+      <p class="ds-block-desc">Placeholders animados (shimmer diagonal). Devem ter o mesmo formato e tamanho do conteúdo final.</p>
+      <div class="ds-grid ds-grid-2">
+        <div class="ds-demo">
+          <span class="ds-demo-label">KPI card · loading</span>
+          <div class="gd-kpi" style="gap:14px">
+            <div class="gd-skel" style="width:60%;height:11px"></div>
+            <div class="gd-skel" style="width:80%;height:34px"></div>
+            <div class="gd-kpi-foot">
+              <div class="gd-skel" style="width:60px;height:14px"></div>
+              <div class="gd-skel" style="width:120px;height:32px;border-radius:var(--r-xs)"></div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-demo">
+          <span class="ds-demo-label">Lista · loading</span>
+          <div style="display:flex;flex-direction:column;gap:12px;padding:4px">
+            <div style="display:flex;align-items:center;gap:14px">
+              <div class="gd-skel" style="width:14px;height:14px;border-radius:50%;flex:none"></div>
+              <div class="gd-skel" style="flex:1;height:12px"></div>
+              <div class="gd-skel" style="width:60px;height:12px"></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <div class="gd-skel" style="width:14px;height:14px;border-radius:50%;flex:none"></div>
+              <div class="gd-skel" style="flex:1;height:12px;max-width:70%"></div>
+              <div class="gd-skel" style="width:60px;height:12px"></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <div class="gd-skel" style="width:14px;height:14px;border-radius:50%;flex:none"></div>
+              <div class="gd-skel" style="flex:1;height:12px;max-width:85%"></div>
+              <div class="gd-skel" style="width:60px;height:12px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-notes">
+        <span class="ds-note">--c-bg-elevated</span>
+        <span class="ds-note">Shimmer 1.6s linear infinite</span>
+        <span class="ds-note muted">Match exato com tamanho do conteúdo real</span>
+      </div>
+    </article>
+  </section>
+
+  <!-- ═══════ H · ICON SYSTEM ═══════ -->
+  <section class="ds-section" id="h">
+    <div class="ds-section-head">
+      <div class="num">Bloco H · Iconografia</div>
+      <h2>Sistema de ícones</h2>
+      <p>Padrão único de ícones baseado em <strong>Lucide</strong>, adaptado para a densidade visual do gestao.dev. Stroke consistente, grid de construção definido, 3 tamanhos oficiais.</p>
+    </div>
+
+    <article class="ds-block" id="h1">
+      <div class="ds-block-title"><span class="id">H1</span><h3>Stroke, sizing e grid</h3></div>
+      <p class="ds-block-desc">Todos os ícones seguem o mesmo conjunto de regras. Para ícones novos que não existam no Lucide, respeitar grid 24×24 com 2px de padding e cantos arredondados no stroke.</p>
+
+      <div class="ds-demo">
+        <span class="ds-demo-label">Tamanhos oficiais</span>
+        <div class="gd-icon-size-row">
+          <figure>
+            <svg class="gd-icon" width="16" height="16" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+            <figcaption>16 · SM</figcaption>
+          </figure>
+          <figure>
+            <svg class="gd-icon" width="20" height="20" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+            <figcaption>20 · MD</figcaption>
+          </figure>
+          <figure>
+            <svg class="gd-icon" width="24" height="24" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+            <figcaption>24 · LG</figcaption>
+          </figure>
+          <div style="flex:1;min-width:200px;font-family:var(--f-mono);font-size:.75rem;color:var(--c-text-secondary);line-height:1.7">
+            <div><span style="color:var(--c-primary-light)">stroke-width:</span> 1.5</div>
+            <div><span style="color:var(--c-primary-light)">stroke-linecap:</span> round</div>
+            <div><span style="color:var(--c-primary-light)">stroke-linejoin:</span> round</div>
+            <div><span style="color:var(--c-primary-light)">fill:</span> none</div>
+            <div><span style="color:var(--c-primary-light)">grid:</span> 24×24 · pad 2px</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-demo" style="margin-top:24px">
+        <span class="ds-demo-label">Biblioteca — Lucide</span>
+        <div class="gd-icon-grid">
+          <div class="gd-icon-cell"><svg class="gd-icon" width="22" height="22" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span class="nm">menu</span></div>
+          <div class="gd-icon-cell"><svg class="gd-icon" width="22" height="22" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="nm">board</span></div>
+          <div class="gd-icon-cell"><svg class="gd-icon" width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg><span class="nm">clock</span></div>
+          <div class="gd-icon-cell"><svg class="gd-icon" width="22" height="22" viewBox="0 0 24 24"><path d="M12 2l2.4 5.3 5.6.5-4.2 4 1.3 5.7L12 14.8 6.9 17.5l1.3-5.7L4 7.8l5.6-.5z"/></svg><span class="nm">star</span></div>
+          <div class="gd-icon-cell"><svg class="gd-icon" width="22" height="22" viewBox="0 0 24 24"><path d="M3 4h8v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M7 4V2h4v2M15 4h6v16h-6zM17 10h2M17 14h2"/></svg><span class="nm">bug</span></div>
+          <div class="gd-icon-cell"><svg class="gd-icon" width="22" height="22" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span class="nm">search</span></div>
+          <div class="gd-icon-cell"><svg class="gd-icon" width="22" height="22" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg><span class="nm">arrow-right</span></div>
+          <div class="gd-icon-cell"><svg class="gd-icon" width="22" height="22" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span class="nm">check</span></div>
+          <div class="gd-icon-cell"><svg class="gd-icon" width="22" height="22" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg><span class="nm">chevron-down</span></div>
+          <div class="gd-icon-cell"><svg class="gd-icon" width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg><span class="nm">info</span></div>
+          <div class="gd-icon-cell"><svg class="gd-icon" width="22" height="22" viewBox="0 0 24 24"><path d="M12 3L2 21h20zM12 9v5M12 17h.01"/></svg><span class="nm">alert</span></div>
+          <div class="gd-icon-cell"><svg class="gd-icon" width="22" height="22" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg><span class="nm">x</span></div>
+          <div class="gd-icon-cell"><svg class="gd-icon" width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3h.1a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8v.1a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span class="nm">settings</span></div>
+          <div class="gd-icon-cell"><svg class="gd-icon" width="22" height="22" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span class="nm">expand</span></div>
+          <div class="gd-icon-cell"><svg class="gd-icon" width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v2"/></svg><span class="nm">user</span></div>
+          <div class="gd-icon-cell"><svg class="gd-icon" width="22" height="22" viewBox="0 0 24 24"><path d="M4 17l5-5-5-5M12 19h8"/></svg><span class="nm">terminal</span></div>
+        </div>
+      </div>
+
+      <div class="ds-code"><span class="c">/* Token único para SVG icons */</span>
+.gd-icon {
+  stroke: <span class="k">currentColor</span>;
+  fill: <span class="v">none</span>;
+  stroke-width: <span class="v">1.5</span>;
+  stroke-linecap: <span class="v">round</span>;
+  stroke-linejoin: <span class="v">round</span>;
+}</div>
+
+      <div class="ds-notes">
+        <span class="ds-note">Lucide como base</span>
+        <span class="ds-note">3 tamanhos: 16 · 20 · 24</span>
+        <span class="ds-note">stroke 1.5px · round caps</span>
+        <span class="ds-note muted">Cor via currentColor (herda do pai)</span>
+      </div>
+    </article>
+  </section>
+
+  <!-- ═══════ I · BREADCRUMBS ═══════ -->
+  <section class="ds-section" id="i">
+    <div class="ds-section-head">
+      <div class="num">Bloco I · Navegação estrutural</div>
+      <h2>Breadcrumbs</h2>
+      <p>Mostra a localização exata do usuário em hierarquias profundas (projeto → sprint → tarefa → sub-tarefa).</p>
+    </div>
+
+    <article class="ds-block" id="i1">
+      <div class="ds-block-title"><span class="id">I1</span><h3>Trilha de navegação</h3></div>
+      <p class="ds-block-desc">Font-family mono, separador "›" em cor faint, item atual em branco com weight 500. Primeiro item pode ser ícone de "home" (14×14).</p>
+
+      <div class="ds-demo">
+        <span class="ds-demo-label">Default</span>
+        <nav class="gd-breadcrumb" aria-label="Breadcrumbs">
+          <a href="#" class="home">
+            <svg class="gd-icon" width="14" height="14" viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg>
+            Home
+          </a>
+          <span class="sep">›</span><a href="#">Site Marketing</a>
+          <span class="sep">›</span><a href="#">Sprint 12</a>
+          <span class="sep">›</span><span class="current" aria-current="page">Refatorar webhook Stripe</span>
+        </nav>
+      </div>
+
+      <div class="ds-demo" style="margin-top:24px">
+        <span class="ds-demo-label">Com estado de loading (último segmento)</span>
+        <nav class="gd-breadcrumb" aria-label="Breadcrumbs">
+          <a href="#">Projetos</a>
+          <span class="sep">›</span><a href="#">App Backend</a>
+          <span class="sep">›</span>
+          <span class="current" aria-busy="true" style="display:inline-flex;align-items:center;gap:8px">
+            <svg class="gem-loader gem-loader--pulse" width="14" height="14" aria-hidden="true"><use href="#gd-logo"/></svg>
+            Carregando tarefa...
+          </span>
+        </nav>
+      </div>
+
+      <div class="ds-notes">
+        <span class="ds-note">font: mono · .8125rem</span>
+        <span class="ds-note">Separador: › · text-faint</span>
+        <span class="ds-note">aria-current="page" no item final</span>
+        <span class="ds-note muted">Truncagem: 4 níveis max · middle-ellipsis se > 4</span>
+      </div>
+    </article>
+  </section>
+
+  <!-- ═══════ J · SOCIAL TEMPLATES ═══════ -->
+  <section class="ds-section" id="j">
+    <div class="ds-section-head">
+      <div class="num">Bloco J · Templates sociais</div>
+      <h2>Assets para redes</h2>
+      <p>Complemento do F3 (OG): templates para Twitter/X card, GitHub repo banner e Discord server. Todos seguem a mesma linguagem — gema + glow + wordmark mono.</p>
+    </div>
+
+    <article class="ds-block" id="j1">
+      <div class="ds-block-title"><span class="id">J1</span><h3>X · GitHub · Discord</h3></div>
+      <p class="ds-block-desc">Mesma gramática visual do OG, adaptada às proporções oficiais de cada plataforma.</p>
+
+      <div class="gd-social-grid">
+        <!-- X / Twitter -->
+        <div class="gd-social gd-social-x">
+          <span class="gd-social-label">X / Twitter · 1600×900</span>
+          <svg class="gem-svg" aria-hidden="true"><use href="#gd-logo"/></svg>
+          <div style="margin-left:var(--space-9);flex:1">
+            <h5>Seu board se atualiza sozinho.</h5>
+            <p>Conecte seu repositório e veja prazos, bloqueios e velocidade em tempo real. <span class="hl">→ gestao.dev</span></p>
+          </div>
+        </div>
+        <div class="gd-social-spec"><span>aspect 16:9</span><span>safe area 80px</span><span>formato PNG / WebP</span></div>
+
+        <!-- GitHub -->
+        <div class="gd-social gd-social-gh">
+          <span class="gd-social-label">GitHub repo banner · 1280×640</span>
+          <svg class="gem-svg" style="width:96px;height:96px" aria-hidden="true"><use href="#gd-logo"/></svg>
+          <div style="margin-left:var(--space-9);flex:1">
+            <h5 style="font-family:var(--f-mono);font-size:clamp(.95rem,2.2vw,1.5rem)">$ npm i -g gestao-dev</h5>
+            <p style="font-family:var(--f-mono)">The project manager that updates itself. <span class="hl">MIT · OSS</span></p>
+          </div>
+        </div>
+        <div class="gd-social-spec"><span>aspect 2:1</span><span>terminal feel</span><span>mono font · code-first</span></div>
+
+        <!-- Discord -->
+        <div class="gd-social gd-social-dc">
+          <span class="gd-social-label">Discord server · 960×540</span>
+          <svg class="gem-svg" style="width:80px;height:80px;margin:0 auto" aria-hidden="true"><use href="#gd-logo"/></svg>
+          <h5 style="margin:0">gestao<span style="color:var(--c-primary-light)">.</span>dev</h5>
+          <p style="margin:0 auto">comunidade de devs · builders · early adopters</p>
+        </div>
+        <div class="gd-social-spec"><span>aspect 16:9</span><span>gema centralizada</span><span>borda dashed interna</span></div>
+      </div>
+
+      <div class="ds-notes">
+        <span class="ds-note">3 templates oficiais</span>
+        <span class="ds-note">SVG gema + wordmark mono</span>
+        <span class="ds-note">Glow radial purple no fundo</span>
+        <span class="ds-note muted">Export final: PNG @2x · WebP como fallback moderno</span>
+      </div>
+    </article>
+  </section>
+
+  <!-- ═══════ K · MÍDIA ═══════ -->
+  <section class="ds-section" id="k">
+    <div class="ds-section-head">
+      <div class="num">Bloco K · Diretrizes de mídia</div>
+      <h2>Fotografia &amp; ilustração</h2>
+      <p>O gestao.dev tem uma posição clara: <strong>zero fotografia stock</strong>. A comunicação visual é construída com UI, código e a própria gema. Essa escolha mantém a identidade técnica e evita a estética genérica de SaaS.</p>
+    </div>
+
+    <article class="ds-block" id="k1">
+      <div class="ds-block-title"><span class="id">K1</span><h3>O que pode e o que não pode</h3></div>
+      <p class="ds-block-desc">Regra central: só usamos imagens que um desenvolvedor reconhece como "do seu mundo". Se precisaria explicar por que aquela foto existe, ela não entra.</p>
+
+      <div class="gd-media-grid">
+        <div class="gd-media-cell ok">
+          <span class="gd-media-tag">Aceito</span>
+          <h5>Mídia técnica</h5>
+          <ul>
+            <li>Screenshots reais do produto (dark-mode, sem chrome do browser)</li>
+            <li>Snippets de código em Geist Mono com syntax highlight da paleta</li>
+            <li>Gravações de terminal com o TerminalMock</li>
+            <li>Ícones em pixel-art respeitando o grid <code>--px</code></li>
+            <li>Diagramas de arquitetura em linhas 1px tracejadas</li>
+          </ul>
+        </div>
+        <div class="gd-media-cell no">
+          <span class="gd-media-tag">Proibido</span>
+          <h5>Evitar sempre</h5>
+          <ul>
+            <li>Fotografia stock de "pessoas colaborando em frente ao laptop"</li>
+            <li>Emojis como ilustração (exceto em quote/review de usuário real)</li>
+            <li>3D renders genéricos, blobs abstratos, shapes fluidas alheias</li>
+            <li>Gradientes fora da paleta (qualquer coisa que não seja purple ou brand)</li>
+            <li>Ícones de outras bibliotecas (Heroicons, Font Awesome, Feather)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ds-notes">
+        <span class="ds-note">Zero fotografia stock</span>
+        <span class="ds-note">UI + código + terminal + pixel-art</span>
+        <span class="ds-note muted">Dúvida → pergunta: "um dev reconhece isso como familiar?"</span>
+      </div>
+    </article>
+  </section>
+
+  <!-- ═══════ L · EMAIL ═══════ -->
+  <section class="ds-section" id="l">
+    <div class="ds-section-head">
+      <div class="num">Bloco L · Email transacional</div>
+      <h2>Template de email</h2>
+      <p>Confirmações de conta, reset de senha, resumo de sprint, notificação de PR. Formato email-safe (tabelas + CSS inline), respeitando tokens do design system.</p>
+    </div>
+
+    <article class="ds-block" id="l1">
+      <div class="ds-block-title"><span class="id">L1</span><h3>Layout base</h3></div>
+      <p class="ds-block-desc">Header com wordmark, corpo em single column (max 560px), CTA primário e footer com unsubscribe. Dark-mode por padrão (via <code>color-scheme</code>).</p>
+
+      <div class="ds-demo">
+        <span class="ds-demo-label">Preview · "Dev Virtual abriu um PR"</span>
+        <div class="gd-email-frame">
+          <div class="gd-email-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="subj">De: no-reply@gestao.dev · Para: fer@gestao.dev</span>
+          </div>
+          <div class="gd-email-body">
+            <div class="gd-email-head">
+              <svg width="28" height="28" aria-hidden="true"><use href="#gd-logo"/></svg>
+              <div class="word">gestao<span class="dot">.</span>dev</div>
+            </div>
+            <h5>O Dev Virtual abriu um PR 🚀</h5>
+            <p>Tarefa <code>#142 · Refatorar webhook Stripe</code> foi concluída. O Dev Virtual abriu o pull request <code>#88</code> no repositório <code>CEISC-TECH/gestaodev-api</code> e está aguardando seu code review.</p>
+            <p style="color:var(--c-text-muted);font-size:.82rem">• 3 arquivos alterados · +142 / −28 linhas<br>• Testes: 24/24 passaram em CI<br>• Preview deploy: <a href="#" style="color:var(--c-primary-light)">pr-88.preview.gestao.dev</a></p>
+            <div style="padding-top:var(--space-3)">
+              <a href="#" class="gem-cta gem-cta--md" style="text-decoration:none">Revisar PR agora</a>
+            </div>
+          </div>
+          <div class="gd-email-foot">
+            <span>© 2026 gestao.dev · R. Pres. Scarambone, 153 — PR</span>
+            <span><a href="#">Preferências</a> · <a href="#">Cancelar notificações</a></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-code"><span class="c">/* Email-safe — regras obrigatórias */</span>
+• Tabelas + CSS inline (Gmail ignora <span class="v">&lt;style&gt;</span> externo)
+• Container max-width <span class="v">560px</span> · padding lateral <span class="v">24px</span>
+• Imagens com <span class="v">alt=""</span> e dimensões fixas
+• Web fonts: <span class="v">Geist</span> com fallback Arial/Helvetica
+• Dark-mode via <span class="v">color-scheme: dark</span> + <span class="v">@media (prefers-color-scheme)</span>
+• Preheader text (primeiros ~90 chars) otimizado para inbox preview
+• Footer: endereço físico + unsubscribe em 1-click</div>
+
+      <div class="ds-notes">
+        <span class="ds-note">Container 560px</span>
+        <span class="ds-note">Tokens via CSS inline</span>
+        <span class="ds-note">gem-cta em href + role="button"</span>
+        <span class="ds-note muted">Anti-spam: incluir unsubscribe + endereço físico</span>
+      </div>
+    </article>
+  </section>
+
+  <footer style="margin-top:128px;padding-top:48px;border-top:1px dashed var(--c-border-visible);
+    color:var(--c-text-muted);font-family:var(--f-mono);font-size:.7rem;text-align:center">
+    gestao.dev · Design System v1.1 · extensão do v1.0 · 2026
+  </footer>
+</main>
+</div>
+
+
+
+
+<!-- FOOTER -->
+<footer class="bb-footer">
+  <div class="container">
+    <div class="bb-footer-logo">gestao<span class="dot">.</span>dev</div>
+    <p style="color:var(--text-muted);font-size:0.8125rem;font-style:italic">O project manager que cuida da gestão para você cuidar do código.</p>
+    <p style="color:var(--text-faint);font-size:0.6875rem;margin-top:20px;font-family:var(--f-mono)">© 2026 gestao.dev — Todos os direitos reservados · Brand Book + Design System v1.1 · Confidencial</p>
+  </div>
+</footer>
+
+<script>
+// ── GemLoader grid ──
+(function(){
+  var V=[{id:'pulse',name:'Pulse',use:'sistema ativo<br>conectado'},{id:'shimmer',name:'Shimmer',use:'loading<br>aguardando'},{id:'symbol',name:'Symbol',use:'presença<br>terminal'},{id:'cursor',name:'Cursor',use:'idle<br>input'},{id:'wave',name:'Wave',use:'AI thinking<br>processando'}];
+  var S=[20,32,48],uid=0;
+  function gem(v,s){var i=++uid;return'<svg class="gem-loader gem-loader--'+v+'" width="'+s+'" height="'+s+'" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="gc'+i+'"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath><filter id="gg'+i+'" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/></filter></defs><g clip-path="url(#gc'+i+')"><polygon class="gem-f1" points="16,2.5 28,9 16,16" fill="#A060E8"/><polygon class="gem-f2" points="28,9 28,23 16,16" fill="#7030C0"/><polygon class="gem-f3" points="28,23 16,29.5 16,16" fill="#501888"/><polygon class="gem-f4" points="16,29.5 4,23 16,16" fill="#280858"/><polygon class="gem-f5" points="4,23 4,9 16,16" fill="#4B218E"/><polygon class="gem-f6" points="4,9 16,2.5 16,16" fill="#6030A8"/><path class="gem-chevron" d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#gg'+i+')"/><rect class="gem-cursor" x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#gg'+i+')"/></g><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/></svg>';}
+  var g=document.getElementById('ds-gem-grid');if(!g)return;
+  V.forEach(function(v){var c=document.createElement('div');c.className='ds-gem-card';c.innerHTML='<div class="ds-gem-name">'+v.name+'</div><div class="ds-gem-use">'+v.use+'</div><div class="ds-gem-sizes">'+S.map(function(s){return'<div class="ds-gem-size-item">'+gem(v.id,s)+'<span class="ds-gem-size-tag">'+s+'px</span></div>';}).join('')+'</div>';g.appendChild(c);});
+})();
+
+// ── Gem CTA animation ──
+document.querySelectorAll('.gem-cta').forEach(function(b){
+  b.addEventListener('mousedown',function(){b.classList.remove('gem-spinning');b.classList.add('gem-pressing');});
+  b.addEventListener('mouseup',function(){b.classList.remove('gem-pressing');b.classList.add('gem-spinning');});
+  b.addEventListener('mouseleave',function(){b.classList.remove('gem-pressing');});
+  b.addEventListener('animationend',function(e){if(e.animationName==='gem-spin')b.classList.remove('gem-spinning');});
+});
+
+/* ─── v1.1 scripts ─── */
+/* ════════ A1 · Spacing rows ════════ */
+(function(){
+  const sizes = [4,6,8,12,16,20,24,32,40,48,56,64];
+  const wrap = document.getElementById('gd-space-list');
+  sizes.forEach((px,i)=>{
+    const row = document.createElement('div');
+    row.className = 'gd-space-row';
+    row.innerHTML = `<span class="tok">--space-${i+1}</span><span class="val">${px}px</span><div class="gd-space-bar" style="width:${(px/64)*100}%"></div>`;
+    wrap.appendChild(row);
+  });
+})();
+
+/* ════════ A2 · Z stack visualizer ════════ */
+(function(){
+  const layers = [
+    {n:'--z-tooltip',v:700},{n:'--z-nav',v:600},{n:'--z-toast',v:500},
+    {n:'--z-modal',v:400},{n:'--z-overlay',v:300},{n:'--z-sticky',v:200},
+    {n:'--z-dropdown',v:100},{n:'--z-base',v:0}
+  ];
+  const stack = document.getElementById('gd-z-stack');
+  layers.forEach((l,i)=>{
+    const el = document.createElement('div');
+    el.className = 'gd-z-layer';
+    el.style.top = (i*36) + 'px';
+    el.style.transform = `translateX(${-50 + i*4}%) rotateY(-20deg)`;
+    el.style.zIndex = layers.length - i;
+    el.style.opacity = (1 - i*0.06).toFixed(2);
+    el.innerHTML = `<span class="lbl">${l.n}</span><span class="val">${l.v}</span>`;
+    stack.appendChild(el);
+  });
+})();
+
+/* ════════ C4 · Sparklines ════════ */
+(function(){
+  document.querySelectorAll('.gd-spark').forEach((svg,idx)=>{
+    let data = svg.dataset.data
+      ? svg.dataset.data.split(',').map(Number)
+      : Array.from({length:8}, ()=> 10 + Math.random()*30);
+    const w=120, h=32;
+    const max = Math.max(...data), min = Math.min(...data);
+    const range = (max-min) || 1;
+    const pts = data.map((v,i)=>{
+      const x = (i/(data.length-1))*w;
+      const y = h - ((v-min)/range)*(h-4) - 2;
+      return [x,y];
+    });
+    const line = pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+    const area = line + ` L${w} ${h} L0 ${h} Z`;
+    const gid = 'sg'+idx;
+    svg.innerHTML = `
+      <defs><linearGradient id="${gid}" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stop-color="#7B4DC4" stop-opacity=".25"/>
+        <stop offset="100%" stop-color="#7B4DC4" stop-opacity="0"/>
+      </linearGradient></defs>
+      <path d="${area}" fill="url(#${gid})"/>
+      <path d="${line}" fill="none" stroke="#7B4DC4" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>`;
+  });
+})();
+
+
+
+
+
+/* ════════ Gem CTA · press + spin (port do v1.0) ════════ */
+(function(){
+  document.querySelectorAll('.gem-cta').forEach(btn=>{
+    if(btn.disabled || btn.classList.contains('is-loading')) return;
+    const press = ()=>{ btn.classList.remove('gem-spinning'); btn.classList.add('gem-pressing'); };
+    const release = ()=>{
+      if(!btn.classList.contains('gem-pressing')) return;
+      btn.classList.remove('gem-pressing');
+      btn.classList.add('gem-spinning');
+      setTimeout(()=>btn.classList.remove('gem-spinning'),600);
+    };
+    btn.addEventListener('pointerdown',press);
+    btn.addEventListener('pointerup',release);
+    btn.addEventListener('pointerleave',()=>btn.classList.remove('gem-pressing'));
+    btn.addEventListener('keydown',e=>{ if(e.key===' '||e.key==='Enter') press(); });
+    btn.addEventListener('keyup',e=>{ if(e.key===' '||e.key==='Enter') release(); });
+  });
+})();
+
+/* Smooth scroll already enabled via html { scroll-behavior:smooth } */
+</script>
+</body>
+</html>

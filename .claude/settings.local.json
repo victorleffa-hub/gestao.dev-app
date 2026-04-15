@@ -29,7 +29,21 @@
       "Bash(Get-Content \"C:\\\\Users\\\\victo\\\\OneDrive\\\\Documents\\\\Ceisc Tech\\\\gestao.dev-app\\\\src\\\\index.css\")",
       "Bash(Measure-Object -Line)",
       "Bash(Select-Object Lines)",
-      "Bash(cmd.exe /c \"cd \\\\\"C:\\\\Users\\\\victo\\\\OneDrive\\\\Documents\\\\Ceisc Tech\\\\gestao.dev-app\\\\\" && npx tsc --noEmit 2>&1\")"
+      "Bash(cmd.exe /c \"cd \\\\\"C:\\\\Users\\\\victo\\\\OneDrive\\\\Documents\\\\Ceisc Tech\\\\gestao.dev-app\\\\\" && npx tsc --noEmit 2>&1\")",
+      "Bash(cmd.exe /c \"cd \\\\\"C:\\\\Users\\\\victo\\\\OneDrive\\\\Documents\\\\Ceisc Tech\\\\gestao.dev-app\\\\\" && dir node_modules /b 2>&1 | find /c /v \\\\\"\\\\\" 2>&1\")",
+      "Bash(cmd.exe /c \"if exist \\\\\"C:\\\\Users\\\\victo\\\\OneDrive\\\\Documents\\\\Ceisc Tech\\\\gestao.dev-app\\\\node_modules\\\\\" \\(echo EXISTS\\) else \\(echo MISSING\\)\")",
+      "Bash(cmd.exe /c \"dir \\\\\"C:\\\\Users\\\\victo\\\\OneDrive\\\\Documents\\\\Ceisc Tech\\\\gestao.dev-app\\\\\" 2>&1\")",
+      "Bash(cmd.exe /c \"cd \\\\\"C:\\\\Users\\\\victo\\\\OneDrive\\\\Documents\\\\Ceisc Tech\\\\gestao.dev-app\\\\\" && npm install 2>&1\")",
+      "Bash(powershell.exe -Command \"Set-Location 'C:\\\\Users\\\\victo\\\\OneDrive\\\\Documents\\\\Ceisc Tech\\\\gestao.dev-app'; npm install 2>&1\")",
+      "Bash(powershell.exe -Command \"Get-Command npm -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source; where.exe npm 2>&1; [System.Environment]::GetEnvironmentVariable\\('Path', 'User'\\) -split ';' | Select-String 'node|npm' 2>&1\")",
+      "Bash(powershell.exe -Command \"Get-ChildItem 'C:\\\\Program Files\\\\nodejs' -ErrorAction SilentlyContinue | Select-Object Name; Get-ChildItem 'C:\\\\Program Files \\(x86\\)\\\\nodejs' -ErrorAction SilentlyContinue | Select-Object Name; Test-Path 'C:\\\\Users\\\\victo\\\\AppData\\\\Roaming\\\\npm\\\\npm.cmd'\")",
+      "Bash(powershell.exe -Command \"Get-ChildItem 'C:\\\\Program Files' -Filter 'node*' -ErrorAction SilentlyContinue | Select-Object Name; Get-ChildItem 'C:\\\\Users\\\\victo\\\\AppData\\\\Local' -Filter 'node*' -ErrorAction SilentlyContinue | Select-Object Name; Get-ChildItem 'C:\\\\Users\\\\victo\\\\AppData\\\\Roaming' -Filter 'nvm*' -ErrorAction SilentlyContinue | Select-Object Name\")",
+      "Bash(powershell.exe -Command \"Get-ChildItem 'C:\\\\' -Filter 'nvm' -ErrorAction SilentlyContinue; Get-ChildItem 'C:\\\\Users\\\\victo' -Filter '.nvm' -ErrorAction SilentlyContinue; Get-ChildItem 'C:\\\\ProgramData' -Filter 'nvm*' -ErrorAction SilentlyContinue | Select-Object Name\")",
+      "Bash(powershell.exe -Command '$env:PATH -split '\\\\'';'\\\\'' | ForEach-Object { $_ } | Select-String '\\\\''node|nvm|npm'\\\\'' -CaseSensitive:$false')",
+      "Bash(powershell.exe -Command '$env:PATH')",
+      "Bash(bun --version)",
+      "Bash(bun install:*)",
+      "Bash(bun run:*)"
     ]
   }
 }
