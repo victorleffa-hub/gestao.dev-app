@@ -343,7 +343,7 @@ export function Dashboard() {
         <div className="page-header-left">
           <span className="section-tag">
             <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--c-success)', boxShadow: '0 0 6px var(--c-success)', display: 'inline-block' }} />
-            gestao.dev · Sprint 6
+            Lin-Dev · Sprint 6
           </span>
           <h1 className="page-title">
             Bom dia, <span className="gradient-text">Victor</span>

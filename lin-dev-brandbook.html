@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>gestao.dev — Design System</title>
+<title>Lin-Dev — Brand Book + Design System</title>
 <style>
 @font-face { font-family:'Geist'; src:url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-Light.woff2') format('woff2'); font-weight:300; font-display:swap; }
 @font-face { font-family:'Geist'; src:url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-Regular.woff2') format('woff2'); font-weight:400; font-display:swap; }
@@ -135,9 +135,9 @@ body{font-family:var(--f-sans);background:var(--bg-primary);color:var(--text-sec
 /* ── TOC ── */
 .toc{padding:60px 0;border-bottom:1px dashed var(--border-vis)}
 .toc h2{color:#fff;font-size:1.25rem;font-weight:600;margin-bottom:24px;letter-spacing:-0.02em}
-.toc .container{max-width:1120px}
-.toc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px 56px}
-@media(max-width:768px){.toc-grid{grid-template-columns:1fr}}
+.toc .container{max-width:1280px}
+.toc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px 40px}
+@media(max-width:1024px){.toc-grid{grid-template-columns:repeat(2,1fr)}}
 .toc-group-label{font-family:var(--f-mono);font-size:0.5625rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple-light);font-weight:600;padding:12px 0 8px;border-bottom:1px solid var(--border-accent)}
 .toc-list{list-style:none;counter-reset:toc}
 .toc-list li{counter-increment:toc;border-bottom:1px solid var(--border);padding:10px 0;display:flex;align-items:center;gap:12px;transition:color 0.2s}
@@ -632,6 +632,7 @@ body{font-family:var(--f-sans);background:var(--bg-primary);color:var(--text-sec
   background:rgba(255,255,255,.03)}
 .gd-btn-ghost:disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
 
+
 /* ════════ E · STATES ════════ */
 .gd-state-row{display:grid;grid-template-columns:120px 1fr;gap:var(--space-7);
   align-items:center;padding:var(--space-5) 0;border-bottom:1px dashed var(--c-border)}
@@ -640,7 +641,7 @@ body{font-family:var(--f-sans);background:var(--bg-primary);color:var(--text-sec
 .gd-state-row .demo{display:flex;gap:var(--space-5);align-items:center;flex-wrap:wrap}
 .gd-state-row .desc{font-size:.78rem;color:var(--c-text-muted);font-family:var(--f-mono)}
 
-/* GemLoader · único padrão de loading no gestao.dev (port do v1.0) */
+/* GemLoader · único padrão de loading no Lin-Dev (port do v1.0) */
 .gem-loader{display:inline-block;flex-shrink:0}
 @keyframes gem-pulse{0%,100%{transform:scale(.82);opacity:.85}50%{transform:scale(1.05);opacity:1}}
 .gem-loader--pulse{transform-origin:50% 50%;animation:gem-pulse 2.4s ease-in-out infinite;
@@ -868,8 +869,8 @@ body{font-family:var(--f-sans);background:var(--bg-primary);color:var(--text-sec
 
 <nav class="bb-nav">
   <div class="bb-nav-inner">
-    <div class="bb-nav-logo">gestao<span class="dot">.</span>dev</div>
-    <div class="bb-nav-meta">Design System · v1.1 · Time de Design</div>
+    <div class="bb-nav-logo">lin<span class="dot">-</span>dev</div>
+    <div class="bb-nav-meta">Brand Book + Design System · v1.1</div>
   </div>
 </nav>
 
@@ -878,25 +879,25 @@ body{font-family:var(--f-sans);background:var(--bg-primary);color:var(--text-sec
   <!-- Hero · logo horizontal (gema + wordmark) -->
   <div class="cover-hero">
     <svg class="gem" aria-hidden="true"><use href="#gd-logo"/></svg>
-    <div class="cover-logo">gestao<span class="dot">.</span>dev</div>
+    <div class="cover-logo">lin<span class="dot">-</span>dev</div>
   </div>
   <div class="cover-divider"></div>
-  <div class="cover-label">Design System</div>
-  <div class="cover-desc">Tokens, componentes, padrões de UX &amp; brand assets — referência para o time de design e engenharia</div>
+  <div class="cover-label">Brand Book + Design System</div>
+  <div class="cover-desc">Posicionamento, Identidade, Playbook &amp; Referência Visual Completa</div>
 
   <div class="cover-parts">
     <div class="cover-part">
-      <div class="cover-part-num">Fundações</div>
-      <div class="cover-part-title">DS·01 — DS·12</div>
-      <div class="cover-part-desc">Logo, cores, tipografia, motion, CTAs, cards</div>
+      <div class="cover-part-num">Parte I</div>
+      <div class="cover-part-title">Marca &amp; Posicionamento</div>
+      <div class="cover-part-desc">15 seções — estratégia, tom, personas</div>
     </div>
     <div class="cover-part">
-      <div class="cover-part-num">Componentes &amp; UX</div>
-      <div class="cover-part-title">A — L</div>
-      <div class="cover-part-desc">Formulários, dashboard, interface, ícones, email</div>
+      <div class="cover-part-num">Parte II</div>
+      <div class="cover-part-title">Design System</div>
+      <div class="cover-part-desc">Tokens, componentes, UX &amp; brand assets</div>
     </div>
   </div>
-  <div class="cover-version">v1.1 · Abril 2026 · Confidencial · para o time de design</div>
+  <div class="cover-version">v1.1 · Abril 2026 · Confidencial</div>
 </section>
 
 <!-- ═══════ TOC ═══════ -->
@@ -905,8 +906,27 @@ body{font-family:var(--f-sans);background:var(--bg-primary);color:var(--text-sec
     <h2>Sumário</h2>
     <div class="toc-grid">
       <div>
-        <div class="toc-group-label">Fundações — DS·01 → DS·12</div>
+        <div class="toc-group-label">Parte I — Marca &amp; Posicionamento</div>
         <ol class="toc-list">
+          <li><a href="#s01">Visão Geral da Marca</a></li>
+          <li><a href="#s02">Propósito, Missão, Visão e Valores</a></li>
+          <li><a href="#s03">Posicionamento Estratégico</a></li>
+          <li><a href="#s04">Arquitetura de Mensagem</a></li>
+          <li><a href="#s05">Arquétipo de Marca</a></li>
+          <li><a href="#s06">Persona da Marca</a></li>
+          <li><a href="#s07">Buyer Personas</a></li>
+          <li><a href="#s08">Tom de Voz &amp; Diretrizes</a></li>
+          <li><a href="#s09">Dicionário de Marca</a></li>
+          <li><a href="#s10">Manifesto</a></li>
+          <li><a href="#s11">Taglines &amp; Slogans</a></li>
+          <li><a href="#s12">Aplicações por Canal</a></li>
+          <li><a href="#s13">Do's &amp; Don'ts</a></li>
+          <li><a href="#s14">Métricas de Marca</a></li>
+        </ol>
+      </div>
+      <div>
+        <div class="toc-group-label">Parte II — Design System</div>
+        <ol class="toc-list" style="counter-reset:toc 14">
           <li><a href="#ds01">Logo &amp; Identidade Visual</a></li>
           <li><a href="#ds02">Paleta de Cores</a></li>
           <li><a href="#ds03">Gradientes</a></li>
@@ -914,7 +934,7 @@ body{font-family:var(--f-sans);background:var(--bg-primary);color:var(--text-sec
           <li><a href="#ds05">Espaçamento &amp; Layout</a></li>
           <li><a href="#ds06">Border Radius</a></li>
           <li><a href="#ds07">Sombras</a></li>
-          <li><a href="#ds08">Padrão de Seção &amp; Divider</a></li>
+          <li><a href="#ds08">Padrão de Seção</a></li>
           <li><a href="#ds09">Cards</a></li>
           <li><a href="#ds10">CTAs — Gem Button</a></li>
           <li><a href="#ds11">GemLoader</a></li>
@@ -922,8 +942,8 @@ body{font-family:var(--f-sans);background:var(--bg-primary);color:var(--text-sec
         </ol>
       </div>
       <div>
-        <div class="toc-group-label">Componentes &amp; UX — A → L</div>
-        <ol class="toc-list" style="counter-reset:toc 12">
+        <div class="toc-group-label">Parte II · continuação — Componentes, UX &amp; Brand</div>
+        <ol class="toc-list" style="counter-reset:toc 26">
           <li><a href="#a">Tokens (spacing, z-index, breakpoints)</a></li>
           <li><a href="#b">Formulários (input, select, checkbox, textarea)</a></li>
           <li><a href="#c">Dashboard (KPI, semáforo, progress, sparkline)</a></li>
@@ -942,12 +962,547 @@ body{font-family:var(--f-sans);background:var(--bg-primary);color:var(--text-sec
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════ -->
-<!--                FUNDAÇÕES — DS·01 → DS·12                   -->
+<!--                    PART I — MARCA                         -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 <div class="part-divider">
-  <div class="part-divider-label">Fundações</div>
-  <div class="part-divider-title">Tokens &amp; Componentes Base</div>
-  <div class="part-divider-desc">Logo, cores, tipografia, espaçamento, radius, sombras, cards, CTAs, gem-loader, motion</div>
+  <div class="part-divider-label">Parte I</div>
+  <div class="part-divider-title">Marca & Posicionamento</div>
+  <div class="part-divider-desc">Estratégia, identidade verbal e diretrizes de comunicação</div>
+</div>
+
+<section class="section" id="s01">
+  <div class="container">
+    <span class="section-num">01</span>
+    <h2>Visão Geral da Marca</h2>
+
+    <h3>O que é o Lin-Dev</h3>
+    <p>O Lin-Dev é um project manager construído exclusivamente para <strong>desenvolvedores e squads de desenvolvimento</strong>. Diferente de ferramentas de gestão genéricas, ele foi desenhado para devolver ao time o tempo perdido com tarefas operacionais — atualizar boards, mover cards, preencher status, re-explicar contexto.</p>
+    <p>A ferramenta cuida da burocracia de gestão para que o dev cuide do código. Sprints, tarefas, ideias e bugs vivem num lugar só, com <strong>dashboards que mostram exatamente o que está acontecendo</strong> — quem está fazendo o quê, o que está atrasado, onde o time está travado — sem precisar perguntar para ninguém.</p>
+    <p>Além disso, possui integração nativa com o protocolo MCP (Model Context Protocol), permitindo que ferramentas de AI coding acessem tarefas e contexto diretamente no terminal. Mas a IA é meio, não fim: <strong>o produto é a gestão fluida, não o hype de inteligência artificial.</strong></p>
+
+    <h3>Categoria de mercado</h3>
+    <p><strong>Project Management para Desenvolvedores</strong> — uma subcategoria que o Lin-Dev está definindo. Não competimos com Jira, Linear ou Asana por features de PM genérico. Competimos com o fato de que nenhuma ferramenta de gestão existente foi construída para se encaixar no dia a dia real de quem coda.</p>
+
+    <h3>Diferenciais inegáveis</h3>
+    <div class="card-grid">
+      <div class="card">
+        <h4>Board que se atualiza</h4>
+        <p>O squad para de gastar 25+ min/dia arrastando cards. A ferramenta mantém o board em sincronia com o que está acontecendo de verdade.</p>
+      </div>
+      <div class="card">
+        <h4>Dashboards de clareza total</h4>
+        <p>Visão em tempo real de prazos, velocidade do time, tarefas bloqueadas e distribuição de carga. Leitura instantânea.</p>
+      </div>
+      <div class="card">
+        <h4>MCP nativo</h4>
+        <p>O Claude Code (ou qualquer ferramenta compatível) acessa tarefas direto no terminal. Zero copy-paste.</p>
+      </div>
+      <div class="card">
+        <h4>Dev Virtual</h4>
+        <p>Agente autônomo que pega tarefas do kanban, implementa e abre PRs — paga apenas quando trabalha.</p>
+      </div>
+      <div class="card">
+        <h4>Workflow Ideia→Exec</h4>
+        <p>De uma ideia no banco de ideias até um PR aberto, sem fricções.</p>
+      </div>
+      <div class="card">
+        <h4>Setup em 2 minutos</h4>
+        <p>Zero configuração complexa. Criou conta, montou o board, pronto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 02 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s02">
+  <div class="container">
+    <span class="section-num">02</span>
+    <h2>Propósito, Missão, Visão e Valores</h2>
+
+    <h3>Propósito <span style="color:var(--text-muted);font-weight:400;font-size:0.875rem;">— Por que existimos</span></h3>
+    <div class="bb-quote">Devolver ao desenvolvedor o tempo que ferramentas de gestão roubam dele todos os dias.</div>
+    <p>Toda hora gasta arrastando cards, preenchendo status e montando relatórios manuais é uma hora roubada da criação. Existimos para eliminar essa burocracia e dar ao dev visão clara do que importa — sem esforço.</p>
+
+    <h3>Missão <span style="color:var(--text-muted);font-weight:400;font-size:0.875rem;">— O que fazemos</span></h3>
+    <p>Simplificar radicalmente a gestão de projetos de desenvolvimento, automatizando o trabalho operacional e entregando dashboards que transformam dados dispersos em decisões claras — para que o time foque em resolver problemas, não em manter ferramentas.</p>
+
+    <h3>Visão <span style="color:var(--text-muted);font-weight:400;font-size:0.875rem;">— Onde queremos chegar</span></h3>
+    <p>Ser o project manager padrão de squads de desenvolvimento em todo o mundo — a ferramenta que finalmente fez a gestão desaparecer dentro do fluxo de trabalho.</p>
+
+    <h3>Valores da marca</h3>
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Valor</th><th>Significado prático</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Clareza</td><td>O time precisa ver o que está acontecendo em 3 segundos. Dashboards legíveis, dados em tempo real, zero ambiguidade sobre prazos, responsáveis e bloqueios.</td></tr>
+          <tr><td class="label">Fluidez</td><td>Tudo deve fluir. Se o dev precisa trocar de aba ou gastar tempo atualizando board, a ferramenta falhou.</td></tr>
+          <tr><td class="label">Precisão</td><td>Funcionalidade cirúrgica. Zero feature bloat. Cada elemento resolve um problema real de quem desenvolve.</td></tr>
+          <tr><td class="label">Transparência</td><td>Preço claro, roadmap aberto, comunicação honesta. Sem asteriscos.</td></tr>
+          <tr><td class="label">Autonomia</td><td>A ferramenta se adapta ao time, nunca o contrário. Sem impor processos rígidos.</td></tr>
+          <tr><td class="label">Craft</td><td>Obsessão por qualidade no detalhe: tipografia, animações, performance, UX. Software feito por quem se importa.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 03 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s03">
+  <div class="container">
+    <span class="section-num">03</span>
+    <h2>Posicionamento Estratégico</h2>
+
+    <h3>Declaração de posicionamento</h3>
+    <div class="callout callout--purple">
+      <p>Para <strong>desenvolvedores e squads de desenvolvimento</strong> que perdem tempo gerenciando ferramentas em vez de codar, o <strong style="color:var(--purple-light);">Lin-Dev</strong> é o <strong>project manager que cuida da burocracia de gestão sozinho</strong> — mantendo o board atualizado, mostrando prazos e bloqueios em dashboards claras, e conectando tarefas ao terminal via MCP — para que o time gaste zero tempo organizando e 100% do tempo criando.</p>
+    </div>
+
+    <h3>Framework de posicionamento</h3>
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Dimensão</th><th>Definição</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Público-alvo</td><td>Devs solo, squads de 2-15 desenvolvedores, founders técnicos, tech leads de startups</td></tr>
+          <tr><td class="label">Categoria</td><td>Project Management para Desenvolvedores</td></tr>
+          <tr><td class="label">Promessa central</td><td>O board se atualiza, as dashboards mostram tudo, e o time ganha horas de volta todo dia</td></tr>
+          <tr><td class="label">Razão para acreditar</td><td>Automação real do board + dashboards em tempo real + MCP nativo + Dev Virtual</td></tr>
+          <tr><td class="label">Território emocional</td><td>O alívio de abrir o board e ele já estar certo. Sem ter feito nada.</td></tr>
+          <tr><td class="label">Inimigo</td><td>O tempo perdido com burocracia de gestão: arrastar cards, preencher status, montar relatórios, re-explicar contexto.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Diferenciação competitiva</h3>
+    <p>O Lin-Dev não compete por features de PM genérico. Compete por relevância no dia a dia do desenvolvedor. Ferramentas tradicionais exigem que o dev pare de codar para gerenciar. O Lin-Dev faz a gestão acontecer automaticamente, mostra o status real via dashboards e devolve ao time o tempo que antes era gasto em trabalho operacional.</p>
+    <p>A conexão com IA (MCP) é uma consequência natural dessa filosofia: se a ferramenta já organiza o contexto de forma estruturada, entregar isso para um agente de IA no terminal é o próximo passo lógico — não o ponto de partida.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 04 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s04">
+  <div class="container">
+    <span class="section-num">04</span>
+    <h2>Arquitetura de Mensagem</h2>
+
+    <h3>Narrativa central</h3>
+    <div class="bb-quote">O Lin-Dev é o project manager que cuida da gestão para você cuidar do código. O board se atualiza sozinho, as dashboards mostram prazos e bloqueios em tempo real, e o Claude Code lê tudo via MCP. Seu time ganha horas de volta todo dia.</div>
+
+    <h3>Hierarquia de mensagens</h3>
+    <ul class="bb-list">
+      <li><strong>Nível 1 — Promessa:</strong> "A gestão que se resolve sozinha. O tempo que volta pro seu squad."</li>
+      <li><strong>Nível 2 — Suporte:</strong> "Board atualizado automaticamente. Dashboards com visibilidade total. MCP nativo para o terminal."</li>
+      <li><strong>Nível 3 — Prova:</strong> Dashboards reais mostrando dados do sprint, terminal rodando com MCP, ROI de 13×.</li>
+      <li><strong>Nível 4 — CTA:</strong> "Quero acesso antecipado" / "Ver demo"</li>
+    </ul>
+
+    <h3>Pilares de comunicação</h3>
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Pilar</th><th>Mensagem-chave</th><th>Prova</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Tempo devolvido</td><td>Pare de gerenciar a ferramenta. Ela se gerencia.</td><td>Board automático, 25min/dia economizados por dev, ROI 13×</td></tr>
+          <tr><td class="label">Clareza de dados</td><td>Veja tudo que importa em 3 segundos.</td><td>Dashboards de sprint, velocidade, prazos, bloqueios, carga por dev</td></tr>
+          <tr><td class="label">Conexão nativa</td><td>Seu terminal já sabe o que fazer.</td><td>MCP Server, zero copy-paste, contexto persistente</td></tr>
+          <tr><td class="label">Autonomia inteligente</td><td>Um dev que nunca dorme.</td><td>Dev Virtual: 3 PRs/dia, 17min/tarefa, custo zero em idle</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Ordem de ênfase na comunicação</h3>
+    <ol class="order-list">
+      <li><strong>A ferramenta:</strong> O que o Lin-Dev faz pelo time (automatiza board, mostra dados, economiza tempo).</li>
+      <li><strong>Os dados:</strong> As dashboards que dão visibilidade total ao que está acontecendo.</li>
+      <li><strong>A conexão:</strong> MCP como extensão natural para quem usa IA no terminal.</li>
+      <li><strong>A automação avançada:</strong> Dev Virtual como multiplicador para quem quer ir além.</li>
+    </ol>
+
+    <div class="callout">
+      <p><strong>Regra de ouro:</strong> A IA nunca é o protagonista. O protagonista é o tempo que o squad ganha de volta e a clareza que as dashboards entregam. Se a frase faz sentido sem mencionar IA, ela está certa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 05 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s05">
+  <div class="container">
+    <span class="section-num">05</span>
+    <h2>Arquétipo de Marca</h2>
+
+    <h3>Primário: O Mago <span style="color:var(--text-muted);font-weight:400;">(The Magician)</span></h3>
+    <p>O Mago transforma a realidade. Pega algo complexo e faz parecer simples. É exatamente o que o Lin-Dev faz: transforma a gestão de projetos de um fardo burocrático em algo que simplesmente acontece — o board se atualiza, as dashboards se montam, o dev nunca precisou parar de codar.</p>
+    <ul class="bb-list">
+      <li><strong>Motivação:</strong> Entender as leis fundamentais e usá-las para criar transformação real — não teatral.</li>
+      <li><strong>Medo:</strong> Prometer magia e entregar fumaça (por isso, dashboards com dados reais, não storytelling vazio).</li>
+      <li><strong>Estratégia:</strong> Mostrar resultado, não tecnologia. O dev vê o board atualizado e sente que é mágica. Sob o capô, é engenharia.</li>
+    </ul>
+
+    <h3>Secundário: O Criador <span style="color:var(--text-muted);font-weight:400;">(The Creator)</span></h3>
+    <p>Valoriza a excelência artística. No Lin-Dev, isso se manifesta no design system obsessivamente construído, nas animações da gema, na tipografia Geist, na paleta deep purple. A ferramenta não é apenas funcional — é bonita. Porque desenvolvedores merecem ferramentas com a mesma qualidade do código que escrevem.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 06 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s06">
+  <div class="container">
+    <span class="section-num">06</span>
+    <h2>Persona da Marca</h2>
+
+    <div class="bb-quote">Se o Lin-Dev fosse uma pessoa, seria o tech lead que mantém o squad organizado sem ninguém perceber — direto, eficiente, zero bullshit, e surpreendentemente atencioso com quem precisa de uma dashboard clara às 17h de sexta.</div>
+
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Atributo</th><th>Definição</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Nome simbólico</td><td>O Tech Lead silencioso</td></tr>
+          <tr><td class="label">Personalidade</td><td>Calmo, confiante, preciso. Fala pouco, mas quando fala, resolve. Organiza sem burocratizar.</td></tr>
+          <tr><td class="label">Tom emocional</td><td>Empoderamento silencioso. Não grita "revolução IA". Mostra o board atualizado e a dashboard limpa.</td></tr>
+          <tr><td class="label">Postura social</td><td>Presente onde devs estão (X/Twitter, GitHub, Discord). Conversa sobre produtividade real, não hype.</td></tr>
+          <tr><td class="label">Humor</td><td>Seco, técnico, sutil. Referências de dev culture. Nunca forçado.</td></tr>
+          <tr><td class="label">É</td><td>A ferramenta. O aliado silencioso do squad. O board que funciona.</td></tr>
+          <tr><td class="label">Não é</td><td>Vendedor de IA. Hype machine. "Gamechanger" genérico. Corporação de terno.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 07 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s07">
+  <div class="container">
+    <span class="section-num">07</span>
+    <h2>Buyer Personas</h2>
+
+    <!-- Persona 1 -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-avatar">R</div>
+        <div>
+          <div class="persona-name">O Dev Solo Produtivo</div>
+          <div class="persona-role">"Rafael" — Full-stack dev, 26 anos, 3-5 anos de experiência</div>
+        </div>
+      </div>
+      <ul class="bb-list">
+        <li><strong>Cenário:</strong> Trabalha sozinho ou com 1-2 freelancers. Tem 3+ projetos paralelos.</li>
+        <li><strong>Dor principal:</strong> Perde tempo mantendo Trello/Notion atualizados. Não tem visão clara do que está atrasado.</li>
+        <li><strong>Motivação:</strong> Quer abrir o board e ver o status real, sem ter atualizado nada.</li>
+        <li><strong>Gatilho de compra:</strong> Ver a dashboard mostrando onde cada projeto está. "Não preciso atualizar nada?"</li>
+        <li><strong>Objeção:</strong> "Já tenho meu sistema no Notion." → "Seu Notion exige que você atualize ele manualmente. Todo dia."</li>
+        <li><strong>Plano ideal:</strong> Free → Pro</li>
+      </ul>
+    </div>
+
+    <!-- Persona 2 -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-avatar">C</div>
+        <div>
+          <div class="persona-name">O Tech Lead Pragmático</div>
+          <div class="persona-role">"Camila" — Tech Lead, 32 anos, squad de 4-8 devs</div>
+        </div>
+      </div>
+      <ul class="bb-list">
+        <li><strong>Cenário:</strong> Lidera um squad em startup. Gasta 1h+ por dia verificando status e montando reports.</li>
+        <li><strong>Dor principal:</strong> Sprint meetings longas porque ninguém atualiza o board. Reports manuais toda sexta.</li>
+        <li><strong>Motivação:</strong> Uma dashboard onde ela abre e vê: quem fez o quê, o que está atrasado, velocidade do time.</li>
+        <li><strong>Gatilho de compra:</strong> ROI de 13× + a dashboard de sprint com dados reais. "Isso substitui minha planilha."</li>
+        <li><strong>Objeção:</strong> "E se não tiver feature X do Jira?" → "Você usa 100% das features do Jira? Ou gasta tempo configurando features que ninguém usa?"</li>
+        <li><strong>Plano ideal:</strong> Pro → Max</li>
+      </ul>
+    </div>
+
+    <!-- Persona 3 -->
+    <div class="persona-card">
+      <div class="persona-header">
+        <div class="persona-avatar">M</div>
+        <div>
+          <div class="persona-name">O Founder Técnico</div>
+          <div class="persona-role">"Marcos" — CTO/Co-founder, 35 anos, startup early-stage</div>
+        </div>
+      </div>
+      <ul class="bb-list">
+        <li><strong>Cenário:</strong> Squad pequeno (2-5 devs), queimando caixa. Faz code review, PM e product ao mesmo tempo.</li>
+        <li><strong>Dor principal:</strong> Precisa de visibilidade total sem microgerenciar. Mais output com menos overhead.</li>
+        <li><strong>Motivação:</strong> Dashboard de CTO: velocidade, prazos, carga, bloqueios. Tudo em uma tela. Dev Virtual como multiplicador.</li>
+        <li><strong>Gatilho de compra:</strong> Ver o Dev Virtual abrindo 3 PRs enquanto o time faz code review.</li>
+        <li><strong>Objeção:</strong> "Será que o código tem qualidade?" → "Testes passam. Code review é seu."</li>
+        <li><strong>Plano ideal:</strong> Max (direto)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 08 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s08">
+  <div class="container">
+    <span class="section-num">08</span>
+    <h2>Tom de Voz & Diretrizes de Comunicação</h2>
+
+    <h3>Princípios do tom</h3>
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Atributo</th><th>Significa</th><th>Não significa</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Técnico</td><td>Usa termos que devs entendem. PRs, sprints, dashboards sem traduzir.</td><td>Jargão forçado. Gatekeeping.</td></tr>
+          <tr><td class="label">Direto</td><td>Vai ao ponto. Respeita o tempo. Frases curtas e acionáveis.</td><td>Rude, frio ou descartável.</td></tr>
+          <tr><td class="label">Confiante</td><td>Afirma com clareza. A ferramenta entrega, não promete.</td><td>Arrogante. Nunca desmerece concorrentes com nome.</td></tr>
+          <tr><td class="label">Prático</td><td>Foca no que a ferramenta FAZ, não no que ela É. Resultados > tecnologia.</td><td>Hype de IA. Buzzwords. "Revolucionário".</td></tr>
+          <tr><td class="label">Artesanal</td><td>Cada palavra é escolhida. A formação visual da frase importa.</td><td>Rebuscado. Poesia corporativa.</td></tr>
+          <tr><td class="label">Com humor</td><td>Referências sutis de dev culture. Terminal como storytelling.</td><td>Memes forçados que precisam de explicação.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Regra de ouro para IA na comunicação</h3>
+    <div class="callout">
+      <p><strong>Nunca lidere com IA.</strong> A mensagem primária é sempre sobre o que a ferramenta faz pelo dev: economiza tempo, mostra dados, mantém o board atualizado. A IA (MCP, Dev Virtual) aparece como <strong style="color:#fff;">extensão natural</strong> dessa proposta, nunca como o ponto central. Se a frase faz sentido sem mencionar IA, ela está certa.</p>
+    </div>
+
+    <h3>Escala de formalidade por canal</h3>
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Canal</th><th>Formalidade</th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Landing page</td><td>5/10 — Assertivo</td><td>"O board que se atualiza. As dashboards que mostram tudo."</td></tr>
+          <tr><td class="label">Docs/Help</td><td>6/10 — Didático</td><td>"Configure seu primeiro sprint em 3 passos."</td></tr>
+          <tr><td class="label">Twitter/X</td><td>3/10 — Casual</td><td>"Quem ainda arrasta card manualmente na sexta às 17h?"</td></tr>
+          <tr><td class="label">Email</td><td>5/10 — Pessoal</td><td>"Seu sprint fechou. Aqui está o resumo. Você não precisou montar nada."</td></tr>
+          <tr><td class="label">Changelogs</td><td>4/10 — Técnico</td><td>"v0.9: Dashboard de velocidade agora com comparativo por sprint."</td></tr>
+          <tr><td class="label">Suporte</td><td>6/10 — Empático</td><td>"Entendi o problema. Já ajustamos. Tenta de novo?"</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 09 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s09">
+  <div class="container">
+    <span class="section-num">09</span>
+    <h2>Dicionário de Marca</h2>
+
+    <h3>Termos oficiais</h3>
+    <p>Use sempre exatamente como descrito. Consistência é crítica.</p>
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Termo</th><th>Grafia correta</th><th>Uso</th><th>Nunca use</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Nome</td><td>Lin-Dev</td><td>L e D maiúsculos, hífen obrigatório.</td><td class="dont">lin-dev, LIN-DEV, LinDev, Lin Dev</td></tr>
+          <tr><td class="label">Público</td><td>desenvolvedores / devs</td><td>A marca fala com quem coda.</td><td class="dont">engenheiros, programadores</td></tr>
+          <tr><td class="label">Painéis</td><td>dashboards</td><td>Minúscula. Nunca traduzir.</td><td class="dont">painéis, relatórios</td></tr>
+          <tr><td class="label">Protocolo</td><td>MCP</td><td>Maiúscula. 1ª menção: MCP (Model Context Protocol)</td><td class="dont">mcp, Mcp</td></tr>
+          <tr><td class="label">Agente</td><td>Dev Virtual</td><td>Com maiúsculas.</td><td class="dont">dev virtual, DV (só UI)</td></tr>
+          <tr><td class="label">Logo icon</td><td>Gema</td><td>Hexágono 6 faces, gradiente purple.</td><td class="dont">Diamante, cristal</td></tr>
+          <tr><td class="label">Planos</td><td>Free / Pro / Max</td><td>Maiúscula inicial.</td><td class="dont">free, pro, PREMIUM</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Vocabulário preferido</h3>
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Use ✓</th><th>Evite ✗</th><th>Motivo</th></tr></thead>
+        <tbody>
+          <tr><td class="do">desenvolvedores / devs</td><td class="dont">engenheiros / programadores</td><td>"Engenheiro" é frio e corporativo</td></tr>
+          <tr><td class="do">squad / time</td><td class="dont">equipe / departamento</td><td>Cultura dev</td></tr>
+          <tr><td class="do">dashboard</td><td class="dont">painel / relatório</td><td>Termo universal, não traduzir</td></tr>
+          <tr><td class="do">visibilidade</td><td class="dont">monitoramento / tracking</td><td>"Visibilidade" = clareza; "monitoramento" = vigilância</td></tr>
+          <tr><td class="do">board / kanban</td><td class="dont">quadro / painel de tarefas</td><td>Universais em dev</td></tr>
+          <tr><td class="do">automaticamente</td><td class="dont">com IA / inteligentemente</td><td>Foco no resultado, não na tecnologia</td></tr>
+          <tr><td class="do">bloqueio</td><td class="dont">impedimento</td><td>Direto, sem jargão de PMO</td></tr>
+          <tr><td class="do">ferramenta</td><td class="dont">plataforma / solução</td><td>"Ferramenta" é honesto. "Plataforma" é corporação.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 10 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s10">
+  <div class="container">
+    <span class="section-num">10</span>
+    <h2>Manifesto</h2>
+
+    <div class="manifesto">
+      <p class="highlight">Nós acreditamos que a melhor gestão é a que você não percebe.</p>
+      <div class="spacer"></div>
+      <p>Que o board ideal não é o mais bonito — é o que se atualiza sozinho.</p>
+      <p>Que a melhor dashboard é a que responde antes de você perguntar.</p>
+      <p>Que o melhor processo é o que desaparece no fluxo.</p>
+      <div class="spacer"></div>
+      <p>Construímos o Lin-Dev porque cansamos de ferramentas que existem pra ser gerenciadas.</p>
+      <p>Ferramentas que pedem mais tempo do que devolvem.</p>
+      <p>Ferramentas que vivem numa aba que você nunca quer abrir.</p>
+      <div class="spacer"></div>
+      <p>Aqui, o board sabe o que está acontecendo.</p>
+      <p>As dashboards mostram prazos, bloqueios e velocidade — sem você montar nada.</p>
+      <p>O sprint fecha e o resumo já está lá.</p>
+      <div class="spacer"></div>
+      <p>E se você usa IA pra codar, ela lê tudo direto no terminal.</p>
+      <p>Sem copiar. Sem colar. Sem trocar de aba.</p>
+      <div class="spacer"></div>
+      <p class="highlight">Mas o ponto não é a IA.</p>
+      <p class="highlight">O ponto é o tempo que volta pro seu squad.</p>
+      <div class="spacer"></div>
+      <p>Isso não é o futuro.</p>
+      <p class="highlight">É o presente que construímos juntos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 11 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s11">
+  <div class="container">
+    <span class="section-num">11</span>
+    <h2>Taglines & Slogans</h2>
+
+    <h3>Tagline principal</h3>
+    <div class="bb-quote">O project manager que cuida da gestão para você cuidar do código.</div>
+    <p>Uso: footer, assinaturas de email, meta descriptions, perfis sociais.</p>
+
+    <h3>Tagline secundária <span style="color:var(--text-muted);font-weight:400;font-size:0.875rem;">— quando MCP é relevante</span></h3>
+    <div class="bb-quote">O project manager que sua IA consegue usar.</div>
+    <p>Uso: contextos onde o público já usa Claude Code ou ferramentas MCP. Não usar como tagline principal.</p>
+
+    <h3>Headlines cenário-específicas</h3>
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Contexto</th><th>Headline</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Landing hero</td><td>A gestão que se resolve sozinha. O tempo que volta pro seu squad.</td></tr>
+          <tr><td class="label">Dashboards</td><td>Veja tudo que importa em 3 segundos.</td></tr>
+          <tr><td class="label">Board automático</td><td>O board que se atualiza. O dev que não para de codar.</td></tr>
+          <tr><td class="label">MCP</td><td>Seu terminal já sabe o que fazer.</td></tr>
+          <tr><td class="label">Dev Virtual</td><td>Um dev que nunca dorme.</td></tr>
+          <tr><td class="label">ROI</td><td>O ROI é matemática, não marketing.</td></tr>
+          <tr><td class="label">Pricing</td><td>Simples. Transparente. Justo.</td></tr>
+          <tr><td class="label">Pain point</td><td>25 minutos por dia arrastando cards. Multiplica pelo time. Faz as contas.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 12 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s12">
+  <div class="container">
+    <span class="section-num">12</span>
+    <h2>Aplicações por Canal</h2>
+
+    <h3>Website (Lin-Dev)</h3>
+    <ul class="bb-list">
+      <li>Background escuro. Nunca fundo branco.</li>
+      <li>Hero focado na proposta de valor da ferramenta (tempo devolvido, board automático).</li>
+      <li>Seção de dashboards com screenshots reais mostrando dados de sprint.</li>
+      <li>MCP e Dev Virtual aparecem como features, não como o pitch central.</li>
+      <li>CTAs sempre com Gem CTA.</li>
+      <li>Internacionalização: PT, EN, ES.</li>
+    </ul>
+
+    <h3>Redes sociais</h3>
+    <ul class="bb-list">
+      <li><strong>Twitter/X:</strong> Conteúdo sobre dores reais (board desatualizado, sprint meeting de 1h). Screenshots de dashboards.</li>
+      <li><strong>GitHub:</strong> README impecável. GIFs das dashboards e do MCP funcionando.</li>
+      <li><strong>Discord:</strong> Comunidade, feedback loop, early adopters.</li>
+      <li><strong>LinkedIn:</strong> Apenas ROI e case studies com dados. Nunca "post motivacional".</li>
+    </ul>
+
+    <h3>Produto (UI/UX)</h3>
+    <ul class="bb-list">
+      <li>Design System v1.0 é a referência absoluta.</li>
+      <li><strong>Dashboards são first-class citizens:</strong> proeminentes, dados sempre frescos, leitura em &lt;3 segundos.</li>
+      <li>Indicadores semáforos em cards: verde (no prazo), amarelo (risco), vermelho (atrasado).</li>
+      <li>Loading states com GemLoader (gema animada).</li>
+      <li>Micro-interações com spring easing.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 14 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s13">
+  <div class="container">
+    <span class="section-num">13</span>
+    <h2>Do's & Don'ts</h2>
+
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th style="color:var(--green);">✓ Do (Sempre)</th><th style="color:var(--red);">✗ Don't (Nunca)</th></tr></thead>
+        <tbody>
+          <tr><td class="do">Liderar com o que a ferramenta faz pelo dev</td><td class="dont">Liderar com IA, MCP ou tecnologia</td></tr>
+          <tr><td class="do">Falar "desenvolvedores" ou "devs"</td><td class="dont">Falar "engenheiros" ou "profissionais de TI"</td></tr>
+          <tr><td class="do">Mostrar dashboards com dados reais como prova</td><td class="dont">Mostrar screenshots genéricos sem dados</td></tr>
+          <tr><td class="do">Focar no resultado: "o board se atualiza sozinho"</td><td class="dont">Focar na tecnologia: "algoritmos avançados de IA"</td></tr>
+          <tr><td class="do">Escrever Lin-Dev com L e D maiúsculos, hífen</td><td class="dont">Escrever como lin-dev, LIN-DEV, LinDev ou Lin Dev</td></tr>
+          <tr><td class="do">Usar o hífen roxo (#7B4DC4) no logo</td><td class="dont">Usar hífen cinza, preto ou de outra cor</td></tr>
+          <tr><td class="do">Manter fundo escuro em materiais visuais</td><td class="dont">Usar fundo branco com logo colorido</td></tr>
+          <tr><td class="do">Usar Geist como fonte em tudo</td><td class="dont">Substituir por Arial ou outra fonte</td></tr>
+          <tr><td class="do">Referenciar concorrentes como "ferramentas tradicionais"</td><td class="dont">Citar Jira, Linear ou Asana por nome</td></tr>
+          <tr><td class="do">Comunicar preço com clareza</td><td class="dont">Esconder custos em letras miúdas</td></tr>
+          <tr><td class="do">Mostrar dashboards como diferencial central</td><td class="dont">Tratar dashboards como feature secundária</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 15 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="s14">
+  <div class="container">
+    <span class="section-num">14</span>
+    <h2>Métricas de Marca</h2>
+
+    <div class="bb-table-wrap">
+      <table class="bb-table">
+        <thead><tr><th>Métrica</th><th>O que mede</th><th>Meta inicial</th></tr></thead>
+        <tbody>
+          <tr><td class="label">Brand recall</td><td>% que lembram "Lin-Dev" ao pensar em PM pra devs</td><td>&gt;5% no nicho em 6 meses</td></tr>
+          <tr><td class="label">NPS de marca</td><td>Recomendação da marca</td><td>&gt;60</td></tr>
+          <tr><td class="label">Associação "ferramenta"</td><td>% que descrevem como "ferramenta pra devs" (não "IA")</td><td>&gt;80%</td></tr>
+          <tr><td class="label">Share of voice</td><td>% de mentions vs concorrentes em PM+dev</td><td>&gt;15% em 3 meses</td></tr>
+          <tr><td class="label">Waitlist conversion</td><td>% visitantes → inscrição</td><td>&gt;8%</td></tr>
+          <tr><td class="label">Demo completion</td><td>% que assiste a demo até o final</td><td>&gt;45%</td></tr>
+          <tr><td class="label">Time to "aha"</td><td>Tempo até o dev ver o board funcionando sozinho</td><td>&lt;3 minutos</td></tr>
+          <tr><td class="label">Dashboard engagement</td><td>% que abrem dashboards diariamente</td><td>&gt;60%</td></tr>
+          <tr><td class="label">Consistency score</td><td>Auditoria trimestral visual/verbal</td><td>&gt;90%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--                  PART II — DESIGN SYSTEM                  -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="part-divider">
+  <div class="part-divider-label">Parte II</div>
+  <div class="part-divider-title">Design System v1.0</div>
+  <div class="part-divider-desc">Tokens, componentes e referência visual completa</div>
 </div>
 
 <!-- DS 01 — LOGO -->
@@ -984,14 +1539,14 @@ body{font-family:var(--f-sans);background:var(--bg-primary);color:var(--text-sec
         <p style="font-family:var(--f-mono);font-size:0.5625rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px">Horizontal — gema 40px + wordmark 22px</p>
         <div style="background:var(--bg-surface);border:1px solid var(--border-vis);border-radius:var(--r-lg);padding:20px 28px;display:inline-flex;align-items:center;gap:10px;font-family:var(--f-mono);font-weight:600;font-size:22px;letter-spacing:-0.01em;color:#fff">
           <svg viewBox="0 0 32 32" width="40" height="40" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="ich"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath><filter id="igh" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/></filter></defs><g clip-path="url(#ich)"><polygon points="16,2.5 28,9 16,16" fill="#A060E8"/><polygon points="28,9 28,23 16,16" fill="#7030C0"/><polygon points="28,23 16,29.5 16,16" fill="#501888"/><polygon points="16,29.5 4,23 16,16" fill="#280858"/><polygon points="4,23 4,9 16,16" fill="#4B218E"/><polygon points="4,9 16,2.5 16,16" fill="#6030A8"/><path d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#igh)"/><rect x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#igh)"/></g><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/></svg>
-          <span>gestao<span style="color:#7B4DC4">.</span>dev</span>
+          <span>lin<span style="color:#7B4DC4">-</span>dev</span>
         </div>
       </div>
       <div>
         <p style="font-family:var(--f-mono);font-size:0.5625rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px">Vertical — gema 64px + wordmark 15px</p>
         <div style="background:var(--bg-surface);border:1px solid var(--border-vis);border-radius:var(--r-lg);padding:20px 32px;display:inline-flex;flex-direction:column;align-items:center;gap:10px;font-family:var(--f-mono);font-weight:600;font-size:15px;color:#fff">
           <svg viewBox="0 0 32 32" width="56" height="56" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="icv"><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9"/></clipPath><filter id="igv" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="0.7" flood-color="white" flood-opacity="0.28"/></filter></defs><g clip-path="url(#icv)"><polygon points="16,2.5 28,9 16,16" fill="#A060E8"/><polygon points="28,9 28,23 16,16" fill="#7030C0"/><polygon points="28,23 16,29.5 16,16" fill="#501888"/><polygon points="16,29.5 4,23 16,16" fill="#280858"/><polygon points="4,23 4,9 16,16" fill="#4B218E"/><polygon points="4,9 16,2.5 16,16" fill="#6030A8"/><path d="M4,9 L16,16 L4,23" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#igv)"/><rect x="17" y="21.25" width="6" height="3.2" rx="1.2" fill="white" filter="url(#igv)"/></g><polygon points="16,2.5 28,9 28,23 16,29.5 4,23 4,9" fill="none" stroke="#1E0642" stroke-width="0.5"/></svg>
-          <span>gestao<span style="color:#7B4DC4">.</span>dev</span>
+          <span>lin<span style="color:#7B4DC4">-</span>dev</span>
         </div>
       </div>
     </div>
@@ -1082,7 +1637,7 @@ body{font-family:var(--f-sans);background:var(--bg-primary);color:var(--text-sec
         <div class="ds-font-box-label">Geist Mono — Monospace</div>
         <div class="ds-font-weight" style="font-family:var(--f-mono);font-weight:400;color:var(--purple-light)">Regular 400 — npm run dev</div>
         <div class="ds-font-weight" style="font-family:var(--f-mono);font-weight:500;color:var(--purple-light)">Medium 500 — npm run build</div>
-        <div class="ds-font-weight" style="font-family:var(--f-mono);font-weight:600;color:var(--purple-light)">SemiBold 600 — gestao.dev</div>
+        <div class="ds-font-weight" style="font-family:var(--f-mono);font-weight:600;color:var(--purple-light)">SemiBold 600 — Lin-Dev</div>
       </div>
     </div>
     <h3>Escala tipográfica</h3>
@@ -1288,13 +1843,8 @@ body{font-family:var(--f-sans);background:var(--bg-primary);color:var(--text-sec
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════ -->
-<!--              COMPONENTES & UX — A → L                       -->
+<!--   PARTE II · CONTINUAÇÃO — COMPONENTES, UX & BRAND ASSETS    -->
 <!-- ═══════════════════════════════════════════════════════════ -->
-<div class="part-divider">
-  <div class="part-divider-label">Componentes &amp; UX</div>
-  <div class="part-divider-title">Biblioteca Estendida</div>
-  <div class="part-divider-desc">Formulários, dashboard, interface, estados, ícones, breadcrumbs, templates sociais, mídia &amp; email</div>
-</div>
 
 <!-- DS v1.1 embed -->
 <div class="ds-embed">
@@ -1430,7 +1980,7 @@ body{font-family:var(--f-sans);background:var(--bg-primary);color:var(--text-sec
           <div class="gd-field"><label class="gd-label">SM (32px)</label>
             <div class="gd-input-wrap"><input class="gd-input gd-input--sm" placeholder="Buscar..."></div></div>
           <div class="gd-field" style="margin-top:16px"><label class="gd-label">MD (40px)</label>
-            <div class="gd-input-wrap"><input class="gd-input" placeholder="email@gestao.dev"></div></div>
+            <div class="gd-input-wrap"><input class="gd-input" placeholder="email@lin-dev.com.br"></div></div>
           <div class="gd-field" style="margin-top:16px"><label class="gd-label">LG (48px)</label>
             <div class="gd-input-wrap"><input class="gd-input gd-input--lg" placeholder="Título da tarefa"></div></div>
         </div>
@@ -1463,7 +2013,7 @@ body{font-family:var(--f-sans);background:var(--bg-primary);color:var(--text-sec
             <label for="gdf1">Nome do projeto</label>
           </div>
           <div class="gd-float" style="margin-top:16px">
-            <input id="gdf2" type="email" placeholder=" " value="dev@gestao.dev">
+            <input id="gdf2" type="email" placeholder=" " value="dev@lin-dev.com.br">
             <label for="gdf2">Email</label>
           </div>
         </div>
@@ -1723,8 +2273,6 @@ body{font-family:var(--f-sans);background:var(--bg-primary);color:var(--text-sec
       </div>
     </article>
   </section>
-
-
   <!-- ═══════ E · STATES ═══════ -->
   <section class="ds-section" id="e">
     <div class="ds-section-head">
@@ -1807,7 +2355,7 @@ loading              { <span class="c">/* GemLoader inline + disabled (nunca mim
           <div style="position:relative">
             <div style="position:absolute;inset:-64px;border:1px dashed rgba(123,77,196,.4);border-radius:8px;pointer-events:none"></div>
             <div style="position:absolute;top:-80px;left:50%;transform:translateX(-50%);font-family:var(--f-mono);font-size:.65rem;color:var(--c-primary-light)">↕ 1× h</div>
-            <div class="gd-brand-wrap"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo"/></svg><div class="word dark">gestao<span class="dot">.</span>dev</div></div>
+            <div class="gd-brand-wrap"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo"/></svg><div class="word dark">lin<span class="dot">-</span>dev</div></div>
           </div>
         </div>
         <div class="gd-brand-clear">
@@ -1816,7 +2364,7 @@ loading              { <span class="c">/* GemLoader inline + disabled (nunca mim
             <p style="font-size:.7rem;color:var(--c-text-muted);font-family:var(--f-mono)">Texto sufocando o logo:</p>
             <div style="display:flex;align-items:center;gap:4px">
               <span style="font-size:.85rem;color:var(--c-text-secondary)">Bem-vindo ao</span>
-              <div class="gd-brand-wrap"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo"/></svg><div class="word dark">gestao<span class="dot">.</span>dev</div></div>
+              <div class="gd-brand-wrap"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo"/></svg><div class="word dark">lin<span class="dot">-</span>dev</div></div>
               <span style="font-size:.85rem;color:var(--c-text-secondary)">— vamos lá!</span>
             </div>
             <p style="font-size:.65rem;color:var(--c-error);margin-top:8px;font-family:var(--f-mono)">→ Sem respiro = sem hierarquia</p>
@@ -1836,19 +2384,19 @@ loading              { <span class="c">/* GemLoader inline + disabled (nunca mim
       <div class="gd-brand-grid">
         <div class="gd-brand-cell dark" style="position:relative">
           <span class="gd-brand-tag on-dark">01 · Original / dark bg</span>
-          <div class="gd-brand-wrap"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo"/></svg><div class="word dark">gestao<span class="dot">.</span>dev</div></div>
+          <div class="gd-brand-wrap"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo"/></svg><div class="word dark">lin<span class="dot">-</span>dev</div></div>
         </div>
         <div class="gd-brand-cell light" style="position:relative">
           <span class="gd-brand-tag on-light">02 · Original / light bg</span>
-          <div class="gd-brand-wrap"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo"/></svg><div class="word light">gestao<span class="dot">.</span>dev</div></div>
+          <div class="gd-brand-wrap"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo"/></svg><div class="word light">lin<span class="dot">-</span>dev</div></div>
         </div>
         <div class="gd-brand-cell dark" style="position:relative">
           <span class="gd-brand-tag on-dark">03 · Mono branco / dark bg</span>
-          <div class="gd-brand-wrap" style="color:#fff"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo-mono"/></svg><div class="word dark">gestao<span class="dot" style="color:#fff">.</span>dev</div></div>
+          <div class="gd-brand-wrap" style="color:#fff"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo-mono"/></svg><div class="word dark">lin<span class="dot" style="color:#fff">-</span>dev</div></div>
         </div>
         <div class="gd-brand-cell light" style="position:relative">
           <span class="gd-brand-tag on-light">04 · Mono preto / light bg</span>
-          <div class="gd-brand-wrap" style="color:#000"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo-mono"/></svg><div class="word light">gestao<span class="dot" style="color:#000">.</span>dev</div></div>
+          <div class="gd-brand-wrap" style="color:#000"><svg width="32" height="32" aria-hidden="true"><use href="#gd-logo-mono"/></svg><div class="word light">lin<span class="dot" style="color:#000">-</span>dev</div></div>
         </div>
       </div>
       <div class="ds-notes">
@@ -1868,7 +2416,7 @@ loading              { <span class="c">/* GemLoader inline + disabled (nunca mim
           <div class="gd-og-text">
             <h5>O project manager que cuida da gestão</h5>
             <p>...para você cuidar do código. Board que se atualiza sozinho, dashboards em tempo real e um Dev Virtual que abre PRs.</p>
-            <div class="url">→ gestao.dev</div>
+            <div class="url">→ lin-dev.com.br</div>
           </div>
         </div>
       </div>
@@ -1924,7 +2472,7 @@ loading              { <span class="c">/* GemLoader inline + disabled (nunca mim
           </div>
           <div class="gd-tt">MCP integrations
             <button class="gd-tt-trigger" aria-describedby="tt2">i</button>
-            <span class="gd-tt-bubble" id="tt2" role="tooltip">Model Context Protocol — conecta seu IDE ao gestao.dev</span>
+            <span class="gd-tt-bubble" id="tt2" role="tooltip">Model Context Protocol — conecta seu IDE ao Lin-Dev</span>
           </div>
           <div class="gd-tt">Dev Virtual
             <button class="gd-tt-trigger" aria-describedby="tt3">i</button>
@@ -1989,7 +2537,7 @@ loading              { <span class="c">/* GemLoader inline + disabled (nunca mim
     <div class="ds-section-head">
       <div class="num">Bloco H · Iconografia</div>
       <h2>Sistema de ícones</h2>
-      <p>Padrão único de ícones baseado em <strong>Lucide</strong>, adaptado para a densidade visual do gestao.dev. Stroke consistente, grid de construção definido, 3 tamanhos oficiais.</p>
+      <p>Padrão único de ícones baseado em <strong>Lucide</strong>, adaptado para a densidade visual do Lin-Dev. Stroke consistente, grid de construção definido, 3 tamanhos oficiais.</p>
     </div>
 
     <article class="ds-block" id="h1">
@@ -2127,7 +2675,7 @@ loading              { <span class="c">/* GemLoader inline + disabled (nunca mim
           <svg class="gem-svg" aria-hidden="true"><use href="#gd-logo"/></svg>
           <div style="margin-left:var(--space-9);flex:1">
             <h5>Seu board se atualiza sozinho.</h5>
-            <p>Conecte seu repositório e veja prazos, bloqueios e velocidade em tempo real. <span class="hl">→ gestao.dev</span></p>
+            <p>Conecte seu repositório e veja prazos, bloqueios e velocidade em tempo real. <span class="hl">→ lin-dev.com.br</span></p>
           </div>
         </div>
         <div class="gd-social-spec"><span>aspect 16:9</span><span>safe area 80px</span><span>formato PNG / WebP</span></div>
@@ -2137,7 +2685,7 @@ loading              { <span class="c">/* GemLoader inline + disabled (nunca mim
           <span class="gd-social-label">GitHub repo banner · 1280×640</span>
           <svg class="gem-svg" style="width:96px;height:96px" aria-hidden="true"><use href="#gd-logo"/></svg>
           <div style="margin-left:var(--space-9);flex:1">
-            <h5 style="font-family:var(--f-mono);font-size:clamp(.95rem,2.2vw,1.5rem)">$ npm i -g gestao-dev</h5>
+            <h5 style="font-family:var(--f-mono);font-size:clamp(.95rem,2.2vw,1.5rem)">$ npm i -g lin-dev</h5>
             <p style="font-family:var(--f-mono)">The project manager that updates itself. <span class="hl">MIT · OSS</span></p>
           </div>
         </div>
@@ -2147,7 +2695,7 @@ loading              { <span class="c">/* GemLoader inline + disabled (nunca mim
         <div class="gd-social gd-social-dc">
           <span class="gd-social-label">Discord server · 960×540</span>
           <svg class="gem-svg" style="width:80px;height:80px;margin:0 auto" aria-hidden="true"><use href="#gd-logo"/></svg>
-          <h5 style="margin:0">gestao<span style="color:var(--c-primary-light)">.</span>dev</h5>
+          <h5 style="margin:0">lin<span style="color:var(--c-primary-light)">-</span>dev</h5>
           <p style="margin:0 auto">comunidade de devs · builders · early adopters</p>
         </div>
         <div class="gd-social-spec"><span>aspect 16:9</span><span>gema centralizada</span><span>borda dashed interna</span></div>
@@ -2167,7 +2715,7 @@ loading              { <span class="c">/* GemLoader inline + disabled (nunca mim
     <div class="ds-section-head">
       <div class="num">Bloco K · Diretrizes de mídia</div>
       <h2>Fotografia &amp; ilustração</h2>
-      <p>O gestao.dev tem uma posição clara: <strong>zero fotografia stock</strong>. A comunicação visual é construída com UI, código e a própria gema. Essa escolha mantém a identidade técnica e evita a estética genérica de SaaS.</p>
+      <p>O Lin-Dev tem uma posição clara: <strong>zero fotografia stock</strong>. A comunicação visual é construída com UI, código e a própria gema. Essa escolha mantém a identidade técnica e evita a estética genérica de SaaS.</p>
     </div>
 
     <article class="ds-block" id="k1">
@@ -2224,22 +2772,22 @@ loading              { <span class="c">/* GemLoader inline + disabled (nunca mim
         <div class="gd-email-frame">
           <div class="gd-email-bar">
             <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-            <span class="subj">De: no-reply@gestao.dev · Para: fer@gestao.dev</span>
+            <span class="subj">De: no-reply@lin-dev.com.br · Para: fer@lin-dev.com.br</span>
           </div>
           <div class="gd-email-body">
             <div class="gd-email-head">
               <svg width="28" height="28" aria-hidden="true"><use href="#gd-logo"/></svg>
-              <div class="word">gestao<span class="dot">.</span>dev</div>
+              <div class="word">lin<span class="dot">-</span>dev</div>
             </div>
             <h5>O Dev Virtual abriu um PR 🚀</h5>
-            <p>Tarefa <code>#142 · Refatorar webhook Stripe</code> foi concluída. O Dev Virtual abriu o pull request <code>#88</code> no repositório <code>CEISC-TECH/gestaodev-api</code> e está aguardando seu code review.</p>
-            <p style="color:var(--c-text-muted);font-size:.82rem">• 3 arquivos alterados · +142 / −28 linhas<br>• Testes: 24/24 passaram em CI<br>• Preview deploy: <a href="#" style="color:var(--c-primary-light)">pr-88.preview.gestao.dev</a></p>
+            <p>Tarefa <code>#142 · Refatorar webhook Stripe</code> foi concluída. O Dev Virtual abriu o pull request <code>#88</code> no repositório <code>CEISC-TECH/lin-dev-api</code> e está aguardando seu code review.</p>
+            <p style="color:var(--c-text-muted);font-size:.82rem">• 3 arquivos alterados · +142 / −28 linhas<br>• Testes: 24/24 passaram em CI<br>• Preview deploy: <a href="#" style="color:var(--c-primary-light)">pr-88.preview.lin-dev.com.br</a></p>
             <div style="padding-top:var(--space-3)">
               <a href="#" class="gem-cta gem-cta--md" style="text-decoration:none">Revisar PR agora</a>
             </div>
           </div>
           <div class="gd-email-foot">
-            <span>© 2026 gestao.dev · R. Pres. Scarambone, 153 — PR</span>
+            <span>© 2026 Lin-Dev · R. Pres. Scarambone, 153 — PR</span>
             <span><a href="#">Preferências</a> · <a href="#">Cancelar notificações</a></span>
           </div>
         </div>
@@ -2265,7 +2813,7 @@ loading              { <span class="c">/* GemLoader inline + disabled (nunca mim
 
   <footer style="margin-top:128px;padding-top:48px;border-top:1px dashed var(--c-border-visible);
     color:var(--c-text-muted);font-family:var(--f-mono);font-size:.7rem;text-align:center">
-    gestao.dev · Design System v1.1 · extensão do v1.0 · 2026
+    Lin-Dev · Design System v1.1 · extensão do v1.0 · 2026
   </footer>
 </main>
 </div>
@@ -2276,9 +2824,9 @@ loading              { <span class="c">/* GemLoader inline + disabled (nunca mim
 <!-- FOOTER -->
 <footer class="bb-footer">
   <div class="container">
-    <div class="bb-footer-logo">gestao<span class="dot">.</span>dev</div>
+    <div class="bb-footer-logo">lin<span class="dot">-</span>dev</div>
     <p style="color:var(--text-muted);font-size:0.8125rem;font-style:italic">O project manager que cuida da gestão para você cuidar do código.</p>
-    <p style="color:var(--text-faint);font-size:0.6875rem;margin-top:20px;font-family:var(--f-mono)">© 2026 gestao.dev — Design System v1.1 · Documento para o time de design · Extraído do Brand Book central</p>
+    <p style="color:var(--text-faint);font-size:0.6875rem;margin-top:20px;font-family:var(--f-mono)">© 2026 Lin-Dev — Todos os direitos reservados · Brand Book + Design System v1.1 · Confidencial</p>
   </div>
 </footer>
 

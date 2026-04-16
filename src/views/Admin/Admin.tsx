@@ -36,7 +36,7 @@ const MEMBERS: Member[] = [
 ];
 
 const TERMINAL_LINES = [
-  { text: '[2026-04-13 08:41:02] deploy:prod — gestao.dev@0.9.2 — SUCCESS', color: '#22c55e' },
+  { text: '[2026-04-13 08:41:02] deploy:prod — Lin-Dev@0.9.2 — SUCCESS', color: '#22c55e' },
   { text: '[2026-04-13 08:40:55] sync:db — migrations applied (3 new)', color: '#22c55e' },
   { text: '[2026-04-13 08:40:48] build:vite — bundle 284kb gzip — OK', color: '#22c55e' },
   { text: '[2026-04-13 08:40:40] ci:lint — 0 errors, 0 warnings', color: '#94a3b8' },

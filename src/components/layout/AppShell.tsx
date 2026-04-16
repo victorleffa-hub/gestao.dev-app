@@ -32,7 +32,7 @@ export function AppShell({ children }: AppShellProps) {
 
   const handleSearch = useCallback(() => {
     // Command palette placeholder — Phase 2 will implement
-    console.log('[gestao.dev] search / command palette');
+    console.log('[Lin-Dev] search / command palette');
   }, []);
 
   return (

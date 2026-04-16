@@ -65,8 +65,8 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'gd-app',
-    title: 'gestao.dev SaaS Platform',
-    description: 'Plataforma de gestao com integracao MCP para IA nativa',
+    title: 'Lin-Dev SaaS Platform',
+    description: 'Plataforma de gestão com integração MCP para IA nativa',
     sprint: 'Sprint 6',
     status: 'active',
     health: 'healthy',
@@ -89,7 +89,7 @@ export const PROJECTS: Project[] = [
   {
     id: 'bq-admin',
     title: 'Admin Panel v1',
-    description: 'Painel administrativo interno para gestao de usuarios e planos',
+    description: 'Painel administrativo interno para gestão de usuarios e planos',
     sprint: 'Sprint 3 · Encerrado em Mar/25',
     status: 'completed',
     health: 'dim',
